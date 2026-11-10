@@ -1,12 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 // Reached from an invite or reset link. The user is already signed in by the link.
 export default function SetPasswordPage() {
-  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
@@ -24,15 +22,15 @@ export default function SetPasswordPage() {
       setPending(false);
       return;
     }
-    router.replace("/dashboard");
-    router.refresh();
+    // Full page load so the Member Office (a separate page) opens cleanly.
+    window.location.assign("/dashboard");
   }
 
   return (
     <main className="mx-auto max-w-sm px-4 py-16">
-      <span className="text-lg font-bold text-blue-800">Pocket Office</span>
+      <span className="brand">OliverFee <b className="text-[#bd1557]">360</b></span>
       <h1 className="mt-6 text-2xl font-bold">Choose your password</h1>
-      <p className="mt-1 mb-4 text-sm text-slate-600">You&apos;ll use this with your email to sign in from now on.</p>
+      <p className="mt-1 mb-4 text-sm text-[#625f69]">You&apos;ll use this with your email to sign in from now on.</p>
       <form onSubmit={onSubmit} className="card space-y-4">
         <div>
           <label className="label" htmlFor="password">New password</label>
@@ -42,7 +40,7 @@ export default function SetPasswordPage() {
           <label className="label" htmlFor="confirm">Type it again</label>
           <input className="field" id="confirm" name="confirm" type="password" required autoComplete="new-password" />
         </div>
-        {error && <p className="text-sm text-red-700">{error}</p>}
+        {error && <p className="text-sm text-[#a11b51]">{error}</p>}
         <button className="btn w-full" disabled={pending}>{pending ? "Saving..." : "Save password"}</button>
       </form>
     </main>

@@ -1,9 +1,10 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
 import { requireAdmin } from "@/lib/auth";
 import { inviteEmailHtml, sendEmail } from "@/lib/email";
+import { ensureLogin, makeLink } from "@/lib/invites";
+import { freshState } from "@/lib/oliverfee/office";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 
@@ -15,26 +16,9 @@ const str = (f: FormData, k: string, max = 200) => {
 const slugify = (s: string) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 50) || "carrier";
 
-async function siteUrl() {
-  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
-  const h = await headers();
-  const host = h.get("x-forwarded-host") ?? h.get("host");
-  const proto = h.get("x-forwarded-proto") ?? "https";
-  return `${proto}://${host}`;
-}
-
 export type InviteResult = { ok: boolean; message: string; link?: string; carrierId?: string } | null;
 
-// Builds a one-time sign-in link that lands on "choose your password".
-async function makeLink(email: string, kind: "invite" | "recovery") {
-  const admin = createAdminClient();
-  const { data, error } = await admin.auth.admin.generateLink({ type: kind, email });
-  if (error || !data) throw new Error(error?.message ?? "Could not create link");
-  const link = `${await siteUrl()}/auth/confirm?token_hash=${data.properties.hashed_token}&type=${kind}&next=/set-password`;
-  return { link, userId: data.user.id };
-}
-
-// One click: create the carrier, create their login, and send the welcome email.
+// One click: create the carrier and its Member Office, make the email its owner, and send the sign-up link.
 export async function createCarrierAndInvite(_prev: InviteResult, f: FormData): Promise<InviteResult> {
   await requireAdmin();
   const legal_name = str(f, "legal_name");
@@ -42,68 +26,57 @@ export async function createCarrierAndInvite(_prev: InviteResult, f: FormData): 
   if (!legal_name || !email) return { ok: false, message: "Company name and email are required." };
 
   const admin = createAdminClient();
+  const dba = str(f, "dba");
   const { data: carrier, error: cErr } = await admin
     .from("carriers")
     .insert({
-      legal_name,
-      dba: str(f, "dba"),
-      usdot: str(f, "usdot", 20),
-      mc: str(f, "mc", 20),
-      phone: str(f, "phone", 40),
-      email,
-      tier: str(f, "tier"),
-      slug: `${slugify(legal_name)}-${crypto.randomUUID().slice(0, 4)}`,
-      status: "onboarding",
+      legal_name, dba, usdot: str(f, "usdot", 20), mc: str(f, "mc", 20), phone: str(f, "phone", 40), email,
+      tier: str(f, "tier"), slug: `${slugify(legal_name)}-${crypto.randomUUID().slice(0, 4)}`, status: "onboarding",
     })
     .select("id")
     .single();
   if (cErr || !carrier) return { ok: false, message: "Couldn't create carrier: " + cErr?.message };
 
-  let link: string;
   try {
-    const res = await makeLink(email, "invite");
-    link = res.link;
-    const { error: pErr } = await admin
-      .from("profiles")
-      .update({ role: "carrier", carrier_id: carrier.id })
-      .eq("id", res.userId);
-    if (pErr) throw new Error(pErr.message);
+    await admin.from("workspaces").insert({ carrier_id: carrier.id, state: freshState(dba || legal_name) });
+    const { error } = await admin.from("carrier_members").insert({ carrier_id: carrier.id, email, role: "owner" });
+    if (error) throw new Error(error.message);
+    const outcome = await ensureLogin(email, dba || legal_name);
+    revalidatePath("/admin");
+    return {
+      ok: true,
+      carrierId: carrier.id,
+      link: outcome.emailed ? undefined : outcome.link,
+      message: outcome.existing
+        ? `Created ${legal_name}. ${email} already has a login and will see this office next time they sign in.`
+        : outcome.emailed
+          ? `Created ${legal_name} and emailed the sign-up link to ${email}.`
+          : `Created ${legal_name}. Email isn't set up yet, so copy this one-time link and text or email it to them:`,
+    };
   } catch (e) {
     await admin.from("carriers").delete().eq("id", carrier.id);
-    const msg = e instanceof Error ? e.message : String(e);
-    return {
-      ok: false,
-      message: msg.includes("already") ? "That email already has a login." : "Couldn't create the login: " + msg,
-    };
+    return { ok: false, message: "Couldn't create the login: " + (e instanceof Error ? e.message : String(e)) };
   }
-
-  const sent = await sendEmail(email, "Your Pocket Office account is ready", inviteEmailHtml(legal_name, link));
-  revalidatePath("/admin");
-  return {
-    ok: true,
-    carrierId: carrier.id,
-    link,
-    message: sent
-      ? `Created ${legal_name} and emailed the invite to ${email}.`
-      : `Created ${legal_name}. Email isn't set up yet, so copy this one-time link and text or email it to them:`,
-  };
 }
 
-// New one-time link for a carrier whose invite expired or who forgot their password.
+// New one-time link for an owner whose invite expired or who forgot their password.
 export async function resendInvite(_prev: InviteResult, f: FormData): Promise<InviteResult> {
   await requireAdmin();
   const carrierId = str(f, "carrier_id");
   const admin = createAdminClient();
-  const { data: carrier } = await admin.from("carriers").select("legal_name").eq("id", carrierId).single();
-  const { data: profile } = await admin.from("profiles").select("email").eq("carrier_id", carrierId).limit(1).maybeSingle();
-  if (!carrier || !profile) return { ok: false, message: "No login found for this carrier." };
+  const { data: carrier } = await admin.from("carriers").select("legal_name, dba").eq("id", carrierId).single();
+  const { data: owner } = await admin
+    .from("carrier_members").select("email").eq("carrier_id", carrierId).eq("role", "owner").limit(1).maybeSingle();
+  if (!carrier || !owner) return { ok: false, message: "No owner login found for this carrier." };
   try {
-    const { link } = await makeLink(profile.email, "recovery");
-    const sent = await sendEmail(profile.email, "Your Pocket Office sign-in link", inviteEmailHtml(carrier.legal_name, link));
+    const name = carrier.dba || carrier.legal_name;
+    const { data: hasLogin } = await admin.from("profiles").select("id").eq("email", owner.email).maybeSingle();
+    const { link } = await makeLink(owner.email, hasLogin ? "recovery" : "invite");
+    const sent = await sendEmail(owner.email, "Your OliverFee 360 sign-in link", inviteEmailHtml(name, link));
     return {
       ok: true,
-      link,
-      message: sent ? `Sent a new link to ${profile.email}.` : "Email isn't set up yet. Copy this one-time link and send it to them:",
+      link: sent ? undefined : link,
+      message: sent ? `Sent a new link to ${owner.email}.` : `Email isn't set up yet. Copy this one-time link and send it to ${owner.email}:`,
     };
   } catch (e) {
     return { ok: false, message: e instanceof Error ? e.message : String(e) };

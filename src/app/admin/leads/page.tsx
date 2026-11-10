@@ -37,7 +37,7 @@ export default async function LeadsPage({ searchParams }: { searchParams: Promis
             key={s}
             href={s === "all" ? "/admin/leads" : `/admin/leads?status=${s}`}
             className={`rounded-full px-3 py-1 text-sm capitalize ${
-              (status ?? "all") === s ? "bg-blue-700 text-white" : "bg-white text-slate-700 ring-1 ring-slate-200"
+              (status ?? "all") === s ? "bg-[#222126] text-white" : "bg-white text-[#1e1d22] ring-1 ring-[#e8e3dc]"
             }`}
           >
             {s}
@@ -57,7 +57,7 @@ export default async function LeadsPage({ searchParams }: { searchParams: Promis
       </section>
 
       {leads.length === 0 ? (
-        <p className="text-sm text-slate-500">No leads here yet.</p>
+        <p className="text-sm text-[#625f69]">No leads here yet.</p>
       ) : (
         <div className="space-y-3">
           {leads.map((l) => (
@@ -65,15 +65,15 @@ export default async function LeadsPage({ searchParams }: { searchParams: Promis
               <input type="hidden" name="id" value={l.id} />
               <div className="sm:col-span-2">
                 <p className="font-medium">{l.name}{l.company && ` · ${l.company}`}</p>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-[#625f69]">
                   {l.usdot && `USDOT ${l.usdot} · `}
-                  {l.phone && <a className="text-blue-700" href={`tel:${l.phone}`}>{l.phone}</a>}
+                  {l.phone && <a className="text-[#78501a]" href={`tel:${l.phone}`}>{l.phone}</a>}
                   {l.email && ` · ${l.email}`}
                 </p>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-[#8a8590]">
                   {l.source} · {new Date(l.created_at).toLocaleDateString("en-US")}
                 </p>
-                {l.message && <p className="mt-1 text-sm text-slate-600">&ldquo;{l.message}&rdquo;</p>}
+                {l.message && <p className="mt-1 text-sm text-[#625f69]">&ldquo;{l.message}&rdquo;</p>}
               </div>
               <select className="field" name="status" defaultValue={l.status} aria-label="Status">
                 {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}

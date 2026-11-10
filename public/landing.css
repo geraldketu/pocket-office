@@ -38,3 +38,15 @@
 .landing-brand b{color:#ad1f5e}
 .landing-brand span{box-shadow:inset 0 -3px #e83f89}
 .landing-preview{border-top:3px solid #e83f89}
+
+/* Sign-in link and contact form (added in the merge with the Next.js app) */
+.landing-nav-links{display:flex;gap:clamp(12px,3vw,24px)}
+.landing-contact{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(20px,4vw,48px);border-top:1px solid #e2d7c6;padding-block:34px 40px}
+.landing-contact h2{font:700 clamp(25px,4vw,39px)/1.12 Georgia,serif;letter-spacing:-.035em;margin:8px 0 12px}
+.landing-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:#fffaf2;border:1px solid #e2d7c6;border-radius:12px;padding:18px}
+.landing-form label{display:grid;gap:5px;font-weight:650;font-size:13px}
+.landing-form input,.landing-form textarea{width:100%;border:1px solid #dcd6ce;background:#fff;border-radius:7px;padding:10px;font:inherit;font-size:16px}
+.landing-form .wide{grid-column:1/-1}
+.landing-form .landing-button{justify-content:center;cursor:pointer;font:inherit;font-weight:800}
+#contact-status{margin:0;color:#514952;min-height:1.2em}
+@media(max-width:720px){.landing-contact,.landing-form{grid-template-columns:1fr}}

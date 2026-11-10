@@ -1,46 +1,45 @@
-# Pocket Office
+# OliverFee 360
 
-DOT compliance "office in your pocket" for owner-operator truckers, plus an admin dashboard for the compliance service that runs it. See [CLAUDE.md](CLAUDE.md) for the full product brief.
+DOT compliance "office in your pocket" for owner-operator truckers and small fleets, plus an admin dashboard for the compliance service that runs it. Live at https://oliverfee360.com. See [CLAUDE.md](CLAUDE.md) for the original product brief and [docs/oliverfee-360.md](docs/oliverfee-360.md) for how Felicia's OliverFee 360 app is wired in, plus its fee decisions.
 
 **Stack:** Next.js 15 (TypeScript, App Router, Tailwind) · Supabase (Postgres, Auth, Storage) · Vercel · Resend (email, optional)
 
 ## What works today
 
-- Public landing page with a contact form; each submission becomes a lead.
-- Email + password login with two roles: `admin` and `carrier`.
-- Admin creates a carrier and its login in one step. The carrier gets a one-time link to choose their own password (no shared passwords).
-- Document vault: upload from phone camera or file, list, view and download through short-lived signed links.
-- Required-documents checklist per carrier, with green / yellow / red compliance status.
-- Leads list with status, quoted price and call notes.
-- Database tables for everything in the brief (fuel receipts, mileage, drug & alcohol records, payments), all with row-level security.
+- **OliverFee 360 Member Office** (Felicia's design and features):
+  - Public landing page, plus a demo with sample data that works without signing in.
+  - Carrier Setup interview, compliance records, documents, drivers and office users, and new entrant audit.
+  - Quotes with plans, the Startup Bundle and permit fees. Customers sign versioned quotes, and any change voids the signature.
+  - Driver board, bid calculator and supplies.
+- **Contact form** on the landing page: each submission becomes a lead.
+- **Accounts:** email and password login.
+  - Gail (admin) sees every carrier office.
+  - Carrier owners invite office users and drivers. New people get a one-time link to choose their own password.
+  - Drivers only see their own records.
+- **Files:** uploaded from a phone camera or file (up to 20 MB) straight to private storage. Downloads use 60-second signed links.
+- **Admin dashboard** at `/admin`: carriers with overdue and due-soon counts, create carrier + invite, and a leads list with status, quote and call notes.
+- **Stripe checkout** is built but switched off until keys are added and it has been tested.
 
 ## First-time setup
 
-1. **Create a Supabase project** at https://supabase.com (free tier is fine).
-2. In the Supabase dashboard, open **SQL Editor**, paste the contents of [supabase/migrations/0001_init.sql](supabase/migrations/0001_init.sql), and run it.
-3. Copy `.env.example` to `.env.local` and fill in the three Supabase values from **Project Settings → API**.
-4. In Supabase, go to **Authentication → URL Configuration** and set **Site URL** to your live URL (and add `http://localhost:3000/**` and your live URL with `/**` to **Redirect URLs**).
-5. Install and create the admin login:
+1. **Create a Supabase project** at https://supabase.com (free tier is fine; it pauses after a week without activity).
+2. In the Supabase **SQL Editor**, run [supabase/migrations/0001_init.sql](supabase/migrations/0001_init.sql), then [0002_oliverfee_office.sql](supabase/migrations/0002_oliverfee_office.sql).
+3. Copy `.env.example` to `.env.local` and fill in the Supabase values from **Project Settings → API Keys**.
+4. In Supabase **Authentication → URL Configuration**, set **Site URL** to the live URL and add `http://localhost:3000/**` and the live URL with `/**` to **Redirect URLs**.
+5. Install, create the admin login and start the app:
    ```bash
    npm install
    npm run create-admin -- you@example.com "a-long-password"
    npm run dev
    ```
-6. Open http://localhost:3000, sign in, and add a carrier.
+6. `npm test` runs Felicia's pricing-rule and form tests.
 
 ## Deploying (Vercel)
 
-Import the GitHub repo in Vercel, add the same environment variables (set `NEXT_PUBLIC_SITE_URL` to the Vercel URL), and deploy. Every push to `main` redeploys.
+The project lives in the SturdiHome Vercel team. Deploy from this folder with `npx vercel deploy --prod`. Automatic deploys from GitHub are currently blocked because commit authors aren't linked to the Vercel team.
 
 ## Security
 
-- Files are in a private storage bucket under `<carrier_id>/...`. Database and storage rules only let that carrier and the admin read them.
-- Downloads use signed links that expire after 60 seconds.
-- The service-role key is used only on the server, and only after checking the caller is the admin.
-
-
-## OliverFee 360 source
-
-The `oliverfee-360/` directory contains the separate OliverFee 360 application from live Site version 30 (source commit `7d3c5b41c996384fd4dbb78f2bdaaeb44764dadd`). The existing Next.js application at the repository root is retained.
-
-See [OliverFee 360 development and access instructions](oliverfee-360/README.md). From that directory, run `npm ci`, `npm test`, `npm run build`, and `npm run dev`. The local preview is at http://127.0.0.1:4173 and uses synthetic sign-in and in-memory test data. Stripe checkout remains disabled. No production credentials or carrier records are included.
+- Every Member Office request goes through `/api/...` on the server, which checks the signed-in user's membership and role. The office tables are only reachable with the server's service-role key.
+- Files live in a private storage bucket under `<carrier_id>/...`.
+- The service-role key is used only on the server.

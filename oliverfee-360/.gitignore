@@ -1,6 +1,0 @@
-node_modules/
-.sites-runtime/
-.wrangler/
-.env*
-!.env.example
-outputs/

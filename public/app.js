@@ -51,7 +51,7 @@ function save(){
 function showSaveStatus(text){const el=$('#save-status');if(el)el.textContent=text}
 async function officeAPI(path,options={}){
  const response=await fetch(path,{credentials:'same-origin',...options,headers:{...(options.body&&typeof options.body==='string'?{'Content-Type':'application/json'}:{}),...options.headers}});
- if(!response.ok){let message='Request failed.';try{message=(await response.json()).error||message}catch{}throw new Error(message)}
+ if(!response.ok){let message='Request failed.';try{message=(await response.json()).error||message}catch{}throw Object.assign(new Error(message),{status:response.status})}
  return response.json();
 }
 async function loadOffice(id){
@@ -67,7 +67,8 @@ async function startOffice(){
   if(serverSession.carriers.length){const params=new URLSearchParams(location.search);const target=params.get('carrier')||serverSession.carriers[0].id;await loadOffice(target);if(params.get('quote'))await loadCustomerQuote(params.get('quote'))}
   else{db={...structuredClone(seed),records:[],people:[],docs:[]};if(page()!=='bid')location.hash='accounts';render()}
  }catch(error){
-  $('#main').innerHTML=head('MEMBER OFFICE','Sign-in or connection needed',esc(error.message))+'<section class="panel"><a class="btn gold" href="/signin-with-chatgpt?return_to=/" target="_top">Sign in with ChatGPT</a><p>Secure accounts and files require the hosted Site. No browser demo records have been sent to the server.</p>'+btn('Retry connection','retry-office')+'</section>';
+  if(error.status===401){serverSession=null;render();return}
+  $('#main').innerHTML=head('MEMBER OFFICE','Sign-in or connection needed',esc(error.message))+'<section class="panel"><a class="btn gold" href="/login" target="_top">Sign in</a><p>No browser demo records have been sent to the server.</p>'+btn('Retry connection','retry-office')+'</section>';
   $('#landing').hidden=true;document.body.classList.remove('show-landing');
  }
 }
@@ -327,11 +328,11 @@ function memberOffice(){
  '<section class="panel review-summary"><h2>Secure quote versions</h2>'+(db.quoteOrders?.length?table(['Quote','Status','Action'],db.quoteOrders.map(q=>[esc(q.id.slice(0,8)),esc(q.status),btn('Open review','open-quote:'+q.id)])):empty('No secure review links saved yet.'))+'</section><section class="panel review-summary"><h2>Service requests</h2>'+(db.requests.length?table(['Request','Payment','Work status'],db.requests.map(r=>[esc((r.services||[]).join(', ')||r.company||'Service request'),badge(r.paymentStatus==='paid'?'Paid':'Unpaid',r.paymentStatus==='paid'?'good':'warn'),esc(r.status||'Awaiting payment')])):empty('No requests yet.'))+'<p class="note">Unpaid → Paid → In progress → Completed. Processing requires full payment of service and outside fees. Live checkout coming soon; this app cannot mark a request paid.</p></section>'+link('Compliance dashboard','dashboard');
 }
 function accountsPage(){
- if(!serverSession)return head('ACCOUNTS','Member accounts','Open the hosted private Site to manage secure accounts.');
- return head('ACCOUNTS','Carrier accounts & access','Sign-in uses ChatGPT. Membership is checked separately on every carrier and file request.')+
+ if(!serverSession)return head('ACCOUNTS','Member accounts','Sign in to open your secure carrier office.')+'<section class="panel"><a class="btn gold" href="/login">Sign in</a><p>New customers: use the sign-up link we sent you, or <a href="/#contact">ask us for one</a>.</p></section>';
+ return head('ACCOUNTS','Carrier accounts & access','Sign-in uses your email and password. Membership is checked separately on every carrier and file request.')+
  '<section class="panel"><h2>Open a carrier office</h2><div class="actions">'+serverSession.carriers.map(c=>btn(c.name+' · '+c.role,'open-office:'+c.id)).join('')+'</div></section>'+
  '<section class="panel"><h2>Create a carrier office</h2><form data-form="new-office">'+field('Company name','name','text','','required maxlength="120"')+'<button class="btn gold">Create private office</button></form><p>No sample records are copied into a new office.</p></section>'+
- (activeCarrier&&officeRole==='owner'?'<section class="panel"><h2>Invite an owner, office user or driver</h2><form data-form="invite-member"><div class="formgrid">'+field('Their ChatGPT account email','email','email','','required')+select('Account role','role',['owner','office','driver'])+'<label>Driver record (required for driver access)<select name="personId"><option value="">Choose a driver</option>'+db.people.filter(p=>p.role==='Driver').map(p=>'<option value="'+esc(p.id)+'">'+esc(p.name)+'</option>').join('')+'</select></label></div><button class="btn gold">Save account invitation</button></form><p class="note">This does not send email or change Site sharing. The owner must separately approve the person in the private Site access list before they can sign in.</p>'+btn('View account memberships','view-members')+'</section>':'')+
+ (activeCarrier&&officeRole==='owner'?'<section class="panel"><h2>Invite an owner, office user or driver</h2><form data-form="invite-member"><div class="formgrid">'+field('Their email','email','email','','required')+select('Account role','role',['owner','office','driver'])+'<label>Driver record (required for driver access)<select name="personId"><option value="">Choose a driver</option>'+db.people.filter(p=>p.role==='Driver').map(p=>'<option value="'+esc(p.id)+'">'+esc(p.name)+'</option>').join('')+'</select></label></div><button class="btn gold">Save account invitation</button></form><p class="note">New people get a one-time link to choose their password. People who already have a login see this office the next time they sign in.</p>'+btn('View account memberships','view-members')+'</section>':'')+
  legacyImportButton()+'<section class="panel"><h2>Access rules</h2><p>Owners manage carrier records and account invitations. Office users manage carrier records and files. Drivers can see their assigned records and upload their own files; they cannot open company quotes, account settings, or other drivers’ files.</p></section>';
 }
 function estimate(o){
@@ -351,10 +352,15 @@ function documents(){
 function filesDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open('oliverfee-files',1);req.onupgradeneeded=()=>req.result.createObjectStore('files');req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
 async function fileOperation(mode,id,file){
  if(activeCarrier){
-  const query=new URLSearchParams(uploadMetadata);
-  const endpoint='/api/carriers/'+activeCarrier+'/files/'+id+(mode==='put'?'?'+query:'');
+  const endpoint='/api/carriers/'+activeCarrier+'/files/'+id;
   if(mode==='get'){const response=await fetch(endpoint,{credentials:'same-origin'});if(!response.ok)throw new Error('File access denied or file unavailable.');return response.blob()}
-  return officeAPI(endpoint,{method:mode==='put'?'PUT':'DELETE',...(mode==='put'?{body:file,headers:{'Content-Type':file.type||({pdf:'application/pdf',jpg:'image/jpeg',jpeg:'image/jpeg',png:'image/png',webp:'image/webp',txt:'text/plain',csv:'text/csv',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'}[file.name.split('.').pop().toLowerCase()]||'application/octet-stream')}}:{})});
+  if(mode!=='put')return officeAPI(endpoint,{method:'DELETE'});
+  const type=file.type||({pdf:'application/pdf',jpg:'image/jpeg',jpeg:'image/jpeg',png:'image/png',webp:'image/webp',txt:'text/plain',csv:'text/csv',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'}[file.name.split('.').pop().toLowerCase()]||'application/octet-stream');
+  const base='/api/carriers/'+activeCarrier+'/files/'+id,info=new URLSearchParams({...uploadMetadata,mime:type,size:String(file.size)});
+  const prep=await officeAPI(base+'?'+info,{method:'POST'});
+  const sent=await fetch(prep.uploadUrl,{method:'PUT',body:file,headers:{'Content-Type':type,'x-upsert':'false'}});
+  if(!sent.ok)throw new Error('The upload did not finish. Please retry.');
+  return officeAPI(base+'/complete?'+info,{method:'POST'});
  }
  const files=await filesDB();
  return new Promise((resolve,reject)=>{const tx=files.transaction('files',mode==='get'?'readonly':'readwrite'), store=tx.objectStore('files'), req=mode==='get'?store.get(id):mode==='put'?store.put(file,id):store.delete(id);tx.oncomplete=()=>{files.close();resolve(req.result)};tx.onabort=()=>{files.close();reject(tx.error)}});
@@ -505,7 +511,7 @@ function render(){
  if(landing)return;
  const p=activeCarrier&&officeRole==='driver'&&!['member','documents','compliance','fleet','bid'].includes(page())?'member':page();
  chrome(p);
- $('#sidebar').insertAdjacentHTML?.('beforeend','<div class="account-nav">'+link('Member Office','member')+link('Carrier accounts','accounts')+'<small id="save-status">'+(activeCarrier?'Secure office · '+esc(officeRole):'Browser demo')+'</small></div>');
+ $('#sidebar').insertAdjacentHTML?.('beforeend','<div class="account-nav">'+link('Member Office','member')+link('Carrier accounts','accounts')+(serverSession?.user?.admin?'<a class="btn" href="/admin">Admin dashboard</a>':'')+(serverSession?'<form action="/auth/signout" method="post"><button class="btn" style="width:100%">Sign out</button></form>':'<a class="btn gold" href="/login">Sign in</a>')+'<small id="save-status">'+(activeCarrier?'Secure office · '+esc(officeRole):'Browser demo · sample data')+'</small></div>');
  if(activeCarrier){$('#top').querySelectorAll('small.muted').forEach(el=>{if(el.textContent==='Demo workspace')el.textContent='Private Member Office'});if(officeRole==='driver')$('#sidebar').querySelectorAll('.navlink').forEach(el=>{if(!['#compliance','#documents','#fleet','#bid'].includes(el.getAttribute('href')))el.hidden=true})}
  $('#main').innerHTML=pages[p]();
  if(p==='bid')loadDieselRate($('#bid-diesel-rate'));
@@ -694,7 +700,7 @@ document.addEventListener('submit',async e=>{
  }
  case 'invite-member':{
   const result=await officeAPI('/api/carriers/'+activeCarrier+'/members',{method:'POST',body:JSON.stringify(d)});
-  modal('Account invitation saved','<p>'+esc(result.status)+'</p>');break;
+  modal('Account invitation saved','<p>'+esc(result.status)+'</p>'+(result.link?'<label>One-time sign-up link<input readonly value="'+esc(result.link)+'" onfocus="this.select()"></label><div class="actions"><button type="button" class="btn gold" onclick="navigator.clipboard.writeText(this.closest(&quot;dialog&quot;).querySelector(&quot;input[readonly]&quot;).value);this.textContent=&quot;Copied&quot;">Copy link</button></div>':''));break;
  }
  case 'prepare-dqf':{
   const count=Number(d.drivers);if(!Number.isInteger(count)||count<1||count>10000)return;

@@ -7,10 +7,10 @@ function app(){
  const context=vm.createContext({Intl,Date,Math,Number,Object,String,Set,Array,JSON,structuredClone,console,setTimeout,clearTimeout,
   localStorage:{getItem:()=>null,setItem(){}},location:{hash:''},window:{addEventListener(){}},
   document:{querySelector:s=>nodes[s]??=( {hidden:false,innerHTML:'',classList:{toggle(){}},style:{}}),body:{classList:{toggle(){}}},addEventListener:(name,fn)=>handlers[name]=fn}});
- vm.runInContext(fs.readFileSync('web/rules.js','utf8'),context);
- vm.runInContext(fs.readFileSync('web/state-workflows.js','utf8'),context);
- vm.runInContext(fs.readFileSync('web/advanced.js','utf8'),context);
- vm.runInContext(fs.readFileSync('web/app.js','utf8'),context);
+ vm.runInContext(fs.readFileSync('public/rules.js','utf8'),context);
+ vm.runInContext(fs.readFileSync('public/state-workflows.js','utf8'),context);
+ vm.runInContext(fs.readFileSync('public/advanced.js','utf8'),context);
+ vm.runInContext(fs.readFileSync('public/app.js','utf8'),context);
  return {run:source=>vm.runInContext(source,context),handlers};
 }
 const setup={scope:'Across state lines (interstate)',hire:'Yes, for hire',cargo:'Regulated freight',weightBand:'Over 26,000 lb',axles:'3 or more',placards:'No',units:1,base:'GA',ucrYear:'2027',ucrVehicles:1,startupServices:['LLC formation','EIN assistance'],llcState:'CT'};

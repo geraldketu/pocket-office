@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#151517"><meta name="description" content="OliverFee 360 trucking compliance and fleet operations for owner-operators and small fleets"><title>OliverFee 360 | Your Office in Your Pocket</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="landing.css"><script src="rules.js" defer></script><script src="state-workflows.js" defer></script><script src="advanced.js" defer></script><script src="app.js" defer></script></head><body><div id="landing" hidden>
 <nav class="landing-nav landing-wrap" aria-label="Main navigation">
   <a class="landing-brand" href="#"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h13v12H2zM15 9h4l3 4v4h-7M5 19a2 2 0 1 0 4 0 2 2 0 1 0-4 0m11 0a2 2 0 1 0 4 0 2 2 0 1 0-4 0"/></svg></span> OliverFee <b>360</b><img class="brand-lock" src="brand-lock.svg" alt=""></a>
-  <a class="landing-nav-link" href="#dashboard">Open Dashboard <span aria-hidden="true">↗</span></a>
+  <span class="landing-nav-links"><a class="landing-nav-link" href="#dashboard">Demo Dashboard</a><a class="landing-nav-link" href="/login">Sign in <span aria-hidden="true">↗</span></a></span>
 </nav>
 <main class="landing-wrap">
   <section class="landing-hero" aria-labelledby="landing-title">
@@ -10,7 +10,7 @@
       <h1 id="landing-title">Your Office<br>in Your Pocket<span>.</span></h1>
       <p class="landing-lede">Know what to file, what’s coming due, and what needs your attention. Keep your trucking paperwork and driver records in one place.</p>
       <div class="landing-actions"><a class="landing-button primary" href="#onboarding">Start Carrier Setup <span aria-hidden="true">→</span></a><a class="landing-button secondary" href="#dashboard">View Demo Dashboard</a></div>
-      <p class="landing-note">Explore with sample data in this private preview.</p>
+      <p class="landing-note">Explore the demo with sample data. No sign-up needed.</p>
     </div>
     <aside class="landing-preview" aria-label="Illustrative compliance overview">
       <div class="landing-preview-top"><span>THE CARRIER WORKSPACE</span><span>DEMO</span></div>
@@ -32,6 +32,20 @@
     </div>
   </section>
   <section class="landing-pricing" aria-label="Carrier pricing"><div><p class="landing-kicker">CARRIER PLANS</p><h2>Starting at $49.99 per month</h2></div><a class="landing-button secondary" href="#plans">See Plans &amp; Pricing <span aria-hidden="true">→</span></a></section>
+  <section class="landing-contact" id="contact" aria-labelledby="contact-title">
+    <div><p class="landing-kicker">FREE COMPLIANCE CHECK</p><h2 id="contact-title">Tell us how to reach you.</h2><p class="landing-lede">We look up your DOT record and tell you exactly what&rsquo;s missing, with no obligation.</p></div>
+    <form id="contact-form" class="landing-form">
+      <label>Your name *<input name="name" required autocomplete="name"></label>
+      <label>Company name<input name="company" autocomplete="organization"></label>
+      <label>Phone<input name="phone" type="tel" autocomplete="tel"></label>
+      <label>Email<input name="email" type="email" autocomplete="email"></label>
+      <label>USDOT number (if you have one)<input name="usdot" inputmode="numeric"></label>
+      <label class="wide">What do you need help with?<textarea name="message" rows="3"></textarea></label>
+      <input name="website" tabindex="-1" autocomplete="off" hidden>
+      <p class="wide" id="contact-status" role="status"></p>
+      <button class="landing-button primary wide">Get my free compliance check <span aria-hidden="true">→</span></button>
+    </form>
+  </section>
 </main>
 <footer class="landing-footer landing-wrap"><strong>OliverFee 360</strong><span>Your Office in Your Pocket</span></footer>
-</div><aside id="sidebar"></aside><div class="shell"><header id="top"></header><main id="main"></main><footer>OliverFee 360 <span>•</span> Your Office in Your Pocket <span>•</span> Private demo workspace</footer></div><dialog id="dialog"></dialog><div id="toast" role="status"></div></body></html>
+</div><aside id="sidebar"></aside><div class="shell"><header id="top"></header><main id="main"></main><footer>OliverFee 360 <span>•</span> Your Office in Your Pocket <span>•</span> Private demo workspace</footer></div><dialog id="dialog"></dialog><div id="toast" role="status"></div><script>document.getElementById("contact-form").addEventListener("submit",async e=>{e.preventDefault();const f=e.target,b=f.querySelector("button"),st=document.getElementById("contact-status");const d=Object.fromEntries(new FormData(f));if(!d.phone&&!d.email){st.textContent="Please add a phone number or email.";return}b.disabled=true;st.textContent="Sending…";try{const r=await fetch("/api/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(d)});const j=await r.json();if(!r.ok)throw new Error(j.error);f.reset();st.textContent="Thanks! We’ll call you within one business day."}catch(err){st.textContent=err.message||"Something went wrong. Please call us instead."}b.disabled=false})</script></body></html>

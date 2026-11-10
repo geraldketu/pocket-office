@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -11,7 +11,6 @@ const errorText: Record<string, string> = {
 };
 
 function LoginForm() {
-  const router = useRouter();
   const params = useSearchParams();
   const [error, setError] = useState<string | null>(errorText[params.get("error") ?? ""] ?? null);
   const [pending, setPending] = useState(false);
@@ -30,8 +29,8 @@ function LoginForm() {
       setPending(false);
       return;
     }
-    router.replace("/dashboard");
-    router.refresh();
+    // Full page load so the Member Office (a separate page) opens cleanly.
+    window.location.assign("/dashboard");
   }
 
   return (
@@ -44,10 +43,10 @@ function LoginForm() {
         <label className="label" htmlFor="password">Password</label>
         <input className="field" id="password" name="password" type="password" required autoComplete="current-password" />
       </div>
-      {error && <p className="text-sm text-red-700">{error}</p>}
+      {error && <p className="text-sm text-[#a11b51]">{error}</p>}
       <button className="btn w-full" disabled={pending}>{pending ? "Signing in..." : "Sign in"}</button>
       <p className="text-center text-sm">
-        <Link href="/forgot-password" className="text-blue-700 hover:underline">Forgot your password?</Link>
+        <Link href="/forgot-password" className="text-[#78501a] hover:underline">Forgot your password?</Link>
       </p>
     </form>
   );
@@ -56,7 +55,7 @@ function LoginForm() {
 export default function LoginPage() {
   return (
     <main className="mx-auto max-w-sm px-4 py-16">
-      <Link href="/" className="text-lg font-bold text-blue-800">Pocket Office</Link>
+      <Link href="/" className="brand">OliverFee <b className="text-[#bd1557]">360</b></Link>
       <h1 className="mt-6 mb-4 text-2xl font-bold">Sign in</h1>
       <Suspense>
         <LoginForm />

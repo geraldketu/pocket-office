@@ -5,5 +5,5 @@ import { getProfile } from "@/lib/auth";
 export default async function DashboardRedirect() {
   const profile = await getProfile();
   if (!profile) redirect("/login");
-  redirect(profile.role === "admin" ? "/admin" : "/app");
+  redirect(profile.role === "admin" ? "/admin" : "/#member");
 }

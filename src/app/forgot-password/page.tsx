@@ -22,10 +22,10 @@ export default function ForgotPasswordPage() {
 
   return (
     <main className="mx-auto max-w-sm px-4 py-16">
-      <Link href="/" className="text-lg font-bold text-blue-800">Pocket Office</Link>
+      <Link href="/" className="brand">OliverFee <b className="text-[#bd1557]">360</b></Link>
       <h1 className="mt-6 mb-4 text-2xl font-bold">Reset your password</h1>
       {sent ? (
-        <p className="card text-slate-700">If that email has an account, a reset link is on its way.</p>
+        <p className="card text-[#1e1d22]">If that email has an account, a reset link is on its way.</p>
       ) : (
         <form onSubmit={onSubmit} className="card space-y-4">
           <div>

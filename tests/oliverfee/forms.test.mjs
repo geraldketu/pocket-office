@@ -4,12 +4,12 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import {JSDOM} from 'jsdom';
 async function page(width){
- const dom=new JSDOM(fs.readFileSync('web/index.html','utf8'),{url:'https://office.test/',runScripts:'outside-only',pretendToBeVisual:true});
+ const dom=new JSDOM(fs.readFileSync('public/office.html','utf8'),{url:'https://office.test/',runScripts:'outside-only',pretendToBeVisual:true});
  const w=dom.window;w.structuredClone=structuredClone;w.scrollTo=()=>{};w.fetch=undefined;
  Object.defineProperty(w,'innerWidth',{value:width});w.HTMLElement.prototype.scrollIntoView=()=>{};
  w.HTMLDialogElement.prototype.showModal=function(){this.open=true};w.HTMLDialogElement.prototype.close=function(){this.open=false};
  const errors=[];w.addEventListener('error',e=>errors.push(e.error||e.message));
- for(const file of ['rules.js','state-workflows.js','advanced.js','app.js'])vm.runInContext(fs.readFileSync('web/'+file,'utf8'),dom.getInternalVMContext());
+ for(const file of ['rules.js','state-workflows.js','advanced.js','app.js'])vm.runInContext(fs.readFileSync('public/'+file,'utf8'),dom.getInternalVMContext());
  w.eval(`db.setupTerms={version:filingTermsVersion};db.onboard={scope:'Across state lines (interstate)',hire:'Yes, for hire',base:'GA',states:'GA, KY, NY',hazmat:'No',weightBand:'Over 26,000 lb',vehicleSetups:[],hazmatDetails:{materials:[]}};location.hash='onboarding';render()`);
  await new Promise(resolve=>setTimeout(resolve,0));
  return {w,dom,errors,change(selector,value){const el=w.document.querySelector(selector);assert.ok(el,selector);if(el.type==='checkbox')el.checked=value;else el.value=value;el.dispatchEvent(new w.Event('input',{bubbles:true}));el.dispatchEvent(new w.Event('change',{bubbles:true}));},click(selector){const el=w.document.querySelector(selector);assert.ok(el,selector);el.click()}};

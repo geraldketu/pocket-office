@@ -30,14 +30,6 @@ export async function getProfile(): Promise<Profile | null> {
 export async function requireAdmin(): Promise<Profile> {
   const profile = await getProfile();
   if (!profile) redirect("/login");
-  if (profile.role !== "admin") redirect("/app");
+  if (profile.role !== "admin") redirect("/#member");
   return profile;
-}
-
-export async function requireCarrier(): Promise<Profile & { carrier_id: string }> {
-  const profile = await getProfile();
-  if (!profile) redirect("/login");
-  if (profile.role === "admin") redirect("/admin");
-  if (!profile.carrier_id) redirect("/login?error=no-carrier");
-  return profile as Profile & { carrier_id: string };
 }

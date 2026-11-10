@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildQuote,evaluateHazmat,weightResults,newMexicoPlanning} from '../worker/rules.mjs';
+import {buildQuote,evaluateHazmat,weightResults,newMexicoPlanning} from '../../src/lib/oliverfee/rules.mjs';
 const material={shippingName:'Gasoline',un:'UN1203',division:'3',quantity:3000,quantityUnit:'gallons',packaging:'Bulk',capacity:4000,capacityUnit:'gallons',phase:'Liquid',placards:'Yes',verified:true,hmspVerified:'Does not apply',securityPlanVerified:'Required'};
 const hazmat={hazmat:'Yes',base:'GA',states:'GA, TN',scope:'Across state lines (interstate)',hire:'Yes, for hire',hazmatDetails:{registrationYear:'2026–2027',businessCategory:'Small business or nonprofit (verified)',farmerException:'No',materials:[material],drivers:[{name:'Driver A',state:'GA',rate:'Standard',transactionVerified:false}]}};
 test('Georgia hazmat with missing cargo details stays unresolved; verified material triggers PHMSA fee automatically',()=>{

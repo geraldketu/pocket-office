@@ -129,7 +129,7 @@ document.addEventListener('click',async e=>{
   if(action==='copy-review'){
    const link=await makeReviewLink();
    try{await navigator.clipboard.writeText(link.url);toast('Secure review link copied. Customer sign-in and carrier access are required.')}
-   catch{modal('Secure review link','<p>The carrier must sign in and have access to this private Site and carrier office.</p>'+field('Copy this link','reviewLink','text',link.url,'readonly'))}
+   catch{modal('Secure review link','<p>The carrier must sign in with an account that has access to this carrier office.</p>'+field('Copy this link','reviewLink','text',link.url,'readonly'))}
   }
   if(action==='quote-checkout'&&customerQuote){const result=await officeAPI('/api/carriers/'+activeCarrier+'/quotes/'+customerQuote.id+'/checkout',{method:'POST',body:'{}'});const target=new URL(result.url);if(target.protocol!=='https:'||target.hostname!=='checkout.stripe.com')throw new Error('Unexpected checkout destination.');location.href=target.href}
   if(action==='quote-confirm'&&customerQuote){await officeAPI('/api/carriers/'+activeCarrier+'/quotes/'+customerQuote.id+'/confirm',{method:'POST',body:'{}'});await loadCustomerQuote(customerQuote.id)}

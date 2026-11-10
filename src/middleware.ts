@@ -30,7 +30,7 @@ export async function middleware(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const path = request.nextUrl.pathname;
-  const isPrivate = ["/admin", "/app", "/set-password", "/dashboard", "/documents"].some(
+  const isPrivate = ["/admin", "/set-password", "/dashboard"].some(
     (p) => path === p || path.startsWith(p + "/"),
   );
   if (!user && isPrivate) {
@@ -45,6 +45,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|js|css|html)$).*)",
   ],
 };

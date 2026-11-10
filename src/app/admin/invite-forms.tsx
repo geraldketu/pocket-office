@@ -7,7 +7,7 @@ function ResultBox({ state }: { state: InviteResult }) {
   const [copied, setCopied] = useState(false);
   if (!state) return null;
   return (
-    <div className={`rounded-lg p-3 text-sm ${state.ok ? "bg-emerald-50 text-emerald-900" : "bg-red-50 text-red-800"}`}>
+    <div className={`rounded-lg p-3 text-sm ${state.ok ? "bg-[#e8f4eb] text-[#24603b]" : "bg-[#fce6ef] text-[#a11b51]"}`}>
       <p>{state.message}</p>
       {state.link && (
         <div className="mt-2 flex gap-2">
