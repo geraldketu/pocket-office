@@ -1,9 +1,15 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { authConfigured } from "@/lib/config";
 
 // Refreshes the login session on every request and keeps
 // signed-out visitors out of the private areas.
 export async function middleware(request: NextRequest) {
+  const protectedPage = ["/admin", "/app", "/set-password", "/dashboard", "/documents"].some(p => request.nextUrl.pathname === p || request.nextUrl.pathname.startsWith(p + "/"));
+  if (!authConfigured()) {
+    if (!protectedPage) return NextResponse.next();
+    return NextResponse.redirect(new URL("/login?error=unavailable",request.url));
+  }
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(

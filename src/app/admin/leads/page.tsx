@@ -30,6 +30,7 @@ export default async function LeadsPage({ searchParams }: { searchParams: Promis
 
   return (
     <>
+      <section className="page-hero"><span className="eyebrow">Carrier outreach</span><h1>Carrier Lead Desk</h1><p className="hero-copy">Review the request, make the call, and keep your next follow-up in sight.</p></section>
       <div className="flex flex-wrap items-center gap-2">
         <h1 className="mr-auto text-2xl font-bold">Leads</h1>
         {["all", ...STATUSES].map((s) => (

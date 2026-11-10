@@ -27,6 +27,7 @@ export default async function AdminHome() {
 
   return (
     <>
+      <section className="page-hero"><span className="eyebrow">Private workspace</span><h1>Your carrier desk.</h1><p className="hero-copy">Review your carriers, open their paperwork, and keep the next action in sight.</p></section>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         <Stat label="Carriers" value={rows.length} />
         <Stat label="Need action" value={count("red")} tone="text-red-700" />

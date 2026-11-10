@@ -18,7 +18,7 @@ export async function sendEmail(to: string, subject: string, html: string): Prom
 export function inviteEmailHtml(companyName: string, link: string) {
   return `
     <div style="font-family:Arial,sans-serif;max-width:520px;margin:auto;color:#0f172a">
-      <h2 style="color:#1e40af">Welcome to Pocket Office</h2>
+      <h2 style="color:#805d18">Welcome to OliverFee 360</h2>
       <p>Your account for <strong>${escapeHtml(companyName)}</strong> is ready.</p>
       <p>Tap the button below to choose your password. Then you can see, upload and download all of your DOT paperwork from your phone.</p>
       <p><a href="${link}" style="display:inline-block;background:#1d4ed8;color:#fff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold">Set up my account</a></p>

@@ -1,6 +1,7 @@
 import "server-only";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { authConfigured } from "@/lib/config";
 
 export type Role = "admin" | "carrier" | "driver";
 
@@ -14,6 +15,7 @@ export type Profile = {
 
 // Returns the signed-in user's profile, or null if signed out.
 export async function getProfile(): Promise<Profile | null> {
+  if (!authConfigured()) return null;
   const supabase = await createClient();
   const {
     data: { user },

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { Brand } from "@/components/site-shell";
 
 // Reached from an invite or reset link. The user is already signed in by the link.
 export default function SetPasswordPage() {
@@ -29,8 +30,8 @@ export default function SetPasswordPage() {
   }
 
   return (
-    <main className="mx-auto max-w-sm px-4 py-16">
-      <span className="text-lg font-bold text-blue-800">Pocket Office</span>
+    <main className="auth-wrap">
+      <Brand/>
       <h1 className="mt-6 text-2xl font-bold">Choose your password</h1>
       <p className="mt-1 mb-4 text-sm text-slate-600">You&apos;ll use this with your email to sign in from now on.</p>
       <form onSubmit={onSubmit} className="card space-y-4">

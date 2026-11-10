@@ -4,8 +4,11 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { authConfigured } from "@/lib/config";
+import { Brand } from "@/components/site-shell";
 
 const errorText: Record<string, string> = {
+  "unavailable": "Member sign-in is not open yet. You can browse the website without signing in.",
   "no-carrier": "Your login isn't linked to a company yet. Please contact us.",
   "link-expired": "That link has expired or was already used. Ask us for a new one, or reset your password.",
 };
@@ -18,6 +21,7 @@ function LoginForm() {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!authConfigured()) {setError("Member sign-in is not open yet. No account information was sent.");return;}
     setPending(true);
     setError(null);
     const form = new FormData(e.currentTarget);
@@ -36,6 +40,7 @@ function LoginForm() {
 
   return (
     <form onSubmit={onSubmit} className="card space-y-4">
+      {!authConfigured() && <p className="notice">Member sign-in is not open yet. Browse services or build a carrier checklist without an account.</p>}
       <div>
         <label className="label" htmlFor="email">Email</label>
         <input className="field" id="email" name="email" type="email" required autoComplete="email" />
@@ -45,7 +50,7 @@ function LoginForm() {
         <input className="field" id="password" name="password" type="password" required autoComplete="current-password" />
       </div>
       {error && <p className="text-sm text-red-700">{error}</p>}
-      <button className="btn w-full" disabled={pending}>{pending ? "Signing in..." : "Sign in"}</button>
+      <button className="btn w-full" disabled={pending || !authConfigured()}>{pending ? "Signing in..." : "Sign in with email"}</button>
       <p className="text-center text-sm">
         <Link href="/forgot-password" className="text-blue-700 hover:underline">Forgot your password?</Link>
       </p>
@@ -55,12 +60,15 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <main className="mx-auto max-w-sm px-4 py-16">
-      <Link href="/" className="text-lg font-bold text-blue-800">Pocket Office</Link>
-      <h1 className="mt-6 mb-4 text-2xl font-bold">Sign in</h1>
+    <main className="auth-wrap">
+      <Brand/>
+      <span className="eyebrow">Private Member Office</span>
+      <h1 className="mt-3 mb-4">Welcome back.</h1>
+      <p className="auth-copy">Sign in with your email and password to access your carrier’s records. No ChatGPT account needed.</p>
       <Suspense>
         <LoginForm />
       </Suspense>
+      <p className="auth-copy">New carrier? <Link className="text-link" href="/carrier-setup">Start your checklist ↗</Link></p>
     </main>
   );
 }

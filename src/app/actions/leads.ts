@@ -1,6 +1,7 @@
 "use server";
 
 import { createAdminClient } from "@/lib/supabase/admin";
+import { requestsConfigured } from "@/lib/config";
 
 export type ContactState = { ok: boolean; message: string } | null;
 
@@ -9,6 +10,7 @@ const clean = (v: FormDataEntryValue | null, max = 200) =>
 
 // Public contact form: creates a new lead in the admin dashboard.
 export async function submitContact(_prev: ContactState, formData: FormData): Promise<ContactState> {
+  if (!requestsConfigured()) return {ok:false,message:"Online requests are not open yet. Your message was not submitted."};
   // Hidden field that bots tend to fill in.
   if (clean(formData.get("website"))) return { ok: true, message: "Thanks! We'll be in touch." };
 

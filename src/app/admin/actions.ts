@@ -77,7 +77,7 @@ export async function createCarrierAndInvite(_prev: InviteResult, f: FormData): 
     };
   }
 
-  const sent = await sendEmail(email, "Your Pocket Office account is ready", inviteEmailHtml(legal_name, link));
+  const sent = await sendEmail(email, "Your OliverFee 360 account is ready", inviteEmailHtml(legal_name, link));
   revalidatePath("/admin");
   return {
     ok: true,
