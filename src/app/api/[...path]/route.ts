@@ -39,8 +39,14 @@ async function authorize(user: User, carrierId: string, write = false, ownerOnly
   if (!carrier) fail(404, "Carrier not found.");
   const base = { id: carrier!.id, name: carrier!.dba || carrier!.legal_name };
   if (user.admin) return { ...base, role: "owner", person_id: null, admin: true };
-  const { data: m } = await db.from("carrier_members").select("role, person_id")
+  let { data: m } = await db.from("carrier_members").select("role, person_id")
     .eq("carrier_id", carrierId).eq("user_id", user.id).maybeSingle();
+  if (!m) {
+    // An invitation to this email that hasn't been linked to a login yet (e.g. opened straight from a link).
+    const { data: invited } = await db.from("carrier_members").update({ user_id: user.id })
+      .eq("carrier_id", carrierId).eq("email", user.email).is("user_id", null).select("role, person_id");
+    m = invited?.[0] ?? null;
+  }
   if (!m) fail(403, "You do not have access to this carrier.");
   if (write && m!.role === "driver") fail(403, "Drivers can upload their own files but cannot edit carrier administration.");
   if (ownerOnly && m!.role !== "owner") fail(403, "Only a carrier owner can manage account access.");
