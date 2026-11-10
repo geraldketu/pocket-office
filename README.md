@@ -37,3 +37,10 @@ Import the GitHub repo in Vercel, add the same environment variables (set `NEXT_
 - Files are in a private storage bucket under `<carrier_id>/...`. Database and storage rules only let that carrier and the admin read them.
 - Downloads use signed links that expire after 60 seconds.
 - The service-role key is used only on the server, and only after checking the caller is the admin.
+
+
+## OliverFee 360 source
+
+The `oliverfee-360/` directory contains the separate OliverFee 360 application from live Site version 30 (source commit `7d3c5b41c996384fd4dbb78f2bdaaeb44764dadd`). The existing Next.js application at the repository root is retained.
+
+See [OliverFee 360 development and access instructions](oliverfee-360/README.md). From that directory, run `npm ci`, `npm test`, `npm run build`, and `npm run dev`. The local preview is at http://127.0.0.1:4173 and uses synthetic sign-in and in-memory test data. Stripe checkout remains disabled. No production credentials or carrier records are included.
