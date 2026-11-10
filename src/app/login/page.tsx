@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { authConfigured } from "@/lib/config";
 import { Brand } from "@/components/site-shell";
@@ -15,8 +15,8 @@ const errorText: Record<string, string> = {
 
 function LoginForm() {
   const router = useRouter();
-  const params = useSearchParams();
-  const [error, setError] = useState<string | null>(errorText[params.get("error") ?? ""] ?? null);
+  const [error, setError] = useState<string | null>(null);
+  useEffect(() => {setError(errorText[new URLSearchParams(window.location.search).get("error") ?? ""] ?? null);},[]);
   const [pending, setPending] = useState(false);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
