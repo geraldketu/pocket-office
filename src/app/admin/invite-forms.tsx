@@ -1,5 +1,6 @@
 "use client";
 
+import {usePreview} from "@/components/admin/preview-runtime";
 import { useActionState, useState } from "react";
 import { createCarrierAndInvite, resendInvite, type InviteResult } from "./actions";
 
@@ -29,7 +30,8 @@ function ResultBox({ state }: { state: InviteResult }) {
 }
 
 export function NewCarrierForm() {
-  const [state, action, pending] = useActionState<InviteResult, FormData>(createCarrierAndInvite, null);
+  const preview=usePreview();const submit=preview?async(_prev:InviteResult,form:FormData):Promise<InviteResult>=>await preview.call("invite",Object.fromEntries(form)) as InviteResult:createCarrierAndInvite;
+  const [state, action, pending] = useActionState<InviteResult, FormData>(submit, null);
   return (
     <form action={action} key={state?.ok ? state.carrierId : "form"} className="grid gap-3 sm:grid-cols-2">
       <div className="sm:col-span-2">
@@ -73,7 +75,8 @@ export function NewCarrierForm() {
 }
 
 export function ResendInviteButton({ carrierId }: { carrierId: string }) {
-  const [state, action, pending] = useActionState<InviteResult, FormData>(resendInvite, null);
+  const preview=usePreview();const submit=preview?async(_prev:InviteResult,form:FormData):Promise<InviteResult>=>await preview.call("invite",Object.fromEntries(form)) as InviteResult:resendInvite;
+  const [state, action, pending] = useActionState<InviteResult, FormData>(submit, null);
   return (
     <form action={action} className="space-y-2">
       <input type="hidden" name="carrier_id" value={carrierId} />

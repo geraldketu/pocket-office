@@ -1,10 +1,14 @@
 "use client";
 
+import {usePreview} from "@/components/admin/preview-runtime";
 import { useActionState } from "react";
 import { submitContact, type ContactState } from "@/app/actions/leads";
 
 export function ContactForm({ available = true }: { available?: boolean }) {
-  const [state, action, pending] = useActionState<ContactState, FormData>(submitContact, null);
+  const preview=usePreview();
+  available=preview?preview.scenario!=="unavailable":available;
+  const submit=preview?async(_prev:ContactState,form:FormData):Promise<ContactState>=>{try{return await preview.call("contact",Object.fromEntries(form)) as {ok:boolean;message:string};}catch(e){return {ok:false,message:e instanceof Error?e.message:"Test save failed"};}}:submitContact;
+  const [state, action, pending] = useActionState<ContactState, FormData>(submit, null);
 
   if (state?.ok) {
     return <p className="rounded-lg bg-emerald-50 p-4 text-emerald-800">{state.message}</p>;

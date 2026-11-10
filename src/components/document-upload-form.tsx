@@ -1,5 +1,6 @@
 "use client";
 
+import {usePreview} from "@/components/admin/preview-runtime";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
@@ -23,7 +24,7 @@ export function DocumentUploadForm({
   types: DocumentType[];
   defaultTypeId?: string;
 }) {
-  const router = useRouter();
+  const router = useRouter();const preview=usePreview();
   const formRef = useRef<HTMLFormElement>(null);
   const [typeId, setTypeId] = useState(defaultTypeId ?? "");
   const [issued, setIssued] = useState("");
@@ -53,6 +54,7 @@ export function DocumentUploadForm({
     if (file.size > MAX_BYTES) return setError("That file is over 25 MB.");
 
     setPending(true);
+    if(preview){try{await preview.call("upload",{carrierId,typeId,fileName:file.name,mimeType:file.type,issued,expires,notes:String(form.get("notes")||"")});setDone(`Saved ${selected?.name??"document"}.`);formRef.current?.reset();router.refresh();}catch(e){setError(e instanceof Error?e.message:"Test upload failed");}setPending(false);return;}
     const supabase = createClient();
     const ext = (file.name.split(".").pop() || "bin").toLowerCase().replace(/[^a-z0-9]/g, "");
     const path = `${carrierId}/documents/${crypto.randomUUID()}.${ext}`;

@@ -1,5 +1,6 @@
 "use client";
 
+import {usePreview} from "@/components/admin/preview-runtime";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
@@ -7,7 +8,7 @@ import { Brand } from "@/components/site-shell";
 
 // Reached from an invite or reset link. The user is already signed in by the link.
 export default function SetPasswordPage() {
-  const router = useRouter();
+  const router = useRouter();const preview=usePreview();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
@@ -19,6 +20,7 @@ export default function SetPasswordPage() {
     if (password !== String(form.get("confirm"))) return setError("The two passwords don't match.");
     setPending(true);
     setError(null);
+    if(preview){try{await preview.call("password",{password});preview.navigate("/dashboard");}catch(e){setError(e instanceof Error?e.message:"Test password update failed");setPending(false);}return;}
     const { error } = await createClient().auth.updateUser({ password });
     if (error) {
       setError(error.message);

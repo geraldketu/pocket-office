@@ -1,0 +1,878 @@
+{
+  "checkedAt": "2026-11-10T21:32:25.600Z",
+  "base": "http://localhost:3004",
+  "coverage": [
+    {
+      "id": "route:/admin/carriers/[id]",
+      "path": "/admin/carriers/[id]",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
+      "id": "route:/admin/leads",
+      "path": "/admin/leads",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
+      "id": "route:/admin/overview",
+      "path": "/admin/overview",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
+      "id": "route:/admin",
+      "path": "/admin",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
+      "id": "route:/admin-lab",
+      "path": "/admin-lab",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
+      "id": "route:/app",
+      "path": "/app",
+      "role": "Basic",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
+      "id": "route:/auth/confirm",
+      "path": "/auth/confirm",
+      "role": "new-customer",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
+      "id": "route:/auth/signout",
+      "path": "/auth/signout",
+      "role": "Basic",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the customer vault and press Sign out (POST is simulated)."
+    },
+    {
+      "id": "route:/bid-calculator",
+      "path": "/bid-calculator",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
+      "id": "route:/carrier-setup",
+      "path": "/carrier-setup",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
+      "id": "route:/dashboard",
+      "path": "/dashboard",
+      "role": "Basic",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "The preview redirects using the test identity, not the owner identity."
+    },
+    {
+      "id": "route:/documents/[id]/file",
+      "path": "/documents/[id]/file",
+      "role": "Basic",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
+      "id": "route:/forgot-password",
+      "path": "/forgot-password",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
+      "id": "route:/login",
+      "path": "/login",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
+      "id": "route:/",
+      "path": "/",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
+      "id": "route:/plans",
+      "path": "/plans",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
+      "id": "route:/set-password",
+      "path": "/set-password",
+      "role": "new-customer",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
+      "id": "state:contact-success",
+      "path": "/#contact",
+      "role": "visitor",
+      "scenario": "contact-success",
+      "httpStatus": 200,
+      "steps": "Submit the real contact form; only a synthetic lead is saved."
+    },
+    {
+      "id": "state:contact-error",
+      "path": "/#contact",
+      "role": "visitor",
+      "scenario": "save-error",
+      "httpStatus": 200,
+      "steps": "Submit with missing contact information, then valid details to see the simulated save error."
+    },
+    {
+      "id": "state:contact-unavailable",
+      "path": "/#contact",
+      "role": "visitor",
+      "scenario": "unavailable",
+      "httpStatus": 200,
+      "steps": "Requests are disabled; no submit button can send data."
+    },
+    {
+      "id": "state:startup",
+      "path": "/carrier-setup?package=startup",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Select needs help; use ?; download and submit an unpaid review."
+    },
+    {
+      "id": "state:interview-success",
+      "path": "/carrier-setup",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Complete company and contact details, request a service and submit."
+    },
+    {
+      "id": "state:interview-failure",
+      "path": "/carrier-setup",
+      "role": "visitor",
+      "scenario": "save-error",
+      "httpStatus": 200,
+      "steps": "Request a service, fill contact details and submit to the failure simulator."
+    },
+    {
+      "id": "state:interview-unavailable",
+      "path": "/carrier-setup",
+      "role": "visitor",
+      "scenario": "unavailable",
+      "httpStatus": 200,
+      "steps": "Build and download a review; live submission is disabled."
+    },
+    {
+      "id": "state:bid-invalid",
+      "path": "/bid-calculator",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Enter offer, mileage and costs; try zero mileage and a rate above $25, then acknowledge."
+    },
+    {
+      "id": "state:login-unavailable",
+      "path": "/login?error=unavailable",
+      "role": "visitor",
+      "scenario": "unavailable",
+      "httpStatus": 200,
+      "steps": "Open the actual sign-in error state."
+    },
+    {
+      "id": "state:login-no-carrier",
+      "path": "/login?error=no-carrier",
+      "role": "visitor",
+      "scenario": "no-carrier",
+      "httpStatus": 200,
+      "steps": "Open the actual sign-in error state."
+    },
+    {
+      "id": "state:login-link-expired",
+      "path": "/login?error=link-expired",
+      "role": "visitor",
+      "scenario": "link-expired",
+      "httpStatus": 200,
+      "steps": "Open the actual sign-in error state."
+    },
+    {
+      "id": "state:login-invalid",
+      "path": "/login",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Use a listed synthetic test email and test password; try a wrong password first."
+    },
+    {
+      "id": "state:reset-unavailable",
+      "path": "/forgot-password",
+      "role": "visitor",
+      "scenario": "unavailable",
+      "httpStatus": 200,
+      "steps": "The actual disabled reset form is displayed; no auth call is possible."
+    },
+    {
+      "id": "state:password-error",
+      "path": "/set-password",
+      "role": "new-customer",
+      "scenario": "password-error",
+      "httpStatus": 200,
+      "steps": "Enter a valid matching password to see the simulated authentication update error."
+    },
+    {
+      "id": "state:reset-sent",
+      "path": "/forgot-password",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Submit a sample email. Open the synthetic recovery link from the preview activity panel."
+    },
+    {
+      "id": "state:password-validation",
+      "path": "/set-password",
+      "role": "new-customer",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Try fewer than 10 characters, mismatched passwords, then a valid match; continue to the test dashboard."
+    },
+    {
+      "id": "state:confirm-valid",
+      "path": "/auth/confirm?token_hash=test-invite&type=invite&next=/set-password",
+      "role": "new-customer",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Synthetic token is accepted only in this isolated preview; continue to choose password."
+    },
+    {
+      "id": "state:confirm-invalid",
+      "path": "/auth/confirm?token_hash=invalid&type=invite",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "The real error destination is displayed; no real token is exchanged."
+    },
+    {
+      "id": "state:vault-empty",
+      "path": "/app",
+      "role": "new-customer",
+      "scenario": "empty",
+      "httpStatus": 200,
+      "steps": "No documents are seeded. Upload a sample file."
+    },
+    {
+      "id": "state:vault-states",
+      "path": "/app",
+      "role": "Basic",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Review badges and checklist; view and download the sample documents."
+    },
+    {
+      "id": "state:upload-storage-error",
+      "path": "/app",
+      "role": "Basic",
+      "scenario": "storage-error",
+      "httpStatus": 200,
+      "steps": "Choose a document type and a sample file, then upload."
+    },
+    {
+      "id": "state:upload-save-error",
+      "path": "/app",
+      "role": "Basic",
+      "scenario": "save-error",
+      "httpStatus": 200,
+      "steps": "Choose a document type and a sample file, then upload."
+    },
+    {
+      "id": "state:doc-missing",
+      "path": "/documents/missing/file",
+      "role": "Basic",
+      "scenario": "populated",
+      "httpStatus": 404,
+      "steps": "Open the missing test document handler."
+    },
+    {
+      "id": "state:doc-error",
+      "path": "/documents/test-doc-0/file",
+      "role": "Basic",
+      "scenario": "storage-error",
+      "httpStatus": 500,
+      "steps": "Open the sample file to reach the safe storage failure."
+    },
+    {
+      "id": "state:doc-download",
+      "path": "/documents/test-doc-0/file?download=1",
+      "role": "Basic",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Downloads only the generated SAMPLE text file."
+    },
+    {
+      "id": "state:unlinked-account",
+      "path": "/app",
+      "role": "Basic",
+      "scenario": "unlinked-account",
+      "httpStatus": 200,
+      "steps": "The actual customer guard redirects to the no-carrier sign-in error."
+    },
+    {
+      "id": "state:admin-read-error",
+      "path": "/admin/overview",
+      "role": "owner",
+      "scenario": "database-error",
+      "httpStatus": 200,
+      "steps": "The real overview error renderer displays schema/access failures; it does not label failed reads as empty success."
+    },
+    {
+      "id": "state:admin-empty",
+      "path": "/admin/overview",
+      "role": "owner",
+      "scenario": "empty",
+      "httpStatus": 200,
+      "steps": "Every existing module shows its real empty state."
+    },
+    {
+      "id": "state:carrier-missing",
+      "path": "/admin/carriers/missing",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 404,
+      "steps": "Open an unknown test carrier."
+    },
+    {
+      "id": "state:invite-success",
+      "path": "/admin/overview",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Use the test-only invitation form, then open the generated invite from Activity. No email is sent."
+    },
+    {
+      "id": "state:invite-error",
+      "path": "/admin/overview",
+      "role": "owner",
+      "scenario": "invite-error",
+      "httpStatus": 200,
+      "steps": "Submit a test invite to see the failure."
+    },
+    {
+      "id": "state:lead-empty",
+      "path": "/admin/leads",
+      "role": "owner",
+      "scenario": "empty",
+      "httpStatus": 200,
+      "steps": "No sample leads are seeded. Add a sample lead."
+    },
+    {
+      "id": "state:leads-new",
+      "path": "/admin/leads?status=new",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Inspect the filter, update test notes/status, and follow record links."
+    },
+    {
+      "id": "state:leads-called",
+      "path": "/admin/leads?status=called",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Inspect the filter, update test notes/status, and follow record links."
+    },
+    {
+      "id": "state:leads-quoted",
+      "path": "/admin/leads?status=quoted",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Inspect the filter, update test notes/status, and follow record links."
+    },
+    {
+      "id": "state:leads-paid",
+      "path": "/admin/leads?status=paid",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Inspect the filter, update test notes/status, and follow record links."
+    },
+    {
+      "id": "state:leads-active",
+      "path": "/admin/leads?status=active",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Inspect the filter, update test notes/status, and follow record links."
+    },
+    {
+      "id": "state:leads-lost",
+      "path": "/admin/leads?status=lost",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Inspect the filter, update test notes/status, and follow record links."
+    },
+    {
+      "id": "state:driver",
+      "path": "/app",
+      "role": "driver",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Driver shares carrier vault permissions in the current live app; individual scoping exists only in the archived Worker."
+    },
+    {
+      "id": "state:tier-Basic",
+      "path": "/app",
+      "role": "Basic",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Tier metadata is seeded. The live app has no tier-specific permission gates."
+    },
+    {
+      "id": "state:tier-Pro",
+      "path": "/app",
+      "role": "Pro",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Tier metadata is seeded. The live app has no tier-specific permission gates."
+    },
+    {
+      "id": "state:tier-Premium",
+      "path": "/app",
+      "role": "Premium",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Tier metadata is seeded. The live app has no tier-specific permission gates."
+    },
+    {
+      "id": "state:tier-Ultimate",
+      "path": "/app",
+      "role": "Ultimate",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Tier metadata is seeded. The live app has no tier-specific permission gates."
+    },
+    {
+      "id": "state:unknown-route",
+      "path": "/does-not-exist",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 404,
+      "steps": "Open the actual not-found fallback."
+    },
+    {
+      "id": "missing:/signup",
+      "path": "/signup",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Missing in the live app. Follow homepage → carrier checklist → owner invitation → choose password instead."
+    },
+    {
+      "id": "missing:/checkout",
+      "path": "/checkout",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Missing/disabled in the live app. Use the labelled integration simulator; it cannot connect to Stripe."
+    },
+    {
+      "id": "missing:/checkout/confirmation",
+      "path": "/checkout/confirmation",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "No live confirmation page exists. Inspect archived customer quote review and the safe simulated receipt."
+    },
+    {
+      "id": "missing:/sales",
+      "path": "/sales",
+      "role": "salesperson",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "No salesperson role or dashboard exists. The actual lead desk is owner-only."
+    },
+    {
+      "id": "archive:dashboard",
+      "path": "/archive#dashboard",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the original screen and follow its real links/buttons. All backend calls go to the isolated Worker; checkout stays disabled."
+    },
+    {
+      "id": "archive:onboarding",
+      "path": "/archive#onboarding",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the original screen and follow its real links/buttons. All backend calls go to the isolated Worker; checkout stays disabled."
+    },
+    {
+      "id": "archive:compliance",
+      "path": "/archive#compliance",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the original screen and follow its real links/buttons. All backend calls go to the isolated Worker; checkout stays disabled."
+    },
+    {
+      "id": "archive:documents",
+      "path": "/archive#documents",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the original screen and follow its real links/buttons. All backend calls go to the isolated Worker; checkout stays disabled."
+    },
+    {
+      "id": "archive:fleet",
+      "path": "/archive#fleet",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the original screen and follow its real links/buttons. All backend calls go to the isolated Worker; checkout stays disabled."
+    },
+    {
+      "id": "archive:audit",
+      "path": "/archive#audit",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the original screen and follow its real links/buttons. All backend calls go to the isolated Worker; checkout stays disabled."
+    },
+    {
+      "id": "archive:board",
+      "path": "/archive#board",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the original screen and follow its real links/buttons. All backend calls go to the isolated Worker; checkout stays disabled."
+    },
+    {
+      "id": "archive:bid",
+      "path": "/archive#bid",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the original screen and follow its real links/buttons. All backend calls go to the isolated Worker; checkout stays disabled."
+    },
+    {
+      "id": "archive:supplies",
+      "path": "/archive#supplies",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the original screen and follow its real links/buttons. All backend calls go to the isolated Worker; checkout stays disabled."
+    },
+    {
+      "id": "archive:notices",
+      "path": "/archive#notices",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the original screen and follow its real links/buttons. All backend calls go to the isolated Worker; checkout stays disabled."
+    },
+    {
+      "id": "archive:plans",
+      "path": "/archive#plans",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the original screen and follow its real links/buttons. All backend calls go to the isolated Worker; checkout stays disabled."
+    },
+    {
+      "id": "archive:review",
+      "path": "/archive#review",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the original screen and follow its real links/buttons. All backend calls go to the isolated Worker; checkout stays disabled."
+    },
+    {
+      "id": "archive:member",
+      "path": "/archive#member",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the original screen and follow its real links/buttons. All backend calls go to the isolated Worker; checkout stays disabled."
+    },
+    {
+      "id": "archive:accounts",
+      "path": "/archive#accounts",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the original screen and follow its real links/buttons. All backend calls go to the isolated Worker; checkout stays disabled."
+    },
+    {
+      "id": "archive:customer-review",
+      "path": "/archive#customer-review",
+      "role": "archive-owner",
+      "scenario": "signed-quote",
+      "httpStatus": 200,
+      "steps": "Open the original screen and follow its real links/buttons. All backend calls go to the isolated Worker; checkout stays disabled."
+    },
+    {
+      "id": "workflow:archive-records",
+      "path": "/archive#compliance",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Use Add record, then open a seeded record and Fix issue."
+    },
+    {
+      "id": "workflow:archive-files",
+      "path": "/archive#documents",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Use Add document and the test document actions."
+    },
+    {
+      "id": "workflow:archive-people",
+      "path": "/archive#fleet",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open seeded driver → DQF / Hazmat test; add and edit a team member."
+    },
+    {
+      "id": "workflow:archive-audit",
+      "path": "/archive#audit",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Toggle checklist items, then request audit support (unpaid)."
+    },
+    {
+      "id": "workflow:archive-market",
+      "path": "/archive#board",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Post availability, create a sample job, then remove it."
+    },
+    {
+      "id": "workflow:archive-orders",
+      "path": "/archive#supplies",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Select products/quantities and request the order; payment remains unpaid."
+    },
+    {
+      "id": "workflow:archive-notices",
+      "path": "/archive#notices",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Create and edit a synthetic notice."
+    },
+    {
+      "id": "workflow:archive-plan",
+      "path": "/archive#plans",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Choose any plan or startup bundle, then review and sign the test quote."
+    },
+    {
+      "id": "workflow:archive-quote",
+      "path": "/archive#customer-review",
+      "role": "archive-owner",
+      "scenario": "unsigned-quote",
+      "httpStatus": 200,
+      "steps": "Review pending/unsigned/signed/stale test quote scenarios. Checkout is disabled; use integration simulator for a receipt."
+    },
+    {
+      "id": "workflow:archive-access",
+      "path": "/archive#accounts",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Create a test carrier; invite a test office/driver; import test-only browser data."
+    },
+    {
+      "id": "workflow:archive-application",
+      "path": "/archive#onboarding",
+      "role": "archive-owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Acknowledge filing terms, complete the actual application and follow conditional questions."
+    },
+    {
+      "id": "state:archive-pending-quote",
+      "path": "/archive#customer-review",
+      "role": "archive-owner",
+      "scenario": "pending-quote",
+      "httpStatus": 200,
+      "steps": "Open the original customer quote review; use the activity/simulator panel to inspect a simulated receipt."
+    },
+    {
+      "id": "state:archive-unsigned-quote",
+      "path": "/archive#customer-review",
+      "role": "archive-owner",
+      "scenario": "unsigned-quote",
+      "httpStatus": 200,
+      "steps": "Open the original customer quote review; use the activity/simulator panel to inspect a simulated receipt."
+    },
+    {
+      "id": "state:archive-signed-quote",
+      "path": "/archive#customer-review",
+      "role": "archive-owner",
+      "scenario": "signed-quote",
+      "httpStatus": 200,
+      "steps": "Open the original customer quote review; use the activity/simulator panel to inspect a simulated receipt."
+    },
+    {
+      "id": "state:archive-stale-quote",
+      "path": "/archive#customer-review",
+      "role": "archive-owner",
+      "scenario": "stale-quote",
+      "httpStatus": 200,
+      "steps": "Open the original customer quote review; use the activity/simulator panel to inspect a simulated receipt."
+    },
+    {
+      "id": "state:archive-paid-quote",
+      "path": "/archive#customer-review",
+      "role": "archive-owner",
+      "scenario": "paid-quote",
+      "httpStatus": 200,
+      "steps": "Open the original customer quote review; use the activity/simulator panel to inspect a simulated receipt."
+    },
+    {
+      "id": "module:profiles",
+      "path": "/admin/overview#profiles",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the overview module and follow company/document links."
+    },
+    {
+      "id": "module:carriers",
+      "path": "/admin/overview#carriers",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the overview module and follow company/document links."
+    },
+    {
+      "id": "module:documents",
+      "path": "/admin/overview#documents",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the overview module and follow company/document links."
+    },
+    {
+      "id": "module:leads",
+      "path": "/admin/overview#leads",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the overview module and follow company/document links."
+    },
+    {
+      "id": "module:payments",
+      "path": "/admin/overview#payments",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the overview module and follow company/document links."
+    },
+    {
+      "id": "module:fuel_receipts",
+      "path": "/admin/overview#fuel_receipts",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the overview module and follow company/document links."
+    },
+    {
+      "id": "module:mileage_entries",
+      "path": "/admin/overview#mileage_entries",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the overview module and follow company/document links."
+    },
+    {
+      "id": "module:dat_records",
+      "path": "/admin/overview#dat_records",
+      "role": "owner",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open the overview module and follow company/document links."
+    },
+    {
+      "id": "role:archive-office",
+      "path": "/archive#member",
+      "role": "archive-office",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Follow navigation; test restricted carrier administration and another carrier ID. Driver sees only assigned records in this archived runtime."
+    },
+    {
+      "id": "role:archive-driver",
+      "path": "/archive#member",
+      "role": "archive-driver",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Follow navigation; test restricted carrier administration and another carrier ID. Driver sees only assigned records in this archived runtime."
+    },
+    {
+      "id": "state:archive-empty",
+      "path": "/archive#documents",
+      "role": "archive-owner",
+      "scenario": "empty",
+      "httpStatus": 200,
+      "steps": "No sample files or records are seeded; upload a sample file."
+    },
+    {
+      "id": "state:archive-no-accounts",
+      "path": "/archive#accounts",
+      "role": "archive-owner",
+      "scenario": "no-accounts",
+      "httpStatus": 200,
+      "steps": "Create a test carrier to continue; no live account is made."
+    },
+    {
+      "id": "state:archive-connection-error",
+      "path": "/archive#member",
+      "role": "archive-owner",
+      "scenario": "connection-error",
+      "httpStatus": 200,
+      "steps": "The original connection-error screen and retry control are shown; the ChatGPT sign-in link is blocked by the preview boundary."
+    }
+  ]
+}

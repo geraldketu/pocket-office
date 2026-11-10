@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import {usePreview} from "@/components/admin/preview-runtime";
 import { useRouter } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
@@ -8,6 +9,7 @@ import { authConfigured } from "@/lib/config";
 import { Brand } from "@/components/site-shell";
 
 const errorText: Record<string, string> = {
+  "owner-required": "This administrative portal is restricted to the designated owner.",
   "unavailable": "Member sign-in is not open yet. You can browse the website without signing in.",
   "no-carrier": "Your login isn't linked to a company yet. Please contact us.",
   "link-expired": "That link has expired or was already used. Ask us for a new one, or reset your password.",
@@ -15,16 +17,18 @@ const errorText: Record<string, string> = {
 
 function LoginForm() {
   const router = useRouter();
+  const preview=usePreview();const configured=preview?preview.scenario!=="unavailable":authConfigured();
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {setError(errorText[new URLSearchParams(window.location.search).get("error") ?? ""] ?? null);},[]);
   const [pending, setPending] = useState(false);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!authConfigured()) {setError("Member sign-in is not open yet. No account information was sent.");return;}
+    if (!configured) {setError("Member sign-in is not open yet. No account information was sent.");return;}
     setPending(true);
     setError(null);
     const form = new FormData(e.currentTarget);
+    if(preview){try{await preview.call("login",{email:String(form.get("email")),password:String(form.get("password"))});preview.navigate("/dashboard");}catch{setError("Wrong email or password.");setPending(false);}return;}
     const { error } = await createClient().auth.signInWithPassword({
       email: String(form.get("email")),
       password: String(form.get("password")),
@@ -40,7 +44,7 @@ function LoginForm() {
 
   return (
     <form onSubmit={onSubmit} className="card space-y-4">
-      {!authConfigured() && <p className="notice">Member sign-in is not open yet. Browse services or build a carrier checklist without an account.</p>}
+      {!configured && <p className="notice">Member sign-in is not open yet. Browse services or build a carrier checklist without an account.</p>}
       <div>
         <label className="label" htmlFor="email">Email</label>
         <input className="field" id="email" name="email" type="email" required autoComplete="email" />
@@ -50,7 +54,7 @@ function LoginForm() {
         <input className="field" id="password" name="password" type="password" required autoComplete="current-password" />
       </div>
       {error && <p className="text-sm text-red-700">{error}</p>}
-      <button className="btn w-full" disabled={pending || !authConfigured()}>{pending ? "Signing in..." : "Sign in with email"}</button>
+      <button className="btn w-full" disabled={pending || !configured}>{pending ? "Signing in..." : "Sign in with email"}</button>
       <p className="text-center text-sm">
         <Link href="/forgot-password" className="text-blue-700 hover:underline">Forgot your password?</Link>
       </p>

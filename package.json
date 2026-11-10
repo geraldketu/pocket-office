@@ -6,10 +6,13 @@
   "scripts": {
     "test": "node --test tests/*.test.mjs",
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/admin-inventory.mjs && next build",
     "start": "next start",
     "lint": "eslint",
-    "create-admin": "node --env-file=.env.local scripts/create-admin.mjs"
+    "create-admin": "node --env-file=.env.local scripts/create-admin.mjs",
+    "admin:lab": "node scripts/admin-lab.mjs",
+    "admin:inventory": "node scripts/admin-inventory.mjs",
+    "test:admin": "node --test tests/admin-preview.integration.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

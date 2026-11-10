@@ -11,7 +11,7 @@ import * as pricing from '../src/lib/interview-rules.ts';
 const require=createRequire(import.meta.url);
 function compile(path,imports){const source=fs.readFileSync(new URL(path,import.meta.url),'utf8');const js=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;const module={exports:{}};new Function('require','module','exports',js)(id=>imports[id]||require(id),module,module.exports);return module.exports;}
 const ui=compile('../src/components/screening-workspace.tsx',{'@/lib/screening':rules});
-const {CarrierInterview}=compile('../src/components/carrier-interview.tsx',{'@/lib/screening':rules,'@/lib/interview-rules':pricing,'@/components/screening-workspace':ui,'@/app/actions/interview':{submitInterview:()=>{throw Error('No real submissions in UI tests');}}});
+const {CarrierInterview}=compile('../src/components/carrier-interview.tsx',{'@/components/admin/preview-runtime':{usePreview:()=>null},'@/lib/screening':rules,'@/lib/interview-rules':pricing,'@/components/screening-workspace':ui,'@/app/actions/interview':{submitInterview:()=>{throw Error('No real submissions in UI tests');}}});
 function environment(width){
  const dom=new JSDOM('<!doctype html><html><body><div id="root"></div></body></html>',{url:'http://localhost/carrier-setup',pretendToBeVisual:true});
  const keys=['window','document','HTMLElement','HTMLDialogElement','Event','MouseEvent','IS_REACT_ACT_ENVIRONMENT'];const previous=keys.map(k=>globalThis[k]);
