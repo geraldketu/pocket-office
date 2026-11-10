@@ -20,7 +20,7 @@ test('all carrier cards retain review buttons even when selected',()=>{
   const html=a.run('plans()');
   for(const name of ['Basic','Pro','Premium','Ultimate'])assert.ok(html.includes(`data-action="plan:${name}"`));
   assert.ok(html.includes('Review Ultimate — $199/month'));
-  assert.ok(html.includes('Review Startup Bundle — $199 one time'));
+  assert.ok(html.includes('Review Startup Bundle — $399 one time'));
  }
 });
 test('plan click opens a review without activating or paying',async()=>{
@@ -43,7 +43,7 @@ test('each plan and the separate bundle dispatch to the correct review',async()=
  }
  const a=app();await a.handlers.click({target:{closest:()=>({dataset:{action:'startup-review'}})}});
  assert.equal(a.run('activeReview.kind'),'startup');
- assert.ok(a.run('pricingReview()').includes('Carrier Startup Bundle — $199 one time'));
+ assert.ok(a.run('pricingReview()').includes('Carrier Startup Bundle — $399 one time'));
 });
 test('only requested items are quoted; bundle replaces covered service fees',()=>{
  const a=app();a.run(`db.onboard=${JSON.stringify(setup)};activeReview={kind:'startup'}`);
@@ -55,11 +55,11 @@ test('only requested items are quoted; bundle replaces covered service fees',()=
  const html=a.run('quoteSummary(selectedQuote())');
  assert.ok(html.includes('Pending'));
  assert.ok(html.includes('Carrier Startup Bundle'));
- assert.ok(html.includes('$554.00')); // 199 bundle + 300 MC + 55 UCR; formation fee pending
+ assert.ok(html.includes('$754.00')); // 399 bundle + 300 MC + 55 UCR; formation fee pending
  assert.ok(!q.services.some(item=>item.type==='IFTA'));
  a.run('db.onboard.skipUcr=true');
  assert.ok(!a.run('selectedQuote().services.some(item=>item.type===\'UCR\')'));
- assert.ok(a.run('quoteSummary(selectedQuote())').includes('$499.00'));
+ assert.ok(a.run('quoteSummary(selectedQuote())').includes('$699.00'));
 });
 test('phone example: existing USDOT is proof-only, only KYU is quoted, NY HUT stays out',()=>{
  const a=app();a.run(`db.onboard=${JSON.stringify({...setup,states:'KY, NY',startupServices:[],requestedServices:[],serviceChoices:{DOT:'have',KYU:'help','NY HUT':'omit'}})};activeReview={kind:'quote'}`);
@@ -68,9 +68,9 @@ test('phone example: existing USDOT is proof-only, only KYU is quoted, NY HUT st
  const office=a.run('memberOffice()');assert.ok(office.includes('upload-service:DOT'));assert.ok(office.includes('Proof needed'));
  const after=a.run(`db.docs.push({id:'proof',purpose:'DOT',name:'usdot.pdf'});memberOffice()`);assert.ok(after.includes('Document on file'));assert.ok(after.includes('download:proof'));
 });
-test('approved UCR assistance is $25; skipped UCR is never charged',()=>{
+test('Basic UCR assistance is included; skipped UCR is never charged',()=>{
  const a=app();a.run(`db.onboard=${JSON.stringify({...setup,startupServices:[],serviceChoices:{UCR:'help'},ucrVehicles:1})}`);
- assert.equal(a.run('requestedItems(db.onboard)[0][4]'),25);
+ assert.equal(a.run('requestedItems(db.onboard)[0][4]'),0);
  a.run('db.onboard.skipUcr=true');assert.equal(a.run('requestedItems(db.onboard).length'),0);
 });
 test('DQF is a separate one-time fee per driver and upload stays available',()=>{

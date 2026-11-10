@@ -88,9 +88,9 @@ for(const width of [390,1280]){
    p.change('[name="hazmat"]','Yes');assert.equal(w.document.querySelector('#hazmat-interview').open,true);p.click('[data-action="add-material"]');assert.equal(w.document.querySelectorAll('.material-row').length,1);assert.equal(w.document.querySelectorAll('#hazmat-evaluation .task').length,8);
    p.click('[data-action="checklist"]');assert.equal(w.eval('db.records.find(r=>r.type==="DOT").filingNumber'),'1234567');assert.equal(w.eval('db.records.find(r=>r.type==="DOT").activation'),'Issued, not yet active');
    w.eval("location.hash='plans';render()");await new Promise(resolve=>setTimeout(resolve,0));
-   assert.ok(w.document.querySelector('[data-action="plan:Ultimate"]').textContent.includes('$199/month'));assert.ok(w.document.querySelector('[data-action="startup-review"]').textContent.includes('$199 one time'));
+   assert.ok(w.document.querySelector('[data-action="plan:Ultimate"]').textContent.includes('$199/month'));assert.ok(w.document.querySelector('[data-action="startup-review"]').textContent.includes('$399 one time'));
    p.click('[data-action="plan:Ultimate"]');await new Promise(resolve=>setTimeout(resolve,0));assert.ok(w.document.querySelector('#main').textContent.includes('Ultimate — $199/month'));
-   w.eval("location.hash='plans';render()");await new Promise(resolve=>setTimeout(resolve,0));p.click('[data-action="startup-review"]');await new Promise(resolve=>setTimeout(resolve,0));assert.ok(w.document.querySelector('#main').textContent.includes('Carrier Startup Bundle — $199 one time'));
+   w.eval("location.hash='plans';render()");await new Promise(resolve=>setTimeout(resolve,0));p.click('[data-action="startup-review"]');await new Promise(resolve=>setTimeout(resolve,0));assert.ok(w.document.querySelector('#main').textContent.includes('Carrier Startup Bundle — $399 one time'));
    assert.deepEqual(p.errors,[]);
   }finally{p.dom.window.close()}
  });

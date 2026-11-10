@@ -1,11 +1,14 @@
 export const serviceNames = {DOT:"USDOT registration assistance",KYU:"Kentucky KYU","NY HUT":"New York HUT",UCR:"UCR filing assistance",IFTA:"IFTA setup assistance",DQF:"Driver Qualification File"} as const;
 export type Service = keyof typeof serviceNames;
 export type Choice = "help" | "have" | "self" | "process";
-export type Interview = {company:string;scope:string;base:string;weight:string;states:string[];filings:Partial<Record<Service,Choice>>;kyWeight:string;nyWeight:string};
+export const pricing = {basicMonthlyCents:4999,startupBundleCents:39900,ucrServiceCents:0} as const;
+export type Interview = {company:string;scope:string;base:string;weight:string;states:string[];filings:Partial<Record<Service,Choice>>;kyWeight:string;nyWeight:string;packageSelection?:"services"|"startup"};
 export function reviewInterview(data:Interview) {
-  const services=(Object.keys(serviceNames) as Service[]).filter(key=>data.filings[key]==="help").map(key=>({key,label:serviceNames[key],serviceCents:key==="DOT"||key==="UCR"?2500:key==="IFTA"?0:key==="DQF"?9999:null,governmentCents:key==="DOT"||key==="DQF"?0:null}));
-  const pending=services.some(row=>row.serviceCents===null||row.governmentCents===null);
-  return {services,pending,knownCents:services.reduce((sum,row)=>sum+(row.serviceCents||0)+(row.governmentCents||0),0),paymentStatus:"unpaid" as const,checkoutEnabled:false as const};
+  const bundle=data.packageSelection==="startup";
+  const services=(Object.keys(serviceNames) as Service[]).filter(key=>data.filings[key]==="help").map(key=>({key,label:serviceNames[key],serviceCents:key==="UCR"?pricing.ucrServiceCents:key==="DOT"?(bundle?0:2500):key==="IFTA"?0:key==="DQF"?9999:null,governmentCents:key==="DOT"||key==="DQF"?0:null}));
+  const bundleCents=bundle?pricing.startupBundleCents:0;
+  const pending=bundle||services.some(row=>row.serviceCents===null||row.governmentCents===null);
+  return {services,bundleCents,pending,knownCents:bundleCents+services.reduce((sum,row)=>sum+(row.serviceCents||0)+(row.governmentCents||0),0),paymentStatus:"unpaid" as const,checkoutEnabled:false as const};
 }
 export function calculateBid(offer:number,miles:number,rate:number,tolls:number,other:number) {
   if (![offer,miles,rate,tolls,other].every(Number.isFinite)||offer<0||miles<=0||rate<0||tolls<0||other<0) throw new Error("Enter valid, non-negative amounts and mileage greater than zero.");

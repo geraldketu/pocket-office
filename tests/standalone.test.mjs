@@ -25,3 +25,14 @@ test('placeholder configuration cannot enable member authentication or request s
  const keys=['NEXT_PUBLIC_SUPABASE_URL','NEXT_PUBLIC_SUPABASE_ANON_KEY','SUPABASE_SERVICE_ROLE_KEY'];const previous=keys.map(k=>process.env[k]);
  try{process.env.NEXT_PUBLIC_SUPABASE_URL='https://YOUR-PROJECT.supabase.co';process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY='';process.env.SUPABASE_SERVICE_ROLE_KEY='';assert.equal(authConfigured(),false);assert.equal(requestsConfigured(),false);}finally{keys.forEach((k,i)=>previous[i]===undefined?delete process.env[k]:process.env[k]=previous[i]);}
 });
+
+test('Basic UCR assistance has no service fee and registration remains separate',()=>{
+ const q=reviewInterview({...fixture,filings:{UCR:'help'}});assert.equal(q.services[0].serviceCents,0);assert.equal(q.services[0].governmentCents,null);assert.equal(q.knownCents,0);assert.equal(q.pending,true);assert.equal(q.checkoutEnabled,false);
+});
+test('Startup Bundle is 399 before outside fees without duplicate USDOT or UCR service charges',()=>{
+ const q=reviewInterview({...fixture,packageSelection:'startup',filings:{DOT:'help',UCR:'help'}});assert.equal(q.bundleCents,39900);assert.equal(q.knownCents,39900);assert.ok(q.services.every(s=>s.serviceCents===0));assert.equal(q.pending,true);assert.equal(q.paymentStatus,'unpaid');assert.equal(q.checkoutEnabled,false);
+});
+test('Basic and Startup approved prices match marketing copy',async()=>{
+ const {pricing}=await import('../src/lib/interview-rules.ts');assert.equal(pricing.basicMonthlyCents,4999);assert.equal(pricing.startupBundleCents,39900);
+ const {readFileSync}=await import('node:fs');const plans=readFileSync(new URL('../src/app/plans/page.tsx',import.meta.url),'utf8');assert.ok(plans.includes('49.99'));assert.ok(plans.includes('$399'));assert.ok(!plans.includes('$25 service fee'));assert.ok(plans.includes('full total is due before processing begins'));
+});

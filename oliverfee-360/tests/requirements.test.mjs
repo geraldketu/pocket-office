@@ -28,14 +28,14 @@ test('self-handled, in-process and existing permits remain off the payable quote
  const state={application:{filings:{DOT:{status:'have',number:'1234',activation:'Issued, not yet active'},KYU:{status:'help'},'NY HUT':{status:'self'},MC:{status:'process'}}},onboard:{quotes:{KYU:{service:35,external:0}}}};
  const q=buildQuote(state);assert.deepEqual(q.services.map(i=>i.type),['KYU']);assert.equal(q.payableCents,3500);
 });
-test('Pro/Premium/Ultimate include UCR help, IFTA setup is free, GA decal order appears once',()=>{
- for(const plan of ['Pro','Premium','Ultimate']){
+test('Basic/Pro/Premium/Ultimate include UCR help, IFTA setup is free, GA decal order appears once',()=>{
+ for(const plan of ['Basic','Pro','Premium','Ultimate']){
   const state={plan,onboard:{base:'GA',iftaBase:'GA',ucrYear:'2027',ucrVehicles:1,gaDecalTrucks:2},application:{filings:{UCR:{status:'help'},IFTA:{status:'help'},'GA IFTA decals':{status:'help'}}}};
   const q=buildQuote(state);assert.equal(q.services.find(i=>i.type==='UCR').amountCents,0);assert.equal(q.services.find(i=>i.type==='IFTA').amountCents,0);assert.equal(q.services.filter(i=>i.type==='GA IFTA decals').length,1);assert.equal(q.services.find(i=>i.type==='GA IFTA decals').amountCents,1000);assert.equal(q.outside.find(i=>i.type==='GA IFTA decals').amountCents,600);
  }
 });
-test('trial is disabled and the two $199 offers remain distinct',()=>{
- const plan=buildQuote({}, {kind:'plan',plan:'Ultimate'}),bundle=buildQuote({}, {kind:'startup'});assert.equal(plan.monthlyCents,19900);assert.equal(bundle.monthlyCents,0);assert.equal(bundle.services[0].amountCents,19900);assert.equal(plan.trialEnabled,false);assert.equal(plan.firstBillingDate,null);
+test('trial is disabled and Ultimate membership and $399 startup remain distinct',()=>{
+ const plan=buildQuote({}, {kind:'plan',plan:'Ultimate'}),bundle=buildQuote({}, {kind:'startup'});assert.equal(plan.monthlyCents,19900);assert.equal(bundle.monthlyCents,0);assert.equal(bundle.services[0].amountCents,39900);assert.equal(plan.trialEnabled,false);assert.equal(plan.firstBillingDate,null);
 });
 test('unknown packaging cannot be promoted to a verified hazmat classification',()=>{
  const o=structuredClone(hazmat);o.hazmatDetails.materials[0].packaging='Unknown';assert.equal(evaluateHazmat(o).find(i=>i.type==='PHMSA').status,'Needs verification');
@@ -53,4 +53,13 @@ test('New Mexico pass-through: over 26000 triggers review, unverified rates and 
 test('IFTA links use the IFTA base even when LLC state and New Mexico route differ',()=>{
  const state={onboard:{base:'MD',llcState:'GA',iftaBase:'CT',states:'MD, NM'},application:{filings:{IFTA:{status:'help'}}}};const q=buildQuote(state);assert.match(q.outside.find(i=>i.type==='IFTA').source,/portal.ct.gov\/drs\/ifta\/connecticut-ifta/);assert.match(q.services.find(i=>i.type==='IFTA').note,/myconneCT/);
  state.onboard.iftaBase='WA';assert.equal(buildQuote(state).outside.find(i=>i.type==='IFTA').source,'https://www.iftach.org/helpdesk/');
+});
+
+test('Basic UCR ignores stale service overrides and keeps government fees separate',()=>{
+ const q=buildQuote({plan:'Basic',membershipRequested:true,pricing:{basicUcrCents:2500},onboard:{ucrYear:'2027',ucrVehicles:1,quotes:{UCR:{service:25}}},application:{filings:{UCR:{status:'help'}}}});
+ assert.equal(q.monthlyCents,4999);assert.equal(q.services[0].amountCents,0);assert.equal(q.outside[0].amountCents,5500);assert.equal(q.dueTodayCents,10499);
+});
+test('Startup total includes 399 service fee and separately itemized outside charges',()=>{
+ const q=buildQuote({onboard:{ucrYear:'2027',ucrVehicles:1},application:{filings:{DOT:{status:'help'},MC:{status:'help'},UCR:{status:'help'}}}},{kind:'startup'});
+ assert.equal(q.services[0].amountCents,39900);assert.equal(q.services.reduce((n,s)=>n+s.amountCents,0),39900);assert.equal(q.outside.reduce((n,s)=>n+s.amountCents,0),35500);assert.equal(q.dueTodayCents,75400);
 });

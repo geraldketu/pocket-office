@@ -23,8 +23,8 @@ Secure review links require sign-in and carrier membership. Immutable quote snap
 
 ## Fees and decisions
 
-- Ultimate is $199/month; Startup Bundle is $199 one time.
-- Existing Basic UCR assistance remains $25 because it was already priced, not Pending. The owner was asked whether to replace it with $10. Pro, Premium and Ultimate assistance is included; registration charges remain separate.
+- Ultimate is $199/month; Startup Bundle is $399 one time, plus separately listed government and third-party fees. The full total is due before processing begins.
+- Basic remains $49.99/month. UCR assistance is included in all plans with no OliverFee service charge; UCR registration charges remain separate.
 - DQF preparation remains $99.99 per driver. Audit support remains $499.99 with the Gold Binder.
 - IFTA setup assistance is free; other agency fees require verification. Georgia decal ordering is one item at $5 service plus $3 per qualifying truck, only for a Georgia IFTA base jurisdiction.
 - The standard hazmat flat service price and plan coverage remain unconfirmed. PHMSA categories and material applicability require verified facts. TSA starting rates are $88.25 or $41 for verified reduced-rate eligibility. The TSA page returned 403 during verification; confirm its rates before live use. The older Georgia manual lists $20, while current DDS terms vary by transaction; staff must confirm the actual licensing fee.
