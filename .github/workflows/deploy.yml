@@ -1,0 +1,49 @@
+# Every push to main runs the tests and, if they pass, deploys to oliverfee360.com.
+# Needs one repository secret: VERCEL_TOKEN (a Vercel access token scoped to the SturdiHome team).
+name: Deploy to production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# One deploy at a time; a newer push waits for the current one to finish.
+concurrency:
+  group: production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: team_YfLkM1POJwWxWzlQca1W2A5l
+      VERCEL_PROJECT_ID: prj_2R7l9Fvg6cBUxlqKlGFzS5Txqm7x
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Check the Vercel token is set
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "::error::Add the VERCEL_TOKEN repository secret (gh secret set VERCEL_TOKEN -R geraldketu/pocket-office)."
+            exit 1
+          fi
+
+      - name: Pull production settings
+        run: npx --yes vercel@65.14.0 pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Build
+        run: npx --yes vercel@65.14.0 build --prod --token="$VERCEL_TOKEN"
+
+      - name: Deploy
+        run: npx --yes vercel@65.14.0 deploy --prebuilt --prod --token="$VERCEL_TOKEN"
