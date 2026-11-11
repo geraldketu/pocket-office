@@ -56,7 +56,7 @@ for(const width of [390,1280]){
  });
  test('lead add/save buttons work in preview and live records are read-only at '+width+'px',async()=>{
   const e=environment(width),calls=[];let refreshes=0;const preview={call:async(op,data)=>{calls.push({op,data});return {ok:true};}};
-  const lead={id:'test-lead',name:'Sample',company:'Test',email:'test@example.test',phone:null,source:'preview',status:'new',quoted_price:399,notes:'test',created_at:'2026-11-10',message:'test',usdot:'TEST'};
+  const lead={id:'test-lead',name:'Sample',company:'Test',email:'test@example.test',phone:null,source:'preview',status:'new',quoted_price:1250,notes:'test',created_at:'2026-11-10',message:'test',usdot:'TEST'};
   try{
    const router={'next/navigation':{useRouter:()=>({refresh(){refreshes++;}})}},Desk=component('../src/components/admin/lead-desk.tsx',preview,router).LeadDesk;act(()=>e.root.render(React.createElement(Desk,{leads:[lead]})));
    e.input('name','Test lead');await e.click('Add lead');assert.equal(calls.at(-1).op,'addLead');e.input('notes','Updated test note');e.input('status','quoted');await e.click('Save test record');assert.equal(calls.at(-1).op,'updateLead');assert.equal(calls.at(-1).data.id,lead.id);assert.equal(calls.at(-1).data.notes,'Updated test note');assert.equal(calls.at(-1).data.status,'quoted');assert.equal(refreshes,2);

@@ -2,7 +2,7 @@ import {screen,numberValue,qualifiedFuelVehicle,type Answers,type Vehicle} from 
 export const serviceNames = {DOT:"USDOT registration assistance",KYU:"Kentucky KYU","NY HUT":"New York HUT",UCR:"UCR filing assistance",IFTA:"IFTA setup assistance",DQF:"Driver Qualification File"} as const;
 export type Service = string;
 export type Choice = "help" | "have" | "self" | "process";
-export const pricing = {basicMonthlyCents:4999,startupBundleCents:39900,ucrServiceCents:0} as const;
+export const pricing = {basicMonthlyCents:4999,startupBundleCents:125000,ucrServiceCents:0} as const;
 export type Interview = {company:string;scope:string;base:string;weight:string;states:string[];filings:Partial<Record<Service,Choice>>;kyWeight:string;nyWeight:string;packageSelection?:"services"|"startup";answers?:Answers;vehicles?:Vehicle[]};
 export function reviewInterview(data:Interview) {
   const bundle=data.packageSelection==="startup";

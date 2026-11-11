@@ -81,7 +81,7 @@ export function buildQuote(state={},selection={}){
  const services=[];const outside=[];const blockers=[];
  const cents=v=>v!==''&&v!=null&&Number.isFinite(Number(v))&&Number(v)>=0?Math.round(Number(v)*100):null;
  const line=(type,label,amount,source='',period='',payer='OliverFee collects',note='')=>({type,label,amountCents:amount,source,period,payer,note});
- if(bundle)services.push(line('Startup Bundle','Carrier Startup Bundle',39900,'','one time'));
+ if(bundle)services.push(line('Startup Bundle','Carrier Startup Bundle',125000,'','one time'));
  for(const type of allTypes){
   if((decision(state,type)!=='help'&&!(type==='Hazmat'&&hazmatRequested))||type==='UCR'&&o.skipUcr)continue;
   const q=o.quotes?.[type]||{};let service=cents(q.service),external=cents(q.external),note='',source='',period='';
@@ -111,7 +111,7 @@ export function buildQuote(state={},selection={}){
    external=0;note+=(note?' · ':'')+'One flat standard hazmat setup charge; government fees listed separately.';
   }
   if(['PHMSA','HMSP','TSA HME','CDL HME','Hazmat routes'].includes(type))continue;
-  if(bundle&&covered.includes(type)){service=0;note='Included in $399 Startup Bundle'}
+  if(bundle&&covered.includes(type)){service=0;note='Included in $1,250 Startup Bundle'}
   services.push(line(type,type,service,['IFTA','NM'].includes(type)?source:'','one time','OliverFee collects',note));
   if(!['Hazmat'].includes(type))outside.push(line(type,type+' government / vendor charge',external,source,period,'OliverFee collects'));
  }

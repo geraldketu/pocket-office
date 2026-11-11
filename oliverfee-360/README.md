@@ -23,7 +23,7 @@ Secure review links require sign-in and carrier membership. Immutable quote snap
 
 ## Fees and decisions
 
-- Ultimate is $199/month; Startup Bundle is $399 one time, plus separately listed government and third-party fees. The full total is due before processing begins.
+- Ultimate is $199/month; Startup Bundle is $1,250 one time, plus separately listed government and third-party fees. The full total is due before processing begins.
 - Basic remains $49.99/month. UCR assistance is included in all plans with no OliverFee service charge; UCR registration charges remain separate.
 - DQF preparation remains $99.99 per driver. Audit support remains $499.99 with the Gold Binder.
 - IFTA setup assistance is free; other agency fees require verification. Georgia decal ordering is one item at $5 service plus $3 per qualifying truck, only for a Georgia IFTA base jurisdiction.

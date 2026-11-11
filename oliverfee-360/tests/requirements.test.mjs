@@ -34,8 +34,8 @@ test('Basic/Pro/Premium/Ultimate include UCR help, IFTA setup is free, GA decal 
   const q=buildQuote(state);assert.equal(q.services.find(i=>i.type==='UCR').amountCents,0);assert.equal(q.services.find(i=>i.type==='IFTA').amountCents,0);assert.equal(q.services.filter(i=>i.type==='GA IFTA decals').length,1);assert.equal(q.services.find(i=>i.type==='GA IFTA decals').amountCents,1000);assert.equal(q.outside.find(i=>i.type==='GA IFTA decals').amountCents,600);
  }
 });
-test('trial is disabled and Ultimate membership and $399 startup remain distinct',()=>{
- const plan=buildQuote({}, {kind:'plan',plan:'Ultimate'}),bundle=buildQuote({}, {kind:'startup'});assert.equal(plan.monthlyCents,19900);assert.equal(bundle.monthlyCents,0);assert.equal(bundle.services[0].amountCents,39900);assert.equal(plan.trialEnabled,false);assert.equal(plan.firstBillingDate,null);
+test('trial is disabled and Ultimate membership and $1,250 startup remain distinct',()=>{
+ const plan=buildQuote({}, {kind:'plan',plan:'Ultimate'}),bundle=buildQuote({}, {kind:'startup'});assert.equal(plan.monthlyCents,19900);assert.equal(bundle.monthlyCents,0);assert.equal(bundle.services[0].amountCents,125000);assert.equal(plan.trialEnabled,false);assert.equal(plan.firstBillingDate,null);
 });
 test('unknown packaging cannot be promoted to a verified hazmat classification',()=>{
  const o=structuredClone(hazmat);o.hazmatDetails.materials[0].packaging='Unknown';assert.equal(evaluateHazmat(o).find(i=>i.type==='PHMSA').status,'Needs verification');
@@ -59,7 +59,7 @@ test('Basic UCR ignores stale service overrides and keeps government fees separa
  const q=buildQuote({plan:'Basic',membershipRequested:true,pricing:{basicUcrCents:2500},onboard:{ucrYear:'2027',ucrVehicles:1,quotes:{UCR:{service:25}}},application:{filings:{UCR:{status:'help'}}}});
  assert.equal(q.monthlyCents,4999);assert.equal(q.services[0].amountCents,0);assert.equal(q.outside[0].amountCents,5500);assert.equal(q.dueTodayCents,10499);
 });
-test('Startup total includes 399 service fee and separately itemized outside charges',()=>{
+test('Startup total includes 1250 service fee and separately itemized outside charges',()=>{
  const q=buildQuote({onboard:{ucrYear:'2027',ucrVehicles:1},application:{filings:{DOT:{status:'help'},MC:{status:'help'},UCR:{status:'help'}}}},{kind:'startup'});
- assert.equal(q.services[0].amountCents,39900);assert.equal(q.services.reduce((n,s)=>n+s.amountCents,0),39900);assert.equal(q.outside.reduce((n,s)=>n+s.amountCents,0),35500);assert.equal(q.dueTodayCents,75400);
+ assert.equal(q.services[0].amountCents,125000);assert.equal(q.services.reduce((n,s)=>n+s.amountCents,0),125000);assert.equal(q.outside.reduce((n,s)=>n+s.amountCents,0),35500);assert.equal(q.dueTodayCents,160500);
 });

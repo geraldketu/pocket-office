@@ -20,7 +20,7 @@ test('all carrier cards retain review buttons even when selected',()=>{
   const html=a.run('plans()');
   for(const name of ['Basic','Pro','Premium','Ultimate'])assert.ok(html.includes(`data-action="plan:${name}"`));
   assert.ok(html.includes('Review Ultimate — $199/month'));
-  assert.ok(html.includes('Review Startup Bundle — $399 one time'));
+  assert.ok(html.includes('Review Startup Bundle — $1,250 one time'));
  }
 });
 test('plan click opens a review without activating or paying',async()=>{
@@ -43,7 +43,7 @@ test('each plan and the separate bundle dispatch to the correct review',async()=
  }
  const a=app();await a.handlers.click({target:{closest:()=>({dataset:{action:'startup-review'}})}});
  assert.equal(a.run('activeReview.kind'),'startup');
- assert.ok(a.run('pricingReview()').includes('Carrier Startup Bundle — $399 one time'));
+ assert.ok(a.run('pricingReview()').includes('Carrier Startup Bundle — $1,250 one time'));
 });
 test('only requested items are quoted; bundle replaces covered service fees',()=>{
  const a=app();a.run(`db.onboard=${JSON.stringify(setup)};activeReview={kind:'startup'}`);
@@ -55,11 +55,11 @@ test('only requested items are quoted; bundle replaces covered service fees',()=
  const html=a.run('quoteSummary(selectedQuote())');
  assert.ok(html.includes('Pending'));
  assert.ok(html.includes('Carrier Startup Bundle'));
- assert.ok(html.includes('$754.00')); // 399 bundle + 300 MC + 55 UCR; formation fee pending
+ assert.ok(html.includes('$1,605.00')); // 1250 bundle + 300 MC + 55 UCR; formation fee pending
  assert.ok(!q.services.some(item=>item.type==='IFTA'));
  a.run('db.onboard.skipUcr=true');
  assert.ok(!a.run('selectedQuote().services.some(item=>item.type===\'UCR\')'));
- assert.ok(a.run('quoteSummary(selectedQuote())').includes('$699.00'));
+ assert.ok(a.run('quoteSummary(selectedQuote())').includes('$1,550.00'));
 });
 test('phone example: existing USDOT is proof-only, only KYU is quoted, NY HUT stays out',()=>{
  const a=app();a.run(`db.onboard=${JSON.stringify({...setup,states:'KY, NY',startupServices:[],requestedServices:[],serviceChoices:{DOT:'have',KYU:'help','NY HUT':'omit'}})};activeReview={kind:'quote'}`);
