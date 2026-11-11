@@ -7,6 +7,9 @@ import Home from "@/app/page";
 import Plans from "@/app/plans/page";
 import Setup from "@/app/carrier-setup/page";
 import Bid from "@/app/bid-calculator/page";
+import Signup from "@/app/signup/page";
+import {AccountStatus} from "@/components/account-status";
+import {accountDestination} from "@/lib/account-flow";
 import Login from "@/app/login/page";
 import Forgot from "@/app/forgot-password/page";
 import Password from "@/app/set-password/page";
@@ -26,10 +29,11 @@ export default async function View({params,searchParams}:{params:Promise<{id:str
  const owner=await requireOwner(),p=await params;return withPreview(p.id,owner.id,async(s)=>{if(!s)notFound();
  const pathname="/"+(p.path||[]).join("/"),query=await searchParams,prefix=`/admin/preview/${s.id}/view`;
  if(pathname==="/app"&&s.role==="owner")redirect(prefix+"/admin");
- if(pathname==="/app"&&s.data.profile&&!s.data.profile.carrier_id)redirect(prefix+"/login?error=no-carrier");
+ if(pathname==="/app"&&s.data.profile&&!s.data.profile.carrier_id)redirect(prefix+"/account");
  if(!previewAccess(s.role,pathname))redirect(prefix+"/login?error=owner-required");
- if(pathname==="/dashboard")redirect(prefix+(s.data.profile?s.data.profile.role==="admin"?"/admin":"/app":"/login"));
+ if(pathname==="/dashboard")redirect(prefix+accountDestination(s.data.profile));
  if(pathname==="/auth/confirm"){
+  if(query.token_hash==="test-signup"&&s.signupPending){s.role="new-customer";const events=s.data.events;s.data=fixtures("new-customer",s.scenario);s.data.events=events;s.data.profile={...s.data.profile!,email:s.signupPending.email,carrier_id:null};logPreview(s,"test signup confirmed","Carrier account only. No live identity, subscription or payment was created.");redirect(prefix+"/account");}
   if(["test-invite","test-recovery"].includes(query.token_hash||"")){if(query.token_hash==="test-invite"||!s.data.profile){const pending=s.data.carrier,leads=s.data.leads;s.role="new-customer";s.data={...fixtures("new-customer",s.scenario),events:s.data.events};s.data.leads=leads;if(pending.status==="onboarding")s.data.carrier.legal_name=pending.legal_name;if(s.invitation){s.data.carrier={...s.data.carrier,id:s.invitation.carrierId,legal_name:s.invitation.name};s.data.profile={...s.data.profile!,email:s.invitation.email,carrier_id:s.invitation.carrierId};}}logPreview(s,"test token accepted","No live auth token was exchanged.");redirect(prefix+"/set-password");}
   redirect(prefix+"/login?error=link-expired");
  }
@@ -39,6 +43,8 @@ export default async function View({params,searchParams}:{params:Promise<{id:str
  else if(pathname==="/plans")content=<Plans/>;
  else if(pathname==="/carrier-setup")content=<Setup/>;
  else if(pathname==="/bid-calculator")content=<Bid/>;
+ else if(pathname==="/signup")content=<Signup/>;
+ else if(pathname==="/account"){const next=accountDestination(s.data.profile);if(next!=="/account")redirect(prefix+next);content=<AccountStatus email={s.data.profile!.email} role={s.data.profile!.role}/>;}
  else if(pathname==="/login")content=<Login/>;
  else if(pathname==="/forgot-password")content=<Forgot/>;
  else if(pathname==="/set-password")content=<Password/>;
@@ -53,7 +59,7 @@ export default async function View({params,searchParams}:{params:Promise<{id:str
  else if(pathname==="/archive")content=<iframe className="archive-iframe" title="Original archived Worker screens" src={`/admin/api/preview/${s.id}/archive/index.html?${new URLSearchParams({screen:query.screen||"member",...(query.carrier?{carrier:query.carrier}:{}),...(query.quote?{quote:query.quote}:{})}).toString()}`} sandbox="allow-scripts allow-same-origin allow-forms allow-downloads"/>;
  else if(pathname==="/auth/signout")content=<SiteShell><PageHero eyebrow="POST workflow" title="Sign out of the test account."><p>The live endpoint accepts POST only. Open the customer vault and use its real Sign out button; the preview simulates that POST.</p></PageHero><Link className="btn" href="/app">Open customer vault</Link></SiteShell>;
  else if(pathname==="/admin-lab")content=<SiteShell><h1>Local owner lab</h1><p>You are already in the isolated lab. The outer /admin-lab login is a development setup screen, not a customer role page.</p><Link className="btn" href="/admin">Open Site Explorer as test owner</Link></SiteShell>;
- else if(["/signup","/checkout","/checkout/confirmation","/sales"].includes(pathname))content=<SiteShell><PageHero eyebrow="Missing from live app" title="This workflow is not implemented."><p>{pathname} has no live route. No production screen is fabricated here.</p></PageHero><section className="card"><h2>Follow the existing journey</h2><p>Homepage → carrier checklist → unpaid request → owner invitation → choose password → customer vault. Payment and notification outcomes can be exercised with the explicitly labelled simulator controls above.</p><div className="form-actions"><Link className="btn" href="/">Start at homepage</Link><Link className="btn-secondary" href="/carrier-setup">Carrier checklist</Link><Link className="btn-secondary" href="/auth/confirm?token_hash=test-invite&type=invite&next=/set-password">Open sample invitation</Link></div></section></SiteShell>;
+ else if(["/checkout","/checkout/confirmation","/sales"].includes(pathname))content=<SiteShell><PageHero eyebrow="Missing from live app" title="This workflow is not implemented."><p>{pathname} has no live route. No production screen is fabricated here.</p></PageHero><section className="card"><h2>Follow the existing journey</h2><p>Homepage → carrier checklist → unpaid request → owner invitation → choose password → customer vault. Payment and notification outcomes can be exercised with the explicitly labelled simulator controls above.</p><div className="form-actions"><Link className="btn" href="/">Start at homepage</Link><Link className="btn-secondary" href="/carrier-setup">Carrier checklist</Link><Link className="btn-secondary" href="/auth/confirm?token_hash=test-invite&type=invite&next=/set-password">Open sample invitation</Link></div></section></SiteShell>;
  else notFound();
  return <PreviewRuntime id={s.id} role={s.role} scenario={s.scenario}>{pathname.startsWith("/admin")&&s.role==="owner"&&<OwnerHeader email={s.data.profile!.email}/>} {content}</PreviewRuntime>;
 });

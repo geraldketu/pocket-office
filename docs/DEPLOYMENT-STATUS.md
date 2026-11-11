@@ -30,6 +30,6 @@ Bid middle-quote calculation no longer overflows for large finite amounts. Passw
 
 Native Windows browser automation was stopped by its URL-identification protection, so complete native visual/touch acceptance has not been performed. Signed-in production owner/customer/driver journeys, actual live RLS/module contents and owner-authorized first preview-bucket creation remain to be walked through. No real payment, filing, email/SMS or customer contact was triggered. Stripe checkout remains disabled and carrier requests remain unpaid.
 
-Self-service signup, live checkout, checkout confirmation and a salesperson dashboard are not implemented in the standalone app; Site Explorer labels them missing. Existing standalone drivers share company-vault permissions, whereas the archived Worker enforces per-driver file scope. These existing boundaries were preserved.
+Live checkout, checkout confirmation and a salesperson dashboard are not implemented in the standalone app; Site Explorer labels them missing. Existing standalone drivers share company-vault permissions, whereas the archived Worker enforces per-driver file scope. These existing boundaries were preserved.
 
 This verification document was recorded after the application deployment; application main remains the tested release commit above.

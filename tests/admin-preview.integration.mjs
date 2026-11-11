@@ -116,3 +116,7 @@ test('failure scenarios return actual-form errors without mutating any productio
  const invite=await create('owner','invite-error');assert.equal((await op(invite.id,'invite',{legal_name:'Sample',email:'sample@example.test'})).data.ok,false);
 });
 test.after(()=>{if(report.length!==inventory.length)return;fs.mkdirSync('docs',{recursive:true});fs.writeFileSync('docs/ADMIN-PREVIEW-COVERAGE.json',JSON.stringify({checkedAt:new Date().toISOString(),base,coverage:report},null,2)+'\n');});
+
+test('self signup confirms into an unlinked member without owner privileges or live actions',async()=>{
+ const s=await create();const result=await op(s.id,'signup',{name:'Test Signup',email:'signup@example.test',password:'Preview-Only-2026!',role:'admin',carrier_id:'other-company'});assert.equal(result.status,200);const confirmed=await follow('/admin/preview/'+s.id+'/view'+result.data.confirmationPath);assert.equal(confirmed.status,200);assert.match(await confirmed.text(),/Carrier access pending/);const app=await follow('/admin/preview/'+s.id+'/view/app');assert.match(await app.text(),/Carrier access pending/);assert.equal((await op(s.id,'addLead',{name:'Forbidden'})).status,403);const failed=await create('visitor','signup-error');assert.equal((await op(failed.id,'signup',{name:'Test Signup',email:'signup@example.test',password:'Preview-Only-2026!'})).status,503);
+});

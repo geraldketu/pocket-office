@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
     if(requestHeaders.has("x-oliver-preview-view"))result.headers.set("Content-Security-Policy","default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data: blob:; frame-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'");
     return result;
   }
-  const protectedPage = ["/admin", "/app", "/set-password", "/dashboard", "/documents"].some(p => request.nextUrl.pathname === p || request.nextUrl.pathname.startsWith(p + "/"));
+  const protectedPage = ["/admin", "/app", "/set-password", "/dashboard", "/documents", "/account"].some(p => request.nextUrl.pathname === p || request.nextUrl.pathname.startsWith(p + "/"));
   if (!authConfigured()) {
     if (!protectedPage) return NextResponse.next({request:{headers:requestHeaders}});
     if(request.nextUrl.pathname.startsWith("/admin/api/"))return NextResponse.json({error:"Owner access required"},{status:403});
@@ -53,7 +53,7 @@ export async function middleware(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const path = request.nextUrl.pathname;
-  const isPrivate = ["/admin", "/app", "/set-password", "/dashboard", "/documents"].some(
+  const isPrivate = ["/admin", "/app", "/set-password", "/dashboard", "/documents", "/account"].some(
     (p) => path === p || path.startsWith(p + "/"),
   );
   if (!user && isPrivate) {

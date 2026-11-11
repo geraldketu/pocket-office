@@ -17,6 +17,7 @@ export function previewAccess(role:PreviewRole,path:string){
  if(pathname.startsWith("/admin"))return role==="owner";
  if(pathname==="/archive")return role.startsWith("archive-")||role==="owner";
  if(pathname==="/app"||pathname.startsWith("/documents/"))return !!profile&&profile.role!=="admin"&&!role.startsWith("archive-");
+ if(pathname==="/account")return !!profile&&!role.startsWith("archive-");
  if(pathname==="/set-password")return !!profile;
  return true;
 }

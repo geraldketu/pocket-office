@@ -6,6 +6,7 @@ import {createRequire} from 'node:module';
 import React,{act} from 'react';
 
 import {JSDOM} from 'jsdom';
+import * as accountFlow from '../src/lib/account-flow.ts';
 import * as policy from '../src/lib/admin/policy.ts';
 const inventory=JSON.parse(fs.readFileSync(new URL('../src/lib/admin/inventory.json',import.meta.url),'utf8'));
 // Initialize the browser event feature checks before importing ReactDOM.
@@ -17,7 +18,7 @@ if(initialDocument===undefined)delete globalThis.document;else globalThis.docume
 const require=createRequire(import.meta.url);
 function component(file,preview,extra={}){
  const source=ts.transpileModule(fs.readFileSync(new URL(file,import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText,module={exports:{}};
- const imports={'@/components/admin/preview-runtime':{usePreview:()=>preview},'@/lib/config':{authConfigured:()=>false},'@/components/site-shell':{Brand:()=>React.createElement('a',{href:'/'},'OliverFee 360')},'next/navigation':{useRouter:()=>({refresh(){},replace(){throw Error('Live router must not be reached');}})},'@/lib/supabase/client':{createClient(){throw Error('Live SDK must not be reached');}},'next/link':{default:({children,href,...props})=>React.createElement('a',{href,...props},children)},'@/app/actions/leads':{submitContact(){throw Error('Live contact must not be reached');}}};
+ const imports={'@/lib/account-flow':accountFlow,'@/components/admin/preview-runtime':{usePreview:()=>preview},'@/lib/config':{authConfigured:()=>false},'@/components/site-shell':{Brand:()=>React.createElement('a',{href:'/'},'OliverFee 360')},'next/navigation':{useRouter:()=>({refresh(){},replace(){throw Error('Live router must not be reached');}})},'@/lib/supabase/client':{createClient(){throw Error('Live SDK must not be reached');}},'next/link':{default:({children,href,...props})=>React.createElement('a',{href,...props},children)},'@/app/actions/leads':{submitContact(){throw Error('Live contact must not be reached');}}};
  new Function('require','module','exports',source)(name=>extra[name]||imports[name]||require(name),module,module.exports);return module.exports;
 }
 function environment(width){
@@ -64,3 +65,12 @@ for(const width of [390,1280]){
   }finally{e.close();}
  });
 }
+
+for(const width of [390,1280])test('Create account controls validate, retry and confirm safely at '+width+'px',async()=>{
+ const e=environment(width),calls=[];let fail=true;
+ const preview={scenario:'populated',call:async(op,data)=>{calls.push({op,data});if(fail)throw Error('Test signup failed');return {confirmationPath:'/auth/confirm?token_hash=test-signup&type=signup&next=/account'};}};
+ try{const Signup=component('../src/app/signup/page.tsx',preview).default;act(()=>e.root.render(React.createElement(Signup)));e.input('name','Test Carrier');e.input('email','test@example.test');e.input('password','Preview-Only-2026!');e.input('confirm','Different-2026!');await e.click('Create account');assert.match(document.body.textContent,/don't match/);assert.equal(calls.length,0);e.input('confirm','Preview-Only-2026!');await e.click('Create account');assert.match(document.body.textContent,/Test signup failed/);assert.equal(document.querySelector('button').disabled,false);fail=false;await e.click('Create account');assert.equal(calls.at(-1).op,'signup');assert.match(document.body.textContent,/Check your inbox/);assert.match(document.querySelector('a[href*="token_hash"]').href,/test-signup/);assert.match(document.body.textContent,/does not grant admin access/);}finally{e.close();}
+});
+test('signup payload cannot grant privileges and routing isolates pending accounts',()=>{
+ const p=accountFlow.signupPayload(' Test Carrier ','TEST@example.test','Preview-Only-2026!','https://oliverfee360.com');assert.deepEqual(p.options.data,{full_name:'Test Carrier'});assert.equal(p.email,'test@example.test');assert.match(p.options.emailRedirectTo,/oliverfee360.com\/auth\/confirm/);assert.throws(()=>accountFlow.signupPayload('X','invalid','short','https://example.test'));assert.equal(accountFlow.accountDestination({role:'carrier'}),'/account');assert.equal(accountFlow.accountDestination({role:'admin'}),'/admin');assert.equal(accountFlow.accountDestination({role:'carrier',carrier_id:'linked'}),'/app');assert.equal(accountFlow.accountDestination(null),'/login');for(const path of ['https://evil.test','//evil.test','/%2f%2fevil.test','/\\evil.test','/%00bad'])assert.equal(accountFlow.safeAuthPath(path),'/dashboard');assert.equal(accountFlow.safeAuthPath('/account'),'/account');
+});

@@ -43,7 +43,7 @@ The sandbox seeds companies, users, document types, valid/expiring/expired/rejec
 
 1. Launch Public visitor at `/`.
 2. Follow Carrier setup, complete the actual interview, open the item-specific `?` questions, select assistance and submit an unpaid review. Download remains available.
-3. The standalone application has **no self-service signup or live checkout**. Open the test invitation from the preview tools, or separately inspect the owner invitation form through the owner overview preview.
+3. The standalone application supports **self-service signup at /signup; live checkout remains disabled**. Open the test invitation from the preview tools, or separately inspect the owner invitation form through the owner overview preview.
 4. Follow `/auth/confirm` → choose password → `/dashboard` → `/app`. The preview uses test authentication and preserves the owner's outer login.
 5. Upload a sample document, inspect checklist/badges, and view/download the generated sample file. Test another-company ID to verify denial.
 6. Use the labelled safe integration tools to simulate successful/declined payment, filing and notification. Filing simulation requires a prior simulated payment. The receipt/outbox is visible under Activity. Nothing calls Stripe, a government agency, email, SMS or a customer.

@@ -5,7 +5,7 @@ import type {LegacySnapshot,Legacy} from "./legacy";
 import {randomBytes} from "node:crypto";
 import {fixtures,type FixtureData} from "./fixtures";
 import {PREVIEW_ROLES,type PreviewRole,startPage} from "./policy";
-export type PreviewSession={id:string;ownerId:string;role:PreviewRole;scenario:string;expires:number;data:FixtureData;legacy?:unknown;snapshot?:LegacySnapshot;invitation?:{carrierId:string;name:string;email:string}};
+export type PreviewSession={id:string;ownerId:string;role:PreviewRole;scenario:string;expires:number;data:FixtureData;legacy?:unknown;snapshot?:LegacySnapshot;signupPending?:{email:string;name:string};invitation?:{carrierId:string;name:string;email:string}};
 const globalStore=globalThis as typeof globalThis&{oliverPreviewSessions?:Map<string,PreviewSession>;oliverLabToken?:string};
 const sessions=globalStore.oliverPreviewSessions??=new Map<string,PreviewSession>();
 export function labToken(){return globalStore.oliverLabToken??=randomBytes(32).toString("hex");}
@@ -18,7 +18,7 @@ export function createPreview(ownerId:string,role:PreviewRole,scenario="populate
 export function getPreview(id:string,ownerId:string){const s=sessions.get(id);return s&&s.ownerId===ownerId&&s.expires>Date.now()?s:null;}
 function closeLegacy(s:PreviewSession){try{(s.legacy as {sql?:{close:()=>void}}|undefined)?.sql?.close();}catch{}s.legacy=undefined;}
 export function deletePreview(id:string,ownerId:string){const s=getPreview(id,ownerId);if(!s)return false;closeLegacy(s);sessions.delete(id);return true;}
-export function resetPreview(s:PreviewSession){closeLegacy(s);s.data=fixtures(s.role,s.scenario);s.invitation=undefined;s.snapshot=undefined;}
+export function resetPreview(s:PreviewSession){closeLegacy(s);s.data=fixtures(s.role,s.scenario);s.invitation=undefined;s.snapshot=undefined;s.signupPending=undefined;}
 export function logPreview(s:PreviewSession,kind:string,detail:string){s.data.events.push({kind,detail,at:new Date().toISOString()});}
 export function previewLocation(s:PreviewSession,path=startPage(s.role)){return `/admin/preview/${s.id}/view${path==="/"?"/":path}`;}
 

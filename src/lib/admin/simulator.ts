@@ -1,4 +1,5 @@
 import "server-only";
+import {signupPayload} from "@/lib/account-flow";
 import {randomUUID} from "node:crypto";
 import {reviewInterview,type Interview} from "@/lib/interview-rules";
 import {normalizeScreening} from "@/lib/screening";
@@ -25,7 +26,16 @@ export async function simulate(s:PreviewSession,op:string,input:Record<string,un
   s.data.leads.unshift({id:"test-lead-"+randomUUID(),name:data.company,company:data.company,usdot:"",phone:null,email:str("email"),source:"carrier-interview",status:"new",quoted_price:0,notes:"",message:JSON.stringify({interview:data,review:quote}),created_at:new Date().toISOString()});
   logPreview(s,"interview saved",JSON.stringify({company:raw.company,quote,paymentStatus:"unpaid"}));return {ok:true,message:"Your carrier request was submitted for review. It is unpaid. No payment or filing has been submitted."};
  }
+ if(op==="signup"){
+  if(s.scenario==="signup-error"||s.scenario==="unavailable")fail("Account creation is currently unavailable. Please try again.",503);
+  const payload=signupPayload(str("name",120),str("email",254),str("password",128),"https://preview.invalid");
+  s.signupPending={email:payload.email,name:payload.options.data.full_name};
+  const confirmationPath="/auth/confirm?token_hash=test-signup&type=signup&next=/account";
+  logPreview(s,"simulated signup confirmation","Synthetic account for "+payload.email+". No Supabase account or email was created. "+confirmationPath);
+  return {ok:true,needsConfirmation:true,confirmationPath};
+ }
  if(op==="login"){
+  if(s.signupPending&&str("email").toLowerCase()===s.signupPending.email&&str("password")===TEST_PASSWORD){s.role="new-customer";const events=s.data.events;s.data=fixtures("new-customer",s.scenario);s.data.events=events;s.data.profile={...s.data.profile!,carrier_id:null,email:s.signupPending.email};return {ok:true};}
   const email=str("email").toLowerCase(),role=PREVIEW_ROLES.find(r=>!r.startsWith("archive-")&&`${r.toLowerCase()}@example.test`===email);
   if(!role||role==="visitor"||role==="salesperson"||str("password")!==TEST_PASSWORD)fail("Wrong email or password",401);
   const events=s.data.events,leads=s.data.leads;s.role=role as PreviewRole;s.data=fixtures(role as PreviewRole,s.scenario);s.data.events=events;s.data.leads=leads;logPreview(s,"test sign-in",email);return {ok:true};

@@ -2,6 +2,20 @@
   "generatedFrom": "src/app/**/{page,route}.ts(x), archived pages map and inspected workflows",
   "entries": [
     {
+      "id": "route:/account",
+      "path": "/account",
+      "label": "Account status / carrier linking",
+      "group": "Customer portal",
+      "access": "Signed-in account",
+      "role": "Basic",
+      "status": "live",
+      "source": "src/app/account/page.tsx",
+      "previewPath": "/account",
+      "scenario": "populated",
+      "setup": null,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
       "id": "route:/admin/carriers/[id]",
       "path": "/admin/carriers/[id]",
       "label": "Carrier record",
@@ -240,6 +254,20 @@
       "steps": "Open preview and follow the real screen navigation."
     },
     {
+      "id": "route:/signup",
+      "path": "/signup",
+      "label": "Create account",
+      "group": "Customer portal",
+      "access": "Anyone",
+      "role": "visitor",
+      "status": "live",
+      "source": "src/app/signup/page.tsx",
+      "previewPath": "/signup",
+      "scenario": "populated",
+      "setup": null,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
       "id": "state:contact-success",
       "path": "/#contact",
       "previewPath": "/#contact",
@@ -406,6 +434,62 @@
       "scenario": "populated",
       "setup": "Pre-seeded isolated scenario: populated",
       "steps": "Use a listed synthetic test email and test password; try a wrong password first."
+    },
+    {
+      "id": "state:signup-confirmation",
+      "path": "/signup",
+      "previewPath": "/signup",
+      "label": "Create account / confirmation instructions",
+      "group": "Public website",
+      "access": "Same as underlying route",
+      "role": "visitor",
+      "status": "live",
+      "source": "Actual route/component state",
+      "scenario": "populated",
+      "setup": "Pre-seeded isolated scenario: populated",
+      "steps": "Complete the signup form with synthetic details; open its test confirmation link, then view Account status."
+    },
+    {
+      "id": "state:signup-error",
+      "path": "/signup",
+      "previewPath": "/signup",
+      "label": "Create account error and retry",
+      "group": "Public website",
+      "access": "Same as underlying route",
+      "role": "visitor",
+      "status": "live",
+      "source": "Actual route/component state",
+      "scenario": "signup-error",
+      "setup": "Pre-seeded isolated scenario: signup-error",
+      "steps": "Submit valid test details; no live account or email is created. Retry remains available."
+    },
+    {
+      "id": "state:signup-unavailable",
+      "path": "/signup",
+      "previewPath": "/signup",
+      "label": "Create account unavailable",
+      "group": "Public website",
+      "access": "Same as underlying route",
+      "role": "visitor",
+      "status": "live",
+      "source": "Actual route/component state",
+      "scenario": "unavailable",
+      "setup": "Pre-seeded isolated scenario: unavailable",
+      "steps": "Account creation is disabled and no provider can be reached."
+    },
+    {
+      "id": "state:account-pending",
+      "path": "/account",
+      "previewPath": "/account",
+      "label": "New account awaiting carrier link",
+      "group": "Public website",
+      "access": "Same as underlying route",
+      "role": "Basic",
+      "status": "live",
+      "source": "Actual route/component state",
+      "scenario": "unlinked-account",
+      "setup": "Pre-seeded isolated scenario: unlinked-account",
+      "steps": "Review the account status and checklist link; no other company record is accessible."
     },
     {
       "id": "state:reset-unavailable",
@@ -601,7 +685,7 @@
       "source": "Actual route/component state",
       "scenario": "unlinked-account",
       "setup": "Pre-seeded isolated scenario: unlinked-account",
-      "steps": "The actual customer guard redirects to the no-carrier sign-in error."
+      "steps": "The actual customer guard opens the account status page; no company records are exposed."
     },
     {
       "id": "state:admin-read-error",
@@ -854,20 +938,6 @@
       "scenario": "populated",
       "setup": "Pre-seeded isolated scenario: populated",
       "steps": "Open the actual not-found fallback."
-    },
-    {
-      "id": "missing:/signup",
-      "path": "/signup",
-      "previewPath": "/signup",
-      "label": "Self-service signup",
-      "group": "Customer portal",
-      "access": "Not implemented",
-      "role": "visitor",
-      "status": "missing",
-      "source": "Feature inventory",
-      "scenario": "populated",
-      "setup": null,
-      "steps": "Missing in the live app. Follow homepage → carrier checklist → owner invitation → choose password instead."
     },
     {
       "id": "missing:/checkout",

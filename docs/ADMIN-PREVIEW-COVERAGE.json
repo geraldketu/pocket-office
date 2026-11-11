@@ -1,7 +1,15 @@
 {
-  "checkedAt": "2026-11-11T01:15:37.942Z",
+  "checkedAt": "2026-11-11T10:36:38.565Z",
   "base": "http://localhost:3004",
   "coverage": [
+    {
+      "id": "route:/account",
+      "path": "/account",
+      "role": "Basic",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
     {
       "id": "route:/admin/carriers/[id]",
       "path": "/admin/carriers/[id]",
@@ -139,6 +147,14 @@
       "steps": "Open preview and follow the real screen navigation."
     },
     {
+      "id": "route:/signup",
+      "path": "/signup",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
       "id": "state:contact-success",
       "path": "/#contact",
       "role": "visitor",
@@ -233,6 +249,38 @@
       "scenario": "populated",
       "httpStatus": 200,
       "steps": "Use a listed synthetic test email and test password; try a wrong password first."
+    },
+    {
+      "id": "state:signup-confirmation",
+      "path": "/signup",
+      "role": "visitor",
+      "scenario": "populated",
+      "httpStatus": 200,
+      "steps": "Complete the signup form with synthetic details; open its test confirmation link, then view Account status."
+    },
+    {
+      "id": "state:signup-error",
+      "path": "/signup",
+      "role": "visitor",
+      "scenario": "signup-error",
+      "httpStatus": 200,
+      "steps": "Submit valid test details; no live account or email is created. Retry remains available."
+    },
+    {
+      "id": "state:signup-unavailable",
+      "path": "/signup",
+      "role": "visitor",
+      "scenario": "unavailable",
+      "httpStatus": 200,
+      "steps": "Account creation is disabled and no provider can be reached."
+    },
+    {
+      "id": "state:account-pending",
+      "path": "/account",
+      "role": "Basic",
+      "scenario": "unlinked-account",
+      "httpStatus": 200,
+      "steps": "Review the account status and checklist link; no other company record is accessible."
     },
     {
       "id": "state:reset-unavailable",
@@ -344,7 +392,7 @@
       "role": "Basic",
       "scenario": "unlinked-account",
       "httpStatus": 200,
-      "steps": "The actual customer guard redirects to the no-carrier sign-in error."
+      "steps": "The actual customer guard opens the account status page; no company records are exposed."
     },
     {
       "id": "state:admin-read-error",
@@ -489,14 +537,6 @@
       "scenario": "populated",
       "httpStatus": 404,
       "steps": "Open the actual not-found fallback."
-    },
-    {
-      "id": "missing:/signup",
-      "path": "/signup",
-      "role": "visitor",
-      "scenario": "populated",
-      "httpStatus": 200,
-      "steps": "Missing in the live app. Follow homepage → carrier checklist → owner invitation → choose password instead."
     },
     {
       "id": "missing:/checkout",

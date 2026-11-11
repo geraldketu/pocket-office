@@ -5,7 +5,7 @@ import {usePreview} from "@/components/admin/preview-runtime";
 export function Brand() {
   return <Link href="/" className="brand"><span className="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v3"/></svg></span><span><b>OliverFee <em>360</em></b><small>Your Office in Your Pocket</small></span></Link>;
 }
-const links = [["/", "Your office", "▦"], ["/carrier-setup", "Carrier setup", "☷"], ["/plans", "Plans & services", "◇"], ["/bid-calculator", "Bid calculator", "+"], ["/login", "Member Office", "↗"]];
+const links = [["/", "Your office", "▦"], ["/carrier-setup", "Carrier setup", "☷"], ["/plans", "Plans & services", "◇"], ["/bid-calculator", "Bid calculator", "+"], ["/login", "Member Office", "↗"], ["/signup", "Create account", "+"]];
 export function SiteShell({children}: {children: React.ReactNode}) {
   const currentPath=usePathname(),preview=usePreview();
   const path=preview?currentPath.replace(`/admin/preview/${preview.id}/view`,"")||"/":currentPath;

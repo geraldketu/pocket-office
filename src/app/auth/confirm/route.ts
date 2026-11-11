@@ -1,6 +1,7 @@
 import { type EmailOtpType } from "@supabase/supabase-js";
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import {safeAuthPath} from "@/lib/account-flow";
 import { authConfigured } from "@/lib/config";
 
 // Landing spot for invite and password-reset links.
@@ -13,7 +14,7 @@ export async function GET(request: NextRequest) {
   const code = searchParams.get("code");
   const nextParam = searchParams.get("next") ?? "/dashboard";
   // Only allow redirects within this site.
-  const next = nextParam.startsWith("/") && !nextParam.startsWith("//") ? nextParam : "/dashboard";
+  const next = safeAuthPath(nextParam);
 
   const supabase = await createClient();
   let ok = false;
