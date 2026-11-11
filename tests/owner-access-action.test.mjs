@@ -4,14 +4,15 @@ import fs from 'node:fs';
 import ts from 'typescript';
 
 const ownerEmail='oliverfee360@gmail.com';
-function action({user={id:'owner-id',email:ownerEmail,email_confirmed_at:'verified'},profile={id:'owner-id',email:ownerEmail,role:'carrier',carrier_id:null},admins=[],configured=true,ids='',updateError=false}={}){
- const calls=[],module={exports:{}};
+function action({user={id:'owner-id',email:ownerEmail,email_confirmed_at:'verified'},profile={id:'owner-id',email:ownerEmail,role:'carrier',carrier_id:null},admins=[],configured=true,ids='',updateError=false,upsertError=false,legacyVerified=true,legacyEmail='felicialvrg@gmail.com'}={}){
+ const calls=[],module={exports:{}};let storedAdmins=[...admins];
  const imports={
   '@/lib/supabase/server':{createClient:async()=>({auth:{getUser:async()=>({data:{user},error:null})}})},
   '@/lib/config':{requestsConfigured:()=>configured},
-  '@/lib/admin/owner-account':{designatedOwnerEmail:email=>email?.trim().toLowerCase()===ownerEmail},
-  '@/lib/supabase/admin':{createAdminClient:()=>{calls.push(['admin-client']);return {from:table=>{assert.equal(table,'profiles');return {
-   select:()=>({eq:(key,value)=>key==='id'?{single:async()=>({data:profile})}:{limit:async()=>({data:admins})}}),
+  '@/lib/admin/owner-account':{PREVIOUS_OWNER_EMAIL:'felicialvrg@gmail.com',designatedOwnerEmail:email=>email?.trim().toLowerCase()===ownerEmail},
+  '@/lib/supabase/admin':{createAdminClient:()=>{calls.push(['admin-client']);return {auth:{admin:{getUserById:async id=>{calls.push(['legacy-identity',id]);return {data:{user:{id,email:legacyEmail,email_confirmed_at:legacyVerified?'verified':null}}};}}},from:table=>{assert.equal(table,'profiles');return {
+   select:()=>({eq:(key,value)=>key==='id'?{single:async()=>({data:profile})}:{limit:async()=>({data:storedAdmins})}}),
+   upsert:(rows,options)=>({select:async()=>{calls.push(['transfer',rows,options]);if(upsertError)return {error:Error('test'),data:null};storedAdmins=rows.filter(r=>r.role==='admin');return {data:rows.map(r=>({id:r.id,role:r.role})),error:null};}}),
    update:patch=>{const filters=[];const chain={eq:(key,value)=>{filters.push([key,value]);return chain;},is:(key,value)=>{filters.push([key,value]);return chain;},select:()=>({single:async()=>{calls.push(['update',patch,filters]);return {data:updateError?null:{id:user.id},error:updateError?Error('test'):null};}})};return chain;}
   };}};}}
  };
@@ -39,3 +40,10 @@ test('existing verified sole owner is idempotent; setup failures never claim acc
 });
 
 test('conflicting administrator email is disclosed only to the authenticated designated owner',async()=>{const p=action({admins:[{id:'previous-owner',email:'previous@example.test',role:'admin',carrier_id:null}]});const result=await p.run();assert.equal(result.owner,false);assert.match(result.message,/Existing administrator account: previous@example.test/);assert.equal(p.calls.some(x=>x[0]==='update'),false);const other=action({user:{id:'other',email:'other@example.test',email_confirmed_at:'verified'},admins:[{id:'previous-owner',email:'previous@example.test'}]});assert.deepEqual(await other.run(),{owner:false});assert.deepEqual(other.calls,[]);});
+
+test('previous explicitly approved owner is reconciled atomically to the verified new owner with profile fields preserved',async()=>{
+ const old={id:'old-owner',email:'felicialvrg@gmail.com',role:'admin',carrier_id:null,full_name:'Previous owner',created_at:'2025-01-01'},profile={id:'owner-id',email:ownerEmail,role:'carrier',carrier_id:null,full_name:'Office owner',created_at:'2026-01-01'};const a=action({admins:[old],profile});assert.deepEqual(await a.run(),{owner:true});assert.deepEqual(a.calls.find(x=>x[0]==='transfer'),['transfer',[{...old,role:'carrier'},{...profile,role:'admin'}],{onConflict:'id'}]);assert.deepEqual(a.calls.find(x=>x[0]==='legacy-identity'),['legacy-identity','old-owner']);
+});
+test('owner reconciliation refuses identity mismatch, unverified legacy identity, linked accounts, other admins and transaction errors',async()=>{
+ const old={id:'old-owner',email:'felicialvrg@gmail.com',role:'admin',carrier_id:null};for(const config of [{legacyVerified:false},{legacyEmail:'different@example.test'},{admins:[{...old,carrier_id:'existing-carrier'}]},{admins:[old,{id:'third',email:'other@example.test',role:'admin',carrier_id:null}]},{ids:'old-owner'}]){const a=action({admins:[old],...config});assert.equal((await a.run()).needsReview,true);assert.equal(a.calls.some(x=>x[0]==='transfer'),false);}const failed=action({admins:[old],upsertError:true});assert.equal((await failed.run()).needsReview,true);assert.equal(failed.calls.filter(x=>x[0]==='transfer').length,1);
+});

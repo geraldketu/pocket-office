@@ -2,7 +2,7 @@
 import {createClient} from "@/lib/supabase/server";
 import {createAdminClient} from "@/lib/supabase/admin";
 import {requestsConfigured} from "@/lib/config";
-import {designatedOwnerEmail} from "@/lib/admin/owner-account";
+import {designatedOwnerEmail,PREVIOUS_OWNER_EMAIL} from "@/lib/admin/owner-account";
 
 export async function ensureOwnerAccess():Promise<{owner:boolean;needsReview?:boolean;message?:string}>{
  const review=(message:string)=>({owner:false,needsReview:true,message});
@@ -15,11 +15,24 @@ export async function ensureOwnerAccess():Promise<{owner:boolean;needsReview?:bo
   const ids=(process.env.OLIVERFEE_OWNER_IDS||"").split(",").map(x=>x.trim()).filter(Boolean);
   if(ids.length&&(ids.length!==1||ids[0]!==user.id))return review("The configured owner identity differs from this login. It must be reconciled securely; no carrier checklist is required.");
   const admin=createAdminClient();
-  const {data:profile,error:profileError}=await admin.from("profiles").select("id,email,role,carrier_id").eq("id",user.id).single();
+  const {data:profile,error:profileError}=await admin.from("profiles").select("*").eq("id",user.id).single();
   if(profileError||!profile||!designatedOwnerEmail(profile.email))return review("The owner profile could not be verified. No carrier checklist is required.");
   if(profile.carrier_id||!["carrier","admin"].includes(profile.role))return review("This login has conflicting account records. Review those records before enabling owner access; do not complete a carrier checklist.");
-  const {data:admins,error:adminsError}=await admin.from("profiles").select("id,email,role,carrier_id").eq("role","admin").limit(2);
+  const {data:admins,error:adminsError}=await admin.from("profiles").select("*").eq("role","admin").limit(2);
   if(adminsError||!admins)return review("The existing owner records could not be verified. Please retry.");
+  const previous=admins.length===1?admins[0]:null;
+  if(previous&&previous.id!==user.id&&previous.email?.trim().toLowerCase()===PREVIOUS_OWNER_EMAIL&&!previous.carrier_id&&profile.role==="carrier"){
+   const {data:oldIdentity,error:identityError}=await admin.auth.admin.getUserById(previous.id);
+   if(identityError||!oldIdentity.user?.email_confirmed_at||oldIdentity.user.email?.trim().toLowerCase()!==PREVIOUS_OWNER_EMAIL)return review("The previous owner identity could not be verified. No owner permissions were changed.");
+   // One PostgREST bulk upsert is one database transaction: both role changes
+   // commit together or neither does. Full rows retain existing profile fields.
+   // No auth account, password, company or customer record is deleted or changed.
+   const {data:changed,error:transferError}=await admin.from("profiles").upsert([{...previous,role:"carrier"},{...profile,role:"admin"}],{onConflict:"id"}).select("id,role");
+   if(transferError||!changed||changed.length!==2)return review("The approved owner-account change could not be completed. Please retry.");
+   const {data:owners,error:ownersError}=await admin.from("profiles").select("id,email,role,carrier_id").eq("role","admin").limit(2);
+   if(ownersError||!owners||owners.length!==1||owners[0].id!==user.id||!designatedOwnerEmail(owners[0].email)||owners[0].carrier_id)return review("The owner-account change needs a final verification. Please retry.");
+   return {owner:true};
+  }
   if(admins.length>1||admins.some(p=>p.id!==user.id||!designatedOwnerEmail(p.email)||p.carrier_id)){
    // This detail is returned only after the fixed owner email has been verified
    // with the provider. Never return administrator identities to other callers.

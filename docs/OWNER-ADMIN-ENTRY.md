@@ -15,3 +15,11 @@ The owner-specific screen is also available through Site Explorer's isolated `ow
 Verification covers actual server action guards, rejected forged metadata and arguments, unverified email, anonymous sessions, role conflicts, stale owner UUIDs, linked companies, idempotent ownership, server account routing, and real mobile/desktop controls. No real user's password or production session is used by automated tests.
 
 Production remains on Gerald's existing repository, main branch and Vercel project. Broker plans and existing prices are preserved.
+
+## Previously approved owner email
+
+The user first explicitly selected `felicialvrg@gmail.com`, then explicitly replaced it with `oliverfee360@gmail.com` and requested sole owner access. The server can reconcile exactly that transition. It requires the new authenticated owner email to be provider-verified; exactly one existing administrator must match the earlier approved email, have no carrier link, and match a verified provider identity. A conflicting UUID allowlist, another email, multiple admins, a driver profile, or a linked carrier account still stops the operation.
+
+Only the two existing profile roles change: the new owner becomes admin and the previous login becomes an unlinked non-admin account. Both authentication accounts, passwords, all existing profile fields and timestamps, and all customer/company records are retained. The two full profile rows are submitted as one bulk upsert, so the database request commits both changes together or rolls back. The action then verifies that the new login is the sole administrator. It accepts no caller-supplied owner email, former admin identity, role, or company. Once completed, the standard owner checks remain in effect and the operation is idempotent.
+
+References: [Supabase bulk upsert](https://supabase.com/docs/reference/javascript/upsert), [PostgREST transactions](https://postgrest.org/en/stable/references/transactions.html).
