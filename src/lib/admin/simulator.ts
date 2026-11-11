@@ -11,6 +11,7 @@ export async function simulate(s:PreviewSession,op:string,input:Record<string,un
  const str=(key:string,max=1000)=>typeof input[key]==="string"?(input[key] as string).slice(0,max):"";
  const signed=()=>{if(!s.data.profile)fail("Sign in to a test account",403);};
  const owner=()=>{if(s.role!=="owner")fail("This test role is not the owner",403);};
+ if(op==="ownerAccess")return s.role==="owner"?{owner:true}:{owner:false,needsReview:true,message:"This test account does not have owner permissions. No live account was changed."};
  if(op==="reset"){resetPreview(s);return {ok:true};}
  if(op==="external"){logPreview(s,"blocked external navigation",str("destination"));return {ok:true};}
  if(op==="contact"){

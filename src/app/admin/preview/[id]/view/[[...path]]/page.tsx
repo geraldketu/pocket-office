@@ -44,7 +44,7 @@ export default async function View({params,searchParams}:{params:Promise<{id:str
  else if(pathname==="/carrier-setup")content=<Setup/>;
  else if(pathname==="/bid-calculator")content=<Bid/>;
  else if(pathname==="/signup")content=<Signup/>;
- else if(pathname==="/account"){const next=accountDestination(s.data.profile);if(next!=="/account")redirect(prefix+next);content=<AccountStatus email={s.data.profile!.email} role={s.data.profile!.role}/>;}
+ else if(pathname==="/account"){const next=accountDestination(s.data.profile);if(next!=="/account")redirect(prefix+next);content=<AccountStatus email={s.data.profile!.email} role={s.data.profile!.role} ownerRequested={s.scenario==="owner-access-pending"}/>;}
  else if(pathname==="/login")content=<Login/>;
  else if(pathname==="/forgot-password")content=<Forgot/>;
  else if(pathname==="/set-password")content=<Password/>;

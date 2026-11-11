@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import {ensureOwnerAccess} from "@/app/actions/owner-access";
 import {usePreview} from "@/components/admin/preview-runtime";
 import { useRouter } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
@@ -38,8 +39,11 @@ function LoginForm() {
       setPending(false);
       return;
     }
-    router.replace("/dashboard");
-    router.refresh();
+    try{
+      const access=await ensureOwnerAccess();
+      router.replace(access.owner?"/admin":access.needsReview?"/account":"/dashboard");
+      router.refresh();
+    }catch{setError("Your login succeeded, but workspace access could not be checked. Please try again.");setPending(false);}
   }
 
   return (
@@ -74,7 +78,6 @@ export default function LoginPage() {
       <Suspense>
         <LoginForm />
       </Suspense>
-      <p className="auth-copy">New carrier? <Link className="text-link" href="/carrier-setup">Start your checklist ↗</Link></p>
     </main>
   );
 }

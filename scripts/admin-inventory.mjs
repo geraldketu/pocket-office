@@ -30,6 +30,7 @@ const states=[
  ['signup-confirmation','/signup','Create account / confirmation instructions','visitor','populated','Complete the signup form with synthetic details; open its test confirmation link, then view Account status.'],
  ['signup-error','/signup','Create account error and retry','visitor','signup-error','Submit valid test details; no live account or email is created. Retry remains available.'],
  ['signup-unavailable','/signup','Create account unavailable','visitor','unavailable','Account creation is disabled and no provider can be reached.'],
+ ['owner-access-pending','/account','Owner access review without carrier onboarding','Basic','owner-access-pending','Open Admin Center retry. The isolated adapter denies non-owner roles and never changes live permissions. No carrier checklist is shown.'],
  ['account-pending','/account','New account awaiting carrier link','Basic','unlinked-account','Review the account status and checklist link; no other company record is accessible.'],
  ['reset-unavailable','/forgot-password','Password reset unavailable','visitor','unavailable','The actual disabled reset form is displayed; no auth call is possible.'],
  ['password-error','/set-password','Password update error','new-customer','password-error','Enter a valid matching password to see the simulated authentication update error.'],

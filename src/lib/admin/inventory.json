@@ -478,6 +478,20 @@
       "steps": "Account creation is disabled and no provider can be reached."
     },
     {
+      "id": "state:owner-access-pending",
+      "path": "/account",
+      "previewPath": "/account",
+      "label": "Owner access review without carrier onboarding",
+      "group": "Public website",
+      "access": "Same as underlying route",
+      "role": "Basic",
+      "status": "live",
+      "source": "Actual route/component state",
+      "scenario": "owner-access-pending",
+      "setup": "Pre-seeded isolated scenario: owner-access-pending",
+      "steps": "Open Admin Center retry. The isolated adapter denies non-owner roles and never changes live permissions. No carrier checklist is shown."
+    },
+    {
       "id": "state:account-pending",
       "path": "/account",
       "previewPath": "/account",
