@@ -8,8 +8,8 @@ Gerald's existing geraldketu/pocket-office repository and sturdi-home/pocket-off
 
 - Root suite: 117 unit, React DOM, persistence, pricing, screening, access and release-target tests passed.
 - Archived Worker suite: 35 tests passed, including original bid/diesel form, onboarding follow-ups, all original action forms, pricing and owner/office/driver isolation.
-- Preview integration: 123 tests over 109 directory entries; the final release run is recorded in ADMIN-PREVIEW-COVERAGE.json and ADMIN-PREVIEW-CHECKLIST.md.
-- Production build is required before publication; its outcome is recorded in DEPLOYMENT-STATUS.md.
+- Preview integration: 123 tests passed over 109 directory entries; the final release run is recorded in ADMIN-PREVIEW-COVERAGE.json and ADMIN-PREVIEW-CHECKLIST.md.
+- Production build passed; live release and smoke-check evidence is recorded in DEPLOYMENT-STATUS.md.
 
 | Area | Exercised behavior |
 | --- | --- |
