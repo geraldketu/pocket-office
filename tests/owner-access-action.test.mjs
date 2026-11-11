@@ -37,3 +37,5 @@ test('existing verified sole owner is idempotent; setup failures never claim acc
  const profile={id:'owner-id',email:ownerEmail,role:'admin',carrier_id:null},a=action({profile,admins:[profile],ids:'owner-id'});assert.deepEqual(await a.run(),{owner:true});assert.equal(a.calls.some(x=>x[0]==='update'),false);
  const failed=action({updateError:true});assert.equal((await failed.run()).needsReview,true);
 });
+
+test('conflicting administrator email is disclosed only to the authenticated designated owner',async()=>{const p=action({admins:[{id:'previous-owner',email:'previous@example.test',role:'admin',carrier_id:null}]});const result=await p.run();assert.equal(result.owner,false);assert.match(result.message,/Existing administrator account: previous@example.test/);assert.equal(p.calls.some(x=>x[0]==='update'),false);const other=action({user:{id:'other',email:'other@example.test',email_confirmed_at:'verified'},admins:[{id:'previous-owner',email:'previous@example.test'}]});assert.deepEqual(await other.run(),{owner:false});assert.deepEqual(other.calls,[]);});

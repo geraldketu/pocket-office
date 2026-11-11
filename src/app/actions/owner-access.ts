@@ -20,7 +20,12 @@ export async function ensureOwnerAccess():Promise<{owner:boolean;needsReview?:bo
   if(profile.carrier_id||!["carrier","admin"].includes(profile.role))return review("This login has conflicting account records. Review those records before enabling owner access; do not complete a carrier checklist.");
   const {data:admins,error:adminsError}=await admin.from("profiles").select("id,email,role,carrier_id").eq("role","admin").limit(2);
   if(adminsError||!admins)return review("The existing owner records could not be verified. Please retry.");
-  if(admins.length>1||admins.some(p=>p.id!==user.id||!designatedOwnerEmail(p.email)||p.carrier_id))return review("Another administrator is already configured. Owner access needs a secure account review, not carrier onboarding.");
+  if(admins.length>1||admins.some(p=>p.id!==user.id||!designatedOwnerEmail(p.email)||p.carrier_id)){
+   // This detail is returned only after the fixed owner email has been verified
+   // with the provider. Never return administrator identities to other callers.
+   const emails=admins.map(p=>p.email||"an account without a recorded email").join(", ");
+   return review(`Existing administrator account: ${emails}. Your verified owner login cannot replace that account automatically. These owner records must be reconciled before the Admin Center can open.`);
+  }
   if(profile.role==="admin")return admins.length===1?{owner:true}:review("The owner records changed while checking access. Please retry.");
   // Only the provider-verified, explicitly designated owner can complete initial
   // provisioning. No caller can supply an email, UUID, role, or company to assign.
