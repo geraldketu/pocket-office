@@ -8,7 +8,7 @@ export const AUTH_HOST='dgjqwnewuhpwitadppkv.supabase.co';
 // Audit is read-only by default; --send requires explicit template verification.
 export async function ownerInvitation(client,{origin,send=false,templatesVerified=false,ownerIds=''}={}){
  const url=new URL(origin);
- if(url.protocol!=='https:'||url.username||url.password||url.port||url.pathname!=='/'||url.search||url.hash||!/^pocket-office-[a-z0-9-]+\.vercel\.app$/.test(url.hostname))throw Error('Use the exact HTTPS preview deployment origin from the existing pocket-office Vercel project.');
+ if(url.protocol!=='https:'||url.username||url.password||url.port||url.pathname!=='/'||url.search||url.hash||(url.hostname!=='oliverfee360.com'&&!/^pocket-office-[a-z0-9-]+\.vercel\.app$/.test(url.hostname)))throw Error('Use https://oliverfee360.com or the exact HTTPS preview deployment origin from the existing pocket-office Vercel project.');
  const {data:admins,error:adminError}=await client.from('profiles').select('id,email,role,carrier_id').eq('role','admin');
  if(adminError)throw Error('Cannot audit admin profiles. No invitation was sent.');
  if(!admins||admins.length>1||admins.some(p=>p.email?.toLowerCase()!==OWNER_EMAIL||p.carrier_id))throw Error('Existing administrators need manual reconciliation before this account can become the sole owner. No account was changed.');
@@ -50,7 +50,7 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
   const env=process.env;
   if(env.NEXT_PUBLIC_SUPABASE_URL!==`https://${AUTH_HOST}`||!env.SUPABASE_SERVICE_ROLE_KEY)throw Error('Connect the existing production Supabase project or load its server credentials securely; no email was sent.');
   const client=createClient(env.NEXT_PUBLIC_SUPABASE_URL,env.SUPABASE_SERVICE_ROLE_KEY,{auth:{persistSession:false,autoRefreshToken:false}});
-  const result=await ownerInvitation(client,{origin:env.OWNER_PREVIEW_ORIGIN,send:process.argv.includes('--send'),templatesVerified:env.OWNER_EMAIL_TEMPLATES_VERIFIED==='true',ownerIds:env.OLIVERFEE_OWNER_IDS||''});
+  const result=await ownerInvitation(client,{origin:env.OWNER_LOGIN_ORIGIN||env.OWNER_PREVIEW_ORIGIN,send:process.argv.includes('--send'),templatesVerified:env.OWNER_EMAIL_TEMPLATES_VERIFIED==='true',ownerIds:env.OLIVERFEE_OWNER_IDS||''});
   console.log(JSON.stringify(result));
  }catch(error){console.error(error.message);process.exitCode=1;}
 }

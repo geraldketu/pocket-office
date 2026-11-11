@@ -52,6 +52,8 @@ npm run owner:invite -- --send
 
 The provider sends an invitation for a missing account or recovery for an existing account. No password is generated or supplied. A new profile is assigned the admin role; its email must be verified before the existing sole-owner fallback grants access. An existing nonempty owner allowlist must match this account. Never substitute an email comparison in a public request for the server's role/UUID checks.
 
-Do not publish to production until the owner completes the preview walkthrough.
+The owner subsequently authorized publishing these login pages through the same existing production workflow used for the broker plans. Actual owner account verification and email delivery remain pending provider administration access.
 
 Official references: [Supabase email templates](https://supabase.com/docs/guides/auth/auth-email-templates), [admin invitations](https://supabase.com/docs/reference/javascript/auth-admin-inviteuserbyemail), [SSR clients](https://supabase.com/docs/guides/auth/server-side/creating-a-client).
+
+For production invitations use `OWNER_LOGIN_ORIGIN=https://oliverfee360.com`. The production `/auth/confirm` URL must be allowed in the existing provider redirect settings. `OWNER_PREVIEW_ORIGIN` remains supported for preview setup. The same email, project, sole-owner audit, and template checks apply to either origin.

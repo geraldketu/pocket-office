@@ -22,8 +22,10 @@ test('existing owner uses secure recovery and preserves identity without creatin
 test('wrong administrator, stale allowlist, linked carrier and ambiguous identities fail closed',async()=>{
  for(const config of [{admins:[{id:'other',email:'other@example.test'}]},{admins:[{id:'one',email:OWNER_EMAIL},{id:'two',email:OWNER_EMAIL}]},{users:[{id:'owner-1',email:OWNER_EMAIL}],profile:{email:OWNER_EMAIL,carrier_id:'live-carrier'}},{users:[{id:'one',email:OWNER_EMAIL},{id:'two',email:OWNER_EMAIL}]}]){const p=provider(config);await assert.rejects(ownerInvitation(p.client,{origin,send:true,templatesVerified:true}));assert.deepEqual(p.calls,[]);}
  const p=provider();await assert.rejects(ownerInvitation(p.client,{origin,send:true,templatesVerified:true,ownerIds:'old-owner'}),/allowlist/);assert.deepEqual(p.calls,[]);
- for(const bad of ['https://oliverfee360.com','http://pocket-office-test.vercel.app','https://evil.test','https://pocket-office-test.vercel.app/redirect','https://pocket-office-test.vercel.app?redirect=evil'])await assert.rejects(ownerInvitation(p.client,{origin:bad}));
+ for(const bad of ['https://oliverfee360.com.evil.test','http://pocket-office-test.vercel.app','https://evil.test','https://pocket-office-test.vercel.app/redirect','https://pocket-office-test.vercel.app?redirect=evil'])await assert.rejects(ownerInvitation(p.client,{origin:bad}));
 });
 test('provider and profile failures never report a successful owner invitation',async()=>{
  for(const opts of [{sendError:true},{profileError:true}]){const p=provider(opts);await assert.rejects(ownerInvitation(p.client,{origin,send:true,templatesVerified:true}));}
 });
+
+test('production owner setup uses the existing OliverFee360 domain and provider flow',async()=>{const p=provider();const status=await ownerInvitation(p.client,{origin:'https://oliverfee360.com',send:true,templatesVerified:true});assert.equal(status.invitationSent,true);assert.deepEqual(p.calls[0],['invite',OWNER_EMAIL,{redirectTo:'https://oliverfee360.com/auth/confirm'}]);});
