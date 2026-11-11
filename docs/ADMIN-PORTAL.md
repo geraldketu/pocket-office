@@ -1,6 +1,6 @@
 # OliverFee 360 — owner Admin Portal
 
-Branch: `admin-portal-site-explorer`. No deployment, database migration, account reset, production configuration change or domain change is part of this branch.
+Built on branch `admin-portal-site-explorer` and released through `main` in Gerald's existing `geraldketu/pocket-office` repository and Vercel integration. No account reset, public-site replacement or domain move is performed. See DEPLOYMENT-STATUS.md for the actual release outcome.
 
 ## Open the isolated local portal
 
@@ -14,7 +14,7 @@ Open **http://localhost:3004/admin-lab**, enter **Preview-Only-2026!**, then ope
 
 Site Explorer is the first screen. Search by path, feature, role or state; filter by area. Each entry lists its actual source, access, status, test setup and steps. “Live” means implemented in this checkout, not deployed. Open a working preview or the explicit missing-feature guide. Dynamic carrier, document and quote paths use seeded test records.
 
-Inside preview, Desktop and Mobile (390px) resize the real application iframe. The persistent banner shows the test role. Exit Preview returns to Site Explorer. Ordinary internal links remain inside that session. **Changing role starts a fresh seeded session.** To follow one continuous journey, use the actual test login/invitation/password screens rather than the role picker. Test records survive navigation within a session and disappear when the server restarts, the session expires, or you reset the test data.
+Inside preview, Desktop and Mobile (390px) resize the real application iframe. The persistent banner shows the test role. Exit Preview returns to Site Explorer. Ordinary internal links remain inside that session. **Changing role starts a fresh seeded session.** To follow one continuous journey, use the actual test login/invitation/password screens rather than the role picker. Test records survive navigation within a session. Local lab records are in memory; production preview snapshots survive server restarts and become inaccessible after four hours or when deleted. Reset replaces only test data.
 
 ## Test identities and records
 
@@ -53,7 +53,7 @@ The archived Worker renders its original HTML, CSS, rules, advanced forms and ap
 
 ## Owner overview / production access
 
-The existing authentication remains Supabase. Production owner access requires **both** a server-validated `profiles.role = 'admin'` and an exact UUID in the server-only **`OLIVERFEE_OWNER_IDS`** allowlist (comma-separated if needed). The allowlist fails closed when unset; an admin email or a preview-selected role is never sufficient. Configure the owner's existing profile UUID during a separate deployment/setup step. This branch does not promote any account or alter production environment settings.
+The existing authentication remains Supabase. An explicit server-only OLIVERFEE_OWNER_IDS allowlist, when configured, takes precedence and requires the matching server-validated admin profile. Without an allowlist, the server verifies the sole existing administrator: exactly one admin profile, matching authenticated UUID and email, confirmed Auth email, and no carrier association. Missing credentials, additional administrators, mismatched identity or query errors deny access. No account is promoted or password reset. If multiple administrators exist, the owner must be explicitly configured in OLIVERFEE_OWNER_IDS. The preview-selected role never grants real owner access.
 
 Owner pages, dynamic records and data APIs all check the owner server-side. Live overview queries use the signed-in client's existing RLS and SELECT only. Companies, users/drivers, documents/DQFs, leads, recorded payments, fuel receipts, mileage and drug/alcohol database modules can be browsed. Large modules have 200-record pagination and error/empty states. Record links open their existing company or document routes. Live invitation, lead-update and upload controls are unavailable in this first admin version; the old admin mutation exports also fail closed.
 
@@ -78,28 +78,14 @@ npm run build
 
 Missing live pages—signup, checkout, checkout confirmation and salesperson dashboard—have working explanatory guides with the real alternative path. Database-only modules have owner browsing previews, rather than invented customer editing screens. Archived pages are all accessible in the isolated original runtime and clearly labelled as not deployed in the standalone app. Production Supabase account authentication/RLS and real provider deliveries are intentionally not invoked by this test environment; their deployment verification is a separate step.
 
-## Final verification and remaining walkthrough
+## Production release through Gerald's existing connection
 
-The production build passed (two non-blocking unused-import lint warnings in the lead page). All 97 root unit/DOM tests and 35 archived Worker tests passed. The final isolated integration run covers all 109 inventory entries and the real archived action forms. See the coverage JSON for per-entry results.
+The existing GitHub-Vercel integration publishes main from geraldketu/pocket-office to sturdi-home/pocket-office and oliverfee360.com. The latest pre-release admin branch received a successful Vercel build in that same project. A separate local CLI account does not replace or migrate this connection. CI runs tests and a production build. If a VERCEL_TOKEN is supplied, the optional CLI path additionally verifies exact repository/team/project/domain before pulling settings or deploying; missing that optional token no longer fails the existing integration's release.
 
-Native Chrome loaded the branded local lab at http://127.0.0.1:3004/admin-lab. Subsequent password entry and form submission were interrupted twice by Computer Use reporting `user input was detected in this window; call get_window_state before continuing`. A refreshed capture confirmed the lab screen, but a full native Explorer/role/customer-journey walkthrough on desktop and mobile was not completed. Automated HTTP, DOM, original form-handler and server permission coverage is complete; it does not replace that remaining visual walkthrough. This branch is ready for that walkthrough, not a claim that all native-browser acceptance is finished.
+Production previews use a dedicated private oliverfee-admin-preview bucket, created only upon an owner-authorized preview request if absent. Existing public buckets are rejected, never reconfigured. Snapshots are authenticated encrypted, owner-bound, locked across concurrent writes, and restored into synthetic in-memory SQLite/R2 adapters on each runtime. The server derives a purpose-separated encryption key from the existing server-only service credential unless OLIVERFEE_PREVIEW_SECRET is explicitly set. No secret reaches the Worker, browser or release endpoint. No customer table or carrier-files object is mutated. Changing the service credential invalidates temporary previews when using the derived key. Interrupted locks are not stolen: start a new preview if a test request crashes. Expired encrypted objects remain until test-storage cleanup.
 
-No production authentication, live RLS data, provider charge, filing or notification was exercised. The owner allowlist must be configured and live read-only access verified in the separate deployment step. No deployment was performed.
+Node 24 is pinned. Original archive assets, migrations and coverage data are included in the server bundle. The read-only /api/release endpoint returns the deployed commit/repository, release label and credential-presence booleans, never credential values or account records. It is an operational endpoint, not a customer workflow in Site Explorer.
 
+Current unit/DOM/control/persistence/release-target suite: 117 tests pass. The isolated integration suite covers all 109 inventory entries and actual archived action forms. Original Worker suite: 35 tests passed. Native Chrome previously rendered the branded lab, but repeated concurrent user input prevented a completed desktop/mobile walkthrough. Automated coverage does not claim full native visual acceptance. Production owner sign-in/RLS and first-preview storage creation need a signed-in owner walkthrough after deployment; no provider charge, filing or customer notification is exercised.
 
-## Production persistence release fix
-
-Production previews now store authenticated encrypted snapshots in a dedicated private `oliverfee-admin-preview` bucket. Each request loads its owner-bound snapshot, acquires a distributed insert-only lock, runs the original test screens/Worker, and saves before releasing. A fresh Vercel instance restores the synthetic SQLite tables, quote identity and test file bytes. No production carrier tables or carrier-files objects are mutated. Interrupted locks are not stolen: start a new preview if a test request crashes. Sessions are inaccessible after four hours; expired encrypted objects remain until test-storage cleanup. The local lab continues using memory and never accesses production storage.
-
-Node 24 is pinned and archived assets/migrations are explicitly included in the server bundle. The deployment setup script verifies the existing owner profile and Auth identity, creates only the private test bucket if absent, verifies encrypted storage/concurrent writes, and configures only the owner UUID allowlist and preview encryption key. It does not reset/promote accounts or change domains. A sole verified existing admin may be selected automatically; multiple admins require the explicit OLIVERFEE_OWNER_IDS repository variable. The setup fails before deployment if any required credential or verification is missing.
-
-Current local checks: 101 unit/DOM/persistence tests and 123 isolated integration tests pass. Persistence tests cover encryption tampering, distinct server instances, concurrent writes, company/owner isolation, and restoring archived SQLite/quote/file state. The existing GitHub Actions release run 42895911411 failed at Check the Vercel token is set because VERCEL_TOKEN is absent. Live setup and deployment are not claimed until that credential is available and the release succeeds. Native Chrome still reported concurrent user input during the lab walkthrough.
-
-
-## Verified release destination
-
-GitHub repository: https://github.com/geraldketu/pocket-office; default/production branch: main. Admin work remains on admin-portal-site-explorer until the production preflight passes. The configured existing Vercel target is SturdiHome / pocket-office, team team_YfLkM1POJwWxWzlQca1W2A5l and project prj_2R7l9Fvg6cBUxlqKlGFzS5Txqm7x. The intended domain is https://oliverfee360.com.
-
-The release workflow now independently queries Vercel before pulling settings or configuring storage. It requires that exact team/project, GitHub repository, production branch main, repository-root build, and verified production domain. It makes no domain or repository-link changes. Tests reject wrong teams, projects, repositories, branches, domains and external redirects. Authenticated live Vercel mapping still requires authorization; the configured IDs alone are not reported as proof that the current cloud settings match.
-
-The rebuild of app commit 295089a passed. Its 101 unit tests passed again, and two release-destination guard tests passed. GitHub was rechecked: main remains b2972a0, the admin branch contains 295089a, and the Actions secrets list is empty. Release run 42895911411 remains failed at the missing VERCEL_TOKEN check. No production deployment has been performed.
+See FUNCTIONAL-VERIFICATION.md for control-level tests, Bid Calculator checks, fixes and live verification limits.

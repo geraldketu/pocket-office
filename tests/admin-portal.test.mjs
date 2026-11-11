@@ -1,11 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {isOwner,labEnabled,previewAccess,PREVIEW_ROLES,startPage,safePreviewPath,roleProfile} from '../src/lib/admin/policy.ts';
+import {isOwner,isVerifiedSoleOwner,labEnabled,previewAccess,PREVIEW_ROLES,startPage,safePreviewPath,roleProfile} from '../src/lib/admin/policy.ts';
 import {sameOrigin,loopbackHost} from '../src/lib/admin/http.ts';
 test('owner access fails closed: role alone, email, preview role, and missing allowlist do not grant access',()=>{
  const owner={id:'owner-uuid',email:'owner@example.test',role:'admin'};
  assert.equal(isOwner(owner,'owner-uuid'),true);assert.equal(isOwner(owner,''),false);assert.equal(isOwner({...owner,id:'another-admin'},'owner-uuid'),false);for(const role of ['carrier','driver','salesperson','owner'])assert.equal(isOwner({...owner,role},'owner-uuid'),false);assert.equal(isOwner(null,'owner-uuid'),false);
+});
+test('existing owner bootstrap requires one matching verified administrator and never promotes another role',()=>{
+ const owner={id:'owner-uuid',email:'owner@example.test',role:'admin',carrier_id:null};
+ assert.equal(isVerifiedSoleOwner(owner,[owner],owner.email),true);
+ for(const admins of [[],[owner,{...owner,id:'second-admin'}],[{...owner,id:'different-admin'}],[{...owner,email:'different@example.test'}]])assert.equal(isVerifiedSoleOwner(owner,admins,owner.email),false);
+ for(const profile of [null,{...owner,role:'carrier'},{...owner,role:'driver'},{...owner,carrier_id:'carrier-a'}])assert.equal(isVerifiedSoleOwner(profile,[owner],owner.email),false);
+ assert.equal(isVerifiedSoleOwner(owner,[owner],null),false);assert.equal(isVerifiedSoleOwner(owner,[owner],'other@example.test'),false);
 });
 test('lab bypass is opt-in development only and never enabled in production',()=>{
  assert.equal(labEnabled({NODE_ENV:'production',OLIVERFEE_ADMIN_LAB:'1'}),false);assert.equal(labEnabled({NODE_ENV:'development'}),false);assert.equal(labEnabled({NODE_ENV:'development',OLIVERFEE_ADMIN_LAB:'1'}),true);

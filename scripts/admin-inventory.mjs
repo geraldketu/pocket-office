@@ -10,7 +10,7 @@ const metadata={
 let entries=[];
 for(const file of walk(root).filter(f=>/[/\\](page|route)\.tsx?$/.test(f))){
  const relative=path.relative(root,path.dirname(file)).replaceAll('\\','/');const route='/'+relative;
- if(route.startsWith('/admin/preview/')||route.startsWith('/admin/api/')||route==='/api/admin-lab')continue;
+ if(route.startsWith('/admin/preview/')||route.startsWith('/admin/api/')||route==='/api/admin-lab'||route==='/api/release')continue;
  const [label,group,access,role]=metadata[route]||[route,'Administration','Owner only','owner'];
  const sample=route.replace('[id]',route.startsWith('/documents')?'test-doc-0':'test-carrier-Basic');
  entries.push({id:'route:'+route,path:route,label,group,access,role,status:'live',source:path.relative(process.cwd(),file).replaceAll('\\','/'),previewPath:sample,scenario:'populated',setup:route.includes('[id]')?'Synthetic carrier/document record is seeded automatically.':route==='/auth/confirm'?'Use the test invitation token from the simulated outbox.':route==='/set-password'?'Select the invited new-customer test account.':null,steps:route==='/auth/signout'?'Open the customer vault and press Sign out (POST is simulated).':route==='/dashboard'?'The preview redirects using the test identity, not the owner identity.':'Open preview and follow the real screen navigation.'});

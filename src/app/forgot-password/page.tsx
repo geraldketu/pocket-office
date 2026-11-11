@@ -11,19 +11,23 @@ export default function ForgotPasswordPage() {
   const preview=usePreview();const configured=preview?preview.scenario!=="unavailable":authConfigured();
   const [sent, setSent] = useState(false);
   const [pending, setPending] = useState(false);
+  const [error,setError] = useState<string|null>(null);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if(!configured)return;
     setPending(true);
+    setError(null);
     const email = String(new FormData(e.currentTarget).get("email"));
-    if(preview){await preview.call("recovery",{email});setSent(true);setPending(false);return;}
-    await createClient().auth.resetPasswordForEmail(email, {
+    try{
+    if(preview){await preview.call("recovery",{email});setSent(true);return;}
+    const {error}=await createClient().auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/auth/confirm?next=/set-password`,
     });
+    if(error)throw Error("Reset request failed");
     // Always show the same message so we don't reveal which emails have accounts.
     setSent(true);
-    setPending(false);
+    }catch{setError("Could not send the reset request. Please try again.");}finally{setPending(false);}
   }
 
   return (
@@ -39,6 +43,7 @@ export default function ForgotPasswordPage() {
             <label className="label" htmlFor="email">Email</label>
             <input className="field" id="email" name="email" type="email" required autoComplete="email" />
           </div>
+          {error&&<p className="notice error" role="alert">{error}</p>}
           <button className="btn w-full" disabled={pending||!configured}>Send reset link</button>
         </form>
       )}

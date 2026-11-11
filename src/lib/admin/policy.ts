@@ -1,5 +1,10 @@
 export type Identity={id:string;email:string;role:string;carrier_id?:string|null};
 export function isOwner(profile:Identity|null,ids:string){return !!profile&&profile.role==="admin"&&ids.split(",").map(s=>s.trim()).filter(Boolean).includes(profile.id);}
+// Existing installations have one administrator (the owner). When an explicit
+// allowlist is absent, verify that exact existing account; never promote users.
+export function isVerifiedSoleOwner(profile:Identity|null,admins:Identity[],verifiedEmail:string|null){
+ return !!profile&&profile.role==="admin"&&!profile.carrier_id&&admins.length===1&&admins[0].id===profile.id&&admins[0].role==="admin"&&!!verifiedEmail&&profile.email.toLowerCase()===verifiedEmail.toLowerCase()&&admins[0].email.toLowerCase()===verifiedEmail.toLowerCase();
+}
 export const PREVIEW_ROLES=["visitor","new-customer","Basic","Pro","Premium","Ultimate","driver","owner","salesperson","archive-owner","archive-office","archive-driver"] as const;
 export type PreviewRole=typeof PREVIEW_ROLES[number];
 export function startPage(role:PreviewRole){return role==="visitor"?"/":role==="owner"?"/admin":role.startsWith("archive-")?"/archive#member":role==="salesperson"?"/admin/leads":"/app";}

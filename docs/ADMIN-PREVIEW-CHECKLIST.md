@@ -1,8 +1,8 @@
 # Admin Site Explorer preview coverage
 
-Verified 2026-11-10T22:04:51.352Z. All 109 inventory entries have a tested HTTP preview or guided state path. See [setup and test-account instructions](ADMIN-PORTAL.md). Open http://localhost:3004/admin after local lab login, search the path or title below, and press Open working preview.
+Verified 2026-11-11T01:15:37.942Z. All 109 inventory entries have a tested HTTP preview or guided state path. See [setup and test-account instructions](ADMIN-PORTAL.md). Open http://localhost:3004/admin after local lab login, search the path or title below, and press Open working preview.
 
-101 root unit/DOM/persistence tests, 123 isolated integration tests and 35 original Worker tests passed. The integration run also rendered all 15 original archived screens and exercised the real archived action forms, quote signing, copied review links, file transport, failure states and permission checks. Mobile/desktop DOM tests cover navigation confinement and 390px/full-width frame controls. These results distinguish reachable implemented screens from missing live features; missing features have explicit guides and are not reported as implemented.
+117 root unit/DOM/control/persistence tests, 123 isolated integration tests and 35 original Worker tests passed. The integration run also rendered all 15 original archived screens and exercised the real archived action forms, quote signing, copied review links, file transport, failure states and permission checks. Mobile/desktop DOM tests cover navigation confinement and 390px/full-width frame controls. These results distinguish reachable implemented screens from missing live features; missing features have explicit guides and are not reported as implemented.
 
 | Check | Screen / workflow | Actual path | Test role | Scenario | Guided test path |
 | --- | --- | --- | --- | --- | --- |

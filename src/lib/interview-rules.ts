@@ -29,5 +29,5 @@ export function calculateBid(offer:number,miles:number,rate:number,tolls:number,
   if (![offer,miles,rate,tolls,other].every(Number.isFinite)||offer<0||miles<=0||rate<0||tolls<0||other<0) throw new Error("Enter valid, non-negative amounts and mileage greater than zero.");
   const minimum=offer+tolls+other,goal=Math.max(offer,miles*rate)+tolls+other;
   if(!Number.isFinite(goal))throw new Error("Enter smaller amounts.");
-  return {minimum,middle:(minimum+goal)/2,goal,mileageTarget:miles*rate,addons:tolls+other};
+  return {minimum,middle:minimum+(goal-minimum)/2,goal,mileageTarget:miles*rate,addons:tolls+other};
 }

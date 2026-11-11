@@ -1,5 +1,5 @@
 import "server-only";
-import {PreviewStorage} from "./persistence";
+import {PreviewStorage,previewSecret} from "./persistence";
 import {labEnabled} from "./policy";
 import type {LegacySnapshot,Legacy} from "./legacy";
 import {randomBytes} from "node:crypto";
@@ -24,11 +24,11 @@ export function previewLocation(s:PreviewSession,path=startPage(s.role)){return 
 
 function durable(){return !labEnabled(process.env)&&process.env.NODE_ENV==="production";}
 function storage(){
- const url=process.env.NEXT_PUBLIC_SUPABASE_URL,key=process.env.SUPABASE_SERVICE_ROLE_KEY,secret=process.env.OLIVERFEE_PREVIEW_SECRET;
- if(!url||!key||!secret)throw Error("Isolated preview storage is not configured");return new PreviewStorage(url,key,secret);
+ const url=process.env.NEXT_PUBLIC_SUPABASE_URL,key=process.env.SUPABASE_SERVICE_ROLE_KEY;
+ if(!url||!key)throw Error("Isolated preview storage is not configured");return new PreviewStorage(url,key,previewSecret(process.env));
 }
 export async function openPreview(ownerId:string,role:PreviewRole,scenario="populated"){
- const s=createPreview(ownerId,role,scenario);if(durable()){await storage().write(ownerId,s.id,s,true);sessions.delete(s.id);}return s;
+ const s=createPreview(ownerId,role,scenario);if(durable()){try{const db=storage();await db.ensurePrivateBucket();await db.write(ownerId,s.id,s,true);}finally{sessions.delete(s.id);}}return s;
 }
 export async function withPreviewRead<T>(id:string,ownerId:string,work:(s:PreviewSession|null)=>Promise<T>):Promise<T>{
  if(!/^[a-f0-9]{48}$/.test(id))return work(null);

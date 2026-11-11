@@ -3,16 +3,28 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import ts from 'typescript';
 import {randomBytes} from 'node:crypto';
-import {PreviewStorage,seal,unseal} from '../src/lib/admin/persistence.ts';
+import {PreviewStorage,seal,unseal,previewSecret} from '../src/lib/admin/persistence.ts';
 
 test('preview snapshots are authenticated encrypted and reject wrong keys or tampering',()=>{
  const key=randomBytes(32).toString('hex'),value={ownerId:'test-owner',data:'synthetic'},bytes=seal(value,key);
  assert.ok(!bytes.includes(Buffer.from('synthetic')));assert.deepEqual(unseal(bytes,key),value);
  assert.throws(()=>unseal(bytes,randomBytes(32).toString('hex')));bytes[30]^=1;assert.throws(()=>unseal(bytes,key));
 });
+test('preview key derivation is server-only, purpose-separated and accepts an explicit override',()=>{
+ const env={SUPABASE_SERVICE_ROLE_KEY:'test-server-only-key'.repeat(4),NEXT_PUBLIC_SUPABASE_URL:'https://test.supabase.co'};
+ const key=previewSecret(env);assert.match(key,/^[a-f0-9]{64}$/);assert.equal(previewSecret(env),key);assert.notEqual(previewSecret({...env,NEXT_PUBLIC_SUPABASE_URL:'https://other.supabase.co'}),key);assert.notEqual(previewSecret({...env,SUPABASE_SERVICE_ROLE_KEY:'other'.repeat(30)}),key);
+ const explicit=randomBytes(32).toString('hex');assert.equal(previewSecret({...env,OLIVERFEE_PREVIEW_SECRET:explicit}),explicit);assert.throws(()=>previewSecret({}));assert.throws(()=>previewSecret({...env,OLIVERFEE_PREVIEW_SECRET:'bad'}));
+});
+test('preview storage creates only its private test bucket and rejects an existing public bucket',async()=>{
+ const calls=[];let exists=false;
+ const transport=async(url,init)=>{calls.push({url,init});if(init.method==='POST'){assert.equal(new URL(url).pathname,'/storage/v1/bucket');const b=JSON.parse(init.body);assert.equal(b.id,'oliverfee-admin-preview');assert.equal(b.public,false);exists=true;return Response.json({});}return exists?Response.json({public:false}):Response.json({message:'Bucket not found'},{status:404});};
+ await new PreviewStorage('https://test.supabase.co','test',randomBytes(32).toString('hex'),transport).ensurePrivateBucket();assert.equal(calls.length,3);
+ await assert.rejects(new PreviewStorage('https://test.supabase.co','test',randomBytes(32).toString('hex'),async()=>Response.json({public:true})).ensurePrivateBucket(),/must be private/);
+});
 test('separate server instances retain state, isolate owners and serialize concurrent requests',async()=>{
  const objects=new Map(),key=randomBytes(32).toString('hex'),id='a'.repeat(48);
  const transport=async(url,init)=>{
+  if(new URL(url).pathname.includes('/bucket/'))return Response.json({public:false});
   const path=new URL(url).pathname.split('/object/')[1],method=init.method||'GET';
   if(method==='GET')return objects.has(path)?new Response(objects.get(path)):new Response('Object not found',{status:400});
   if(method==='POST'){if(objects.has(path)&&init.headers['x-upsert']==='false')return new Response('Duplicate',{status:409});objects.set(path,Buffer.from(init.body));return new Response('{}');}

@@ -1,7 +1,15 @@
-import {createCipheriv,createDecipheriv,randomBytes} from "node:crypto";
+import {createCipheriv,createDecipheriv,createHmac,randomBytes} from "node:crypto";
 
 // Only synthetic preview state is persisted. Neither customer tables nor carrier-files are used.
 export const PREVIEW_BUCKET="oliverfee-admin-preview";
+export function previewSecret(env:Record<string,string|undefined>){
+ if(env.OLIVERFEE_PREVIEW_SECRET){if(!/^[a-f0-9]{64}$/.test(env.OLIVERFEE_PREVIEW_SECRET))throw Error("Preview encryption is not configured");return env.OLIVERFEE_PREVIEW_SECRET;}
+ const key=env.SUPABASE_SERVICE_ROLE_KEY,url=env.NEXT_PUBLIC_SUPABASE_URL;
+ if(!key||key.length<30||!url)throw Error("Isolated preview storage is not configured");
+ // Purpose-separated server-only key. Existing deployments need no new env var.
+ // Rotating the service key invalidates only temporary preview snapshots.
+ return createHmac("sha256",key).update("oliverfee360/admin-preview/v1|"+url).digest("hex");
+}
 export function seal(value:unknown,secret:string){
  const key=Buffer.from(secret,"hex");if(key.length!==32)throw Error("Preview encryption is not configured");
  const iv=randomBytes(12),cipher=createCipheriv("aes-256-gcm",key,iv);
@@ -21,6 +29,15 @@ export class PreviewStorage {
   return r;
  }
  private name(owner:string,id:string){if(!/^[a-zA-Z0-9_-]{1,80}$/.test(owner)||! /^(?:[a-f0-9]{48})$/.test(id))throw Error("Invalid preview identity");return `${owner}/${id}`;}
+ async ensurePrivateBucket(){
+  const inspect=async()=>this.request(`bucket/${PREVIEW_BUCKET}`);
+  let r=await inspect();
+  if(!r.ok){const message=await r.text();if(r.status!==404&&!/not.?found/i.test(message))throw Error("Could not verify isolated preview storage");
+   const created=await this.request("bucket",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:PREVIEW_BUCKET,name:PREVIEW_BUCKET,public:false,file_size_limit:10_000_000,allowed_mime_types:["application/octet-stream"]})});
+   if(!created.ok&&!/already exists|duplicate/i.test(await created.text()))throw Error("Could not create private preview storage");r=await inspect();
+  }
+  if(!r.ok||(await r.json()).public!==false)throw Error("Preview storage must be private. Existing bucket settings were not changed.");
+ }
  async read(owner:string,id:string){
   const r=await this.request(`object/${PREVIEW_BUCKET}/${this.name(owner,id)}.bin`);if(r.status===404||r.status===400&&/not.?found/i.test(await r.clone().text()))return null;
   if(!r.ok)throw Error("Private preview storage is unavailable");return unseal(new Uint8Array(await r.arrayBuffer()),this.secret);
