@@ -1,3 +1,4 @@
+import {verifyReleaseTarget} from "./verify-release-target.mjs";
 import {randomBytes} from 'node:crypto';
 import {createClient} from '@supabase/supabase-js';
 import {PreviewStorage,PREVIEW_BUCKET} from '../src/lib/admin/persistence.ts';
@@ -7,6 +8,7 @@ import {PreviewStorage,PREVIEW_BUCKET} from '../src/lib/admin/persistence.ts';
 process.loadEnvFile('.vercel/.env.production.local');
 const env=process.env;
 for(const key of ['VERCEL_TOKEN','VERCEL_PROJECT_ID','VERCEL_ORG_ID','NEXT_PUBLIC_SUPABASE_URL','SUPABASE_SERVICE_ROLE_KEY'])if(!env[key])throw Error(`Production setup requires ${key}; existing configuration was not replaced.`);
+await verifyReleaseTarget(env);
 const supabase=createClient(env.NEXT_PUBLIC_SUPABASE_URL,env.SUPABASE_SERVICE_ROLE_KEY,{auth:{persistSession:false}});
 const {data:admins,error}=await supabase.from('profiles').select('id,email,role').eq('role','admin');
 if(error)throw Error('Could not verify production owner profiles. No access was granted.');

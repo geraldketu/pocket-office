@@ -44,6 +44,9 @@ jobs:
             exit 1
           fi
 
+      - name: Verify repository, Vercel project and production domain
+        run: node scripts/verify-release-target.mjs
+
       - name: Pull production settings
         run: npx --yes vercel@65.14.0 pull --yes --environment=production --token="$VERCEL_TOKEN"
 
