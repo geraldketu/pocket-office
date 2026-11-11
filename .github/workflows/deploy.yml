@@ -6,6 +6,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      deploy:
+        description: Deploy after checks (false runs production preflight only)
+        type: boolean
+        default: false
 
 # One deploy at a time; a newer push waits for the current one to finish.
 concurrency:
@@ -42,8 +47,17 @@ jobs:
       - name: Pull production settings
         run: npx --yes vercel@65.14.0 pull --yes --environment=production --token="$VERCEL_TOKEN"
 
+      - name: Verify owner and configure isolated admin storage
+        env:
+          ADMIN_RELEASE_OWNER_IDS: ${{ vars.OLIVERFEE_OWNER_IDS }}
+        run: node scripts/configure-admin-production.mjs
+
+      - name: Refresh verified production settings
+        run: npx --yes vercel@65.14.0 pull --yes --environment=production --token="$VERCEL_TOKEN"
+
       - name: Build
         run: npx --yes vercel@65.14.0 build --prod --token="$VERCEL_TOKEN"
 
       - name: Deploy
+        if: github.event_name == 'push' || inputs.deploy
         run: npx --yes vercel@65.14.0 deploy --prebuilt --prod --token="$VERCEL_TOKEN"

@@ -2,7 +2,7 @@ import {fixtures} from "@/lib/admin/fixtures";
 import {LeadDesk} from "@/components/admin/lead-desk";
 import { requireOwner as requireAdmin } from "@/lib/admin/owner";
 import { createClient } from "@/lib/supabase/server";
-import { addLead, updateLead } from "../actions";
+
 
 const STATUSES = ["new", "called", "quoted", "paid", "active", "lost"];
 

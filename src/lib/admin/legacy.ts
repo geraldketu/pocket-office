@@ -6,7 +6,7 @@ import worker from "../../../oliverfee-360/worker/index.mjs";
 import type {PreviewSession} from "./store";
 import {logPreview} from "./store";
 type DBAdapter={prepare:(text:string)=>{bind:(...values:unknown[])=>unknown;first:()=>Promise<unknown>;all:()=>Promise<unknown>;run:()=>Promise<unknown>};batch:(statements:{run:()=>Promise<unknown>}[])=>Promise<unknown[]>};
-export type Legacy={sql:DatabaseSync;env:{DB:DBAdapter;BUCKET:{put:(key:string,bytes:ArrayBuffer)=>Promise<void>;get:(key:string)=>Promise<{body:Uint8Array}|null>;delete:(key:string)=>Promise<void>};OWNER_EMAIL:string;STRIPE_CHECKOUT_ENABLED:string};user:{id:string;email:string};carrier:string;quote?:string};
+export type Legacy={sql:DatabaseSync;objects:Map<string,Uint8Array>;env:{DB:DBAdapter;BUCKET:{put:(key:string,bytes:ArrayBuffer)=>Promise<void>;get:(key:string)=>Promise<{body:Uint8Array}|null>;delete:(key:string)=>Promise<void>};OWNER_EMAIL:string;STRIPE_CHECKOUT_ENABLED:string};user:{id:string;email:string};carrier:string;quote?:string};
 export async function legacySession(s:PreviewSession):Promise<Legacy>{
  if(s.legacy)return s.legacy as Legacy;
  const sql=new DatabaseSync(":memory:");const dir=path.join(process.cwd(),"oliverfee-360/drizzle");for(const file of fs.readdirSync(dir).filter(f=>f.endsWith(".sql")).sort())sql.exec(fs.readFileSync(path.join(dir,file),"utf8"));
@@ -21,7 +21,8 @@ export async function legacySession(s:PreviewSession):Promise<Legacy>{
  sql.prepare("INSERT INTO national_diesel_rate VALUES(1,?,?)").run(4.25,"2026-11-10");
  const file="test-archive-file",bytes=new TextEncoder().encode("OLIVERFEE 360 TEST ONLY FILE");objects.set(carrier+"/"+file,bytes);
  if(s.scenario!=="empty")sql.prepare("INSERT INTO files VALUES(?,?,?,?,?,?,?,?,?,?,?)").run(file,carrier,"d1","test-record-driver","Medical Card","SAMPLE.txt","text/plain",bytes.length,"2027-01-01",user.id,new Date().toISOString());
- const result:Legacy={sql,env,user,carrier};s.legacy=result;
+ const result:Legacy={sql,objects,env,user,carrier};s.legacy=result;
+ if(s.snapshot){restoreLegacy(result,s.snapshot);delete s.snapshot;return result;}
  if(s.scenario.includes("quote")){
   if(s.scenario!=="pending-quote"){state.onboard.serviceChoices={DOT:"have",KYU:"omit","NY HUT":"omit"};state.application.filings={DOT:{status:"have",number:"TEST-ONLY",activation:"Active"}};sql.prepare("UPDATE workspaces SET state=? WHERE carrier_id=?").run(JSON.stringify(state),carrier);}
   const created=await legacyCall(s,"/api/carriers/"+carrier+"/quotes","POST",JSON.stringify({selection:s.scenario==="pending-quote"?{kind:"quote"}:{kind:"plan",plan:"Basic"}}));if(!created)throw Error("Test quote creation failed");const data=await created.json();result.quote=data.id;
@@ -67,4 +68,22 @@ export function archiveAsset(name:string){
   return Buffer.from(source.replace(original,"officeAPI('/api/preview-outbox',{method:'POST',body:JSON.stringify({kind:'driver-test-email'})}).then(()=>toast('Preview notification simulated. No email sent.'));"));
  }
  return bytes;
+}
+
+export type LegacySnapshot={tables:Record<string,Record<string,unknown>[]>;objects:[string,string][];user:Legacy["user"];carrier:string;quote?:string};
+export function snapshotLegacy(instance:Legacy):LegacySnapshot {
+ const names=instance.sql.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'").all();
+ const tables:LegacySnapshot["tables"]={};for(const {name} of names){if(typeof name!=="string"||!/^\w+$/.test(name))throw Error("Invalid snapshot table");tables[name]=instance.sql.prepare('SELECT * FROM "'+name+'"').all();}
+ return {tables,objects:[...instance.objects].map(([key,value])=>[key,Buffer.from(value).toString("base64")]),user:instance.user,carrier:instance.carrier,quote:instance.quote};
+}
+function restoreLegacy(instance:Legacy,snapshot:LegacySnapshot){
+ const allowed=new Set(instance.sql.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'").all().map(r=>r.name));
+ instance.sql.exec("PRAGMA foreign_keys=OFF; BEGIN");try{
+  for(const name of allowed){if(typeof name!=="string"||!/^\w+$/.test(name))throw Error("Invalid snapshot table");instance.sql.exec('DELETE FROM "'+name+'"');}
+  for(const [name,rows]of Object.entries(snapshot.tables)){if(!allowed.has(name))throw Error("Unknown snapshot table");const columns=new Set(instance.sql.prepare('PRAGMA table_info("'+name+'")').all().map(r=>r.name));
+   for(const row of rows){const keys=Object.keys(row);if(!keys.every(k=>columns.has(k)&&/^\w+$/.test(k)))throw Error("Invalid snapshot column");instance.sql.prepare('INSERT INTO "'+name+'" ('+keys.map(k=>'"'+k+'"').join(',')+') VALUES ('+keys.map(()=>'?').join(',')+')').run(...keys.map(k=>row[k]));}
+  }
+  instance.sql.exec("COMMIT");
+ }catch(e){instance.sql.exec("ROLLBACK");throw e;}finally{instance.sql.exec("PRAGMA foreign_keys=ON");}
+ instance.objects.clear();for(const [key,value]of snapshot.objects)instance.objects.set(key,Buffer.from(value,"base64"));instance.user=snapshot.user;instance.carrier=snapshot.carrier;instance.quote=snapshot.quote;
 }

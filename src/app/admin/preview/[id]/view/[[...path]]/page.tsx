@@ -18,12 +18,12 @@ import {CarrierDetailView} from "@/components/admin/carrier-detail";
 import {LeadDesk} from "@/components/admin/lead-desk";
 import {PreviewRuntime} from "@/components/admin/preview-runtime";
 import {requireOwner} from "@/lib/admin/owner";
-import {getPreview,logPreview} from "@/lib/admin/store";
+import {withPreview,logPreview} from "@/lib/admin/store";
 import {previewAccess} from "@/lib/admin/policy";
 import {fixtures} from "@/lib/admin/fixtures";
 import {testOverview} from "@/lib/admin/overview";
 export default async function View({params,searchParams}:{params:Promise<{id:string;path?:string[]}>;searchParams:Promise<Record<string,string|undefined>>}){
- const owner=await requireOwner(),p=await params,s=getPreview(p.id,owner.id);if(!s)notFound();
+ const owner=await requireOwner(),p=await params;return withPreview(p.id,owner.id,async(s)=>{if(!s)notFound();
  const pathname="/"+(p.path||[]).join("/"),query=await searchParams,prefix=`/admin/preview/${s.id}/view`;
  if(pathname==="/app"&&s.role==="owner")redirect(prefix+"/admin");
  if(pathname==="/app"&&s.data.profile&&!s.data.profile.carrier_id)redirect(prefix+"/login?error=no-carrier");
@@ -56,4 +56,5 @@ export default async function View({params,searchParams}:{params:Promise<{id:str
  else if(["/signup","/checkout","/checkout/confirmation","/sales"].includes(pathname))content=<SiteShell><PageHero eyebrow="Missing from live app" title="This workflow is not implemented."><p>{pathname} has no live route. No production screen is fabricated here.</p></PageHero><section className="card"><h2>Follow the existing journey</h2><p>Homepage → carrier checklist → unpaid request → owner invitation → choose password → customer vault. Payment and notification outcomes can be exercised with the explicitly labelled simulator controls above.</p><div className="form-actions"><Link className="btn" href="/">Start at homepage</Link><Link className="btn-secondary" href="/carrier-setup">Carrier checklist</Link><Link className="btn-secondary" href="/auth/confirm?token_hash=test-invite&type=invite&next=/set-password">Open sample invitation</Link></div></section></SiteShell>;
  else notFound();
  return <PreviewRuntime id={s.id} role={s.role} scenario={s.scenario}>{pathname.startsWith("/admin")&&s.role==="owner"&&<OwnerHeader email={s.data.profile!.email}/>} {content}</PreviewRuntime>;
+});
 }
