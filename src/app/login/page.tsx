@@ -67,9 +67,10 @@ export default function LoginPage() {
     <main className="auth-wrap">
       <Brand/>
       <nav className="auth-tabs" aria-label="Account navigation"><Link href="/login" aria-current="page">Sign in</Link><Link href="/signup">Create account</Link></nav>
-      <span className="eyebrow">Private Member Office</span>
+      <span className="eyebrow">Owner & Staff Login</span>
       <h1 className="mt-3 mb-4">Welcome back.</h1>
-      <p className="auth-copy">Sign in with your email and password to access your carrier’s records. No ChatGPT account needed.</p>
+      <p className="auth-copy">Use your OliverFee 360 email and password. Owners open the Admin Center; other accounts open only their permitted workspace. No ChatGPT account or matching ChatGPT email is required.</p>
+      <p className="auth-copy">Invited owner or staff member? Open your private invitation email first to verify your address and choose a password. If your link expired, <Link className="text-link" href="/forgot-password">request a new password link</Link>.</p>
       <Suspense>
         <LoginForm />
       </Suspense>

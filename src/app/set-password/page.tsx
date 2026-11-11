@@ -16,19 +16,19 @@ export default function SetPasswordPage() {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const password = String(form.get("password"));
-    if (password.length < 10) return setError("Use at least 10 characters.");
+    if (password.length < 10 || password.length > 128) return setError("Use at least 10 characters.");
     if (password !== String(form.get("confirm"))) return setError("The two passwords don't match.");
     setPending(true);
     setError(null);
     if(preview){try{await preview.call("password",{password});preview.navigate("/dashboard");}catch(e){setError(e instanceof Error?e.message:"Test password update failed");setPending(false);}return;}
-    const { error } = await createClient().auth.updateUser({ password });
-    if (error) {
-      setError(error.message);
-      setPending(false);
-      return;
-    }
-    router.replace("/dashboard");
-    router.refresh();
+    try {
+      const {error}=await createClient().auth.updateUser({password});
+      if(error)throw Error("This password link could not be used. Request a new link and try again.");
+      router.replace("/dashboard");
+      router.refresh();
+    } catch(e) {
+      setError(e instanceof Error?e.message:"Could not save your password. Please try again.");
+    } finally {setPending(false);}
   }
 
   return (
@@ -39,7 +39,7 @@ export default function SetPasswordPage() {
       <form onSubmit={onSubmit} className="card space-y-4">
         <div>
           <label className="label" htmlFor="password">New password</label>
-          <input className="field" id="password" name="password" type="password" required autoComplete="new-password" />
+          <input className="field" id="password" name="password" type="password" required autoComplete="new-password" minLength={10} maxLength={128} />
         </div>
         <div>
           <label className="label" htmlFor="confirm">Type it again</label>
