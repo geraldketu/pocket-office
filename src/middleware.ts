@@ -60,7 +60,8 @@ export async function middleware(request: NextRequest) {
     if(path.startsWith("/admin/api/"))return NextResponse.json({error:"Owner access required"},{status:403});
     const url = request.nextUrl.clone();
     url.pathname = "/login";
-    url.search = "";
+    // Remember the admin page (e.g. Owner leads) so owners return to it after signing in.
+    url.search = path.startsWith("/admin") ? "?next=" + encodeURIComponent(path + request.nextUrl.search) : "";
     return NextResponse.redirect(url);
   }
 

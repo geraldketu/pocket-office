@@ -17,3 +17,11 @@
 .auth-tabs{display:flex;gap:6px;border:1px solid var(--line);border-radius:12px;padding:5px;margin:24px 0;background:#191920}.auth-tabs a{flex:1;text-align:center;padding:12px 8px;border-radius:8px;color:var(--silver);font-weight:700}.auth-tabs a[aria-current="page"]{background:var(--gold);color:#17130c}.auth-tabs a:focus-visible{outline:3px solid var(--pink);outline-offset:2px}.signup-form{display:grid;gap:18px}.signup-form small{color:var(--muted)}
 
 .broker-plans-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+/* Carrier prospects (FMCSA census) */
+.prospect-filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;align-items:end}.prospect-search{grid-column:span 2}.prospect-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;grid-column:1/-1}
+.prospect-list{display:grid;gap:14px}.prospect h2{font-size:18px;overflow-wrap:anywhere}.prospect-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.prospect-tags{display:flex;gap:6px;flex-wrap:wrap;align-items:flex-start}
+.prospect-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px 18px;margin:14px 0 0;font-size:13px}.prospect-facts dt{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em}.prospect-facts dd{margin:2px 0 0;overflow-wrap:anywhere}.prospect-facts .wide{grid-column:1/-1}.prospect-contact{display:flex;flex-wrap:wrap;gap:6px 16px}
+.prospect-pages{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap}
+@media(max-width:600px){.prospect-search{grid-column:auto}}
+.office-top-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.owner-header nav .btn{min-height:36px;padding:6px 12px;color:#221706}
