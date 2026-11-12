@@ -1,7 +1,7 @@
 import {pathToFileURL} from 'node:url';
 import {createClient} from '@supabase/supabase-js';
 
-export const OWNER_EMAIL='oliverfee360@gmail.com';
+export const OWNER_EMAIL='felicialvrg@gmail.com';
 export const AUTH_HOST='dgjqwnewuhpwitadppkv.supabase.co';
 
 // Operator-only workflow. Never imported by an application route or public form.

@@ -9,7 +9,7 @@ function provider({users=[],admins=[],profile=null,sendError=false,profileError=
  return {client,calls};
 }
 test('owner invitation audit is read-only and pinned to the confirmed owner email',async()=>{
- const {client,calls}=provider();const status=await ownerInvitation(client,{origin});assert.equal(status.email,'oliverfee360@gmail.com');assert.equal(status.accountExists,false);assert.equal(status.invitationSent,false);assert.deepEqual(calls,[]);
+ const {client,calls}=provider();const status=await ownerInvitation(client,{origin});assert.equal(status.email,'felicialvrg@gmail.com');assert.equal(status.accountExists,false);assert.equal(status.invitationSent,false);assert.deepEqual(calls,[]);
 });
 test('new owner receives provider invitation without a password, only after template verification',async()=>{
  const p=provider();await assert.rejects(ownerInvitation(p.client,{origin,send:true}),/templates/);assert.deepEqual(p.calls,[]);
