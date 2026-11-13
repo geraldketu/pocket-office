@@ -7,3 +7,5 @@
 
 .sales-shell{overflow-wrap:anywhere}.sales-primary,.sales-secondary,.sales-subtabs button{min-height:44px}
 .sales-quote-table{overflow-x:auto}.sales-quote-table table{width:100%;border-collapse:collapse}.sales-quote-table td,.sales-quote-table th{padding:10px;text-align:left;border-bottom:1px solid var(--s-border)}.sales-language{display:flex;gap:6px;flex-wrap:wrap}.sales-resource-grid p{margin:10px 0}.sales-resource-grid h3{margin:12px 0}
+
+.sales-shell:has(>.sales-preview-banner){grid-template-rows:auto 1fr}
