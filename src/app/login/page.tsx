@@ -16,6 +16,12 @@ const errorText: Record<string, string> = {
   "link-expired": "That link has expired or was already used. Ask us for a new one, or reset your password.",
 };
 
+// Owners sent here from an admin page (e.g. the Owner leads button) go straight back to it.
+function ownerNext() {
+  const next = new URLSearchParams(window.location.search).get("next") ?? "";
+  return /^\/admin(\/[A-Za-z0-9_/-]*)?(\?[^#]*)?$/.test(next) && !next.includes("..") ? next : "/admin";
+}
+
 function LoginForm() {
   const router = useRouter();
   const preview=usePreview();const configured=preview?preview.scenario!=="unavailable":authConfigured();
@@ -41,7 +47,7 @@ function LoginForm() {
     }
     try{
       const access=await ensureOwnerAccess();
-      router.replace(access.owner?"/admin":access.needsReview?"/account":"/dashboard");
+      router.replace(access.owner?ownerNext():access.needsReview?"/account":"/dashboard");
       router.refresh();
     }catch{setError("Your login succeeded, but workspace access could not be checked. Please try again.");setPending(false);}
   }

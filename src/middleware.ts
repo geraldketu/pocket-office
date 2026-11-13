@@ -63,7 +63,7 @@ export async function middleware(request: NextRequest) {
     if(salesApi||path.startsWith("/admin/api/"))return NextResponse.json({error:salesApi?"Sales access required":"Owner access required"},{status:403});
     const url = request.nextUrl.clone();
     url.pathname = salesPrivate?"/sales/login":"/login";
-    url.search = "";
+    url.search = path.startsWith("/admin") ? "?next=" + encodeURIComponent(path + request.nextUrl.search) : "";
     return NextResponse.redirect(url);
   }
 

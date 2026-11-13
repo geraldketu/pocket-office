@@ -72,6 +72,34 @@
       "steps": "Open preview and follow the real screen navigation."
     },
     {
+      "id": "route:/admin/prospects/export",
+      "path": "/admin/prospects/export",
+      "label": "Carrier prospects CSV download",
+      "group": "Sales workspace",
+      "access": "Explicit owner only; read-only public DOT data",
+      "role": "owner",
+      "status": "live",
+      "source": "src/app/admin/prospects/export/route.ts",
+      "previewPath": "/admin/prospects/export",
+      "scenario": "populated",
+      "setup": null,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
+      "id": "route:/admin/prospects",
+      "path": "/admin/prospects",
+      "label": "DOT leads (FMCSA census prospects)",
+      "group": "Sales workspace",
+      "access": "Explicit owner only; read-only public DOT data",
+      "role": "owner",
+      "status": "live",
+      "source": "src/app/admin/prospects/page.tsx",
+      "previewPath": "/admin/prospects",
+      "scenario": "populated",
+      "setup": null,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
       "id": "route:/admin/sales",
       "path": "/admin/sales",
       "label": "Sales Management",
