@@ -60,3 +60,7 @@ Rollback before rollout is a local source revert. After real management activity
 ## Final Phase 1 check results
 
 The full regression suite passed 166 tests. After the last invitation-resend changes, all eight Phase 1 tests passed again; the optimized production build and TypeScript checks passed. The compiled offline artifact rendered with zero network requests. Local HTTP checks returned 200 for /admin-lab, 303 for synthetic lab sign-in, and 200 for the existing /admin/overview with the real management component and synthetic records; attempted management API writes from the lab returned 403. The preview is running on port 3012 and can be restarted with npm run owner:preview. No native-browser screenshot QA or real provider test-mode/email round trip was completed.
+
+## Subsequent Owner Operations and Remote Sales Preview
+
+This is a historical Phase 1 report. See REMOTE-SALES-READINESS.md for completed fuel/mileage/restricted compliance controls, owner-assisted enrollment and itemized quotes, four-person sales changes, current verification and remaining provider/approval gates. No production changes were made.

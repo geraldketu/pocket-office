@@ -18,7 +18,9 @@
     "test:sales": "node --test tests/sales-*.test.mjs",
     "owner:preview": "node scripts/owner-center-preview.mjs",
     "owner:preview:html": "node scripts/build-owner-preview.mjs",
-    "test:owner-management": "node --test tests/owner-management-*.test.mjs"
+    "test:owner-management": "node --test tests/owner-management-*.test.mjs",
+    "remote:preview:html": "node scripts/build-remote-sales-preview.mjs",
+    "test:remote": "node --test tests/remote-sales-database.test.mjs tests/enrollment-quotes.test.mjs tests/quoted-commissions.test.mjs tests/dnc-adapter.test.mjs tests/sales-*.test.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

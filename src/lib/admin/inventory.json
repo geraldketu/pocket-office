@@ -128,6 +128,20 @@
       "steps": "Open preview and follow the real screen navigation."
     },
     {
+      "id": "route:/api/sales/call",
+      "path": "/api/sales/call",
+      "label": "/api/sales/call",
+      "group": "Administration",
+      "access": "Owner only",
+      "role": "owner",
+      "status": "live",
+      "source": "src/app/api/sales/call/route.ts",
+      "previewPath": "/api/sales/call",
+      "scenario": "populated",
+      "setup": null,
+      "steps": "Open preview and follow the real screen navigation."
+    },
+    {
       "id": "route:/api/sales",
       "path": "/api/sales",
       "label": "/api/sales",

@@ -1,4 +1,5 @@
 import 'server-only';
+import {screeningConfiguration} from './dnc';
 import {SalesInputError} from './input-error';
 import {createClient} from '@/lib/supabase/server';
 import {ownerIdentity} from '@/lib/admin/owner';
@@ -42,7 +43,10 @@ export async function salesData(management=false,page=0,query='',status='All'):P
   who.owner?client.from('sales_outbox').select('id,kind,recipient,status,attempts,last_error').neq('status','sent').order('created_at').limit(100):Promise.resolve({data:[],error:null})
  ]);
  if([resources,checkouts,commissions,activity,reps,metrics,outbox].some(v=>v.error))throw new SalesError('Sales records could not be loaded safely. Retry after database setup.',503);
- return {representative:who.rep,representatives:(reps.data||[]) as Representative[],prospects:visible,applications:(applications||[]) as Application[],checkouts:(checkouts.data||[]) as Checkout[],commissions:(commissions.data||[]) as Commission[],resources:(resources.data||[]) as Resource[],activity:(activity.data||[]) as Activity[],metrics:{...emptyMetrics,...metrics.data},page,hasMore:(prospects||[]).length>30,outbox:outbox.data||[]};
+ const screened=visible.length?await client.rpc('sales_call_permissions',{p_ids:visible.map(p=>p.id)}):{data:[],error:null};const configured=!!screeningConfiguration();const screening=screened.error?visible.map(p=>({id:p.id,allowed:false,status:p.disposition==='Do Not Contact'?'internal-dnc':'unscreened',verified_at:null})):(screened.data||[]).map((s:Record<string,unknown>)=>({...s,allowed:configured&&s.allowed,status:!configured&&s.status==='screened-clear'?'not-connected':s.status}));const slots=who.owner?await client.from('sales_team_slots').select('slot,rep_id').order('slot'):{data:[],error:null};
+ const performance=who.owner?await client.rpc('sales_team_performance'):{data:[],error:null};
+ const quoted=appIds.length?await client.from('sales_enrollment_quotes').select('*').in('application_id',appIds).order('created_at',{ascending:false}):{data:[],error:null};
+ return {quotes:quoted.data||[],teamPerformance:performance.error?[]:performance.data||[],screening,screeningConfigured:configured,teamSlots:slots.data||[],representative:who.rep,representatives:(reps.data||[]) as Representative[],prospects:visible,applications:(applications||[]) as Application[],checkouts:(checkouts.data||[]) as Checkout[],commissions:(commissions.data||[]) as Commission[],resources:(resources.data||[]) as Resource[],activity:(activity.data||[]) as Activity[],metrics:{...emptyMetrics,...metrics.data},page,hasMore:(prospects||[]).length>30,outbox:outbox.data||[]};
 }
 export async function command(action:string,id:string|null,payload:Record<string,unknown>){
  const client=await createClient();const {data,error}=await client.rpc('sales_command',{p_action:action,p_id:id,p_payload:payload});

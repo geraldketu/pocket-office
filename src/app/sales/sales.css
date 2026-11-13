@@ -6,3 +6,4 @@
 .sales-report-form{display:flex;align-items:end;gap:12px;flex-wrap:wrap}.sales-report-form label{margin:0}.sales-report-form input{max-width:190px}.sales-report-form button{margin-bottom:1px}
 
 .sales-shell{overflow-wrap:anywhere}.sales-primary,.sales-secondary,.sales-subtabs button{min-height:44px}
+.sales-quote-table{overflow-x:auto}.sales-quote-table table{width:100%;border-collapse:collapse}.sales-quote-table td,.sales-quote-table th{padding:10px;text-align:left;border-bottom:1px solid var(--s-border)}.sales-language{display:flex;gap:6px;flex-wrap:wrap}.sales-resource-grid p{margin:10px 0}.sales-resource-grid h3{margin:12px 0}
