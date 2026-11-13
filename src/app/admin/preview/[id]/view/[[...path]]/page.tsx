@@ -1,3 +1,8 @@
+import {SalesWorkspace} from "@/components/sales/workspace";
+import {demoSalesData} from "@/lib/sales/demo";
+import SalesLogin from "@/app/sales/login/page";
+import SalesPaymentResult from "@/app/sales/payment-result/page";
+import "@/app/sales/sales.css";
 import {OwnerHeader} from "@/components/admin/owner-header";
 import fs from "node:fs";
 import path from "node:path";
@@ -59,7 +64,10 @@ export default async function View({params,searchParams}:{params:Promise<{id:str
  else if(pathname==="/archive")content=<iframe className="archive-iframe" title="Original archived Worker screens" src={`/admin/api/preview/${s.id}/archive/index.html?${new URLSearchParams({screen:query.screen||"member",...(query.carrier?{carrier:query.carrier}:{}),...(query.quote?{quote:query.quote}:{})}).toString()}`} sandbox="allow-scripts allow-same-origin allow-forms allow-downloads"/>;
  else if(pathname==="/auth/signout")content=<SiteShell><PageHero eyebrow="POST workflow" title="Sign out of the test account."><p>The live endpoint accepts POST only. Open the customer vault and use its real Sign out button; the preview simulates that POST.</p></PageHero><Link className="btn" href="/app">Open customer vault</Link></SiteShell>;
  else if(pathname==="/admin-lab")content=<SiteShell><h1>Local owner lab</h1><p>You are already in the isolated lab. The outer /admin-lab login is a development setup screen, not a customer role page.</p><Link className="btn" href="/admin">Open Site Explorer as test owner</Link></SiteShell>;
- else if(["/checkout","/checkout/confirmation","/sales"].includes(pathname))content=<SiteShell><PageHero eyebrow="Missing from live app" title="This workflow is not implemented."><p>{pathname} has no live route. No production screen is fabricated here.</p></PageHero><section className="card"><h2>Follow the existing journey</h2><p>Homepage → carrier checklist → unpaid request → owner invitation → choose password → customer vault. Payment and notification outcomes can be exercised with the explicitly labelled simulator controls above.</p><div className="form-actions"><Link className="btn" href="/">Start at homepage</Link><Link className="btn-secondary" href="/carrier-setup">Carrier checklist</Link><Link className="btn-secondary" href="/auth/confirm?token_hash=test-invite&type=invite&next=/set-password">Open sample invitation</Link></div></section></SiteShell>;
+ else if(["/sales","/admin/sales","/sales-preview"].includes(pathname))content=<SalesWorkspace initial={demoSalesData()} management={pathname==="/admin/sales"} preview/>;
+ else if(pathname==="/sales/login")content=<SalesLogin/>;
+ else if(pathname==="/sales/payment-result")content=<SalesPaymentResult/>;
+ else if(["/checkout","/checkout/confirmation"].includes(pathname))content=<SiteShell><PageHero eyebrow="Missing from live app" title="This workflow is not implemented."><p>{pathname} has no live route. No production screen is fabricated here.</p></PageHero><section className="card"><h2>Follow the existing journey</h2><p>Homepage → carrier checklist → unpaid request → owner invitation → choose password → customer vault. Payment and notification outcomes can be exercised with the explicitly labelled simulator controls above.</p><div className="form-actions"><Link className="btn" href="/">Start at homepage</Link><Link className="btn-secondary" href="/carrier-setup">Carrier checklist</Link><Link className="btn-secondary" href="/auth/confirm?token_hash=test-invite&type=invite&next=/set-password">Open sample invitation</Link></div></section></SiteShell>;
  else notFound();
  return <PreviewRuntime id={s.id} role={s.role} scenario={s.scenario}>{pathname.startsWith("/admin")&&s.role==="owner"&&<OwnerHeader email={s.data.profile!.email}/>} {content}</PreviewRuntime>;
 });

@@ -1,0 +1,13 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import ts from 'typescript';import {createRequire} from 'node:module';import * as validation from '../src/lib/sales/validation.ts';
+const require=createRequire(import.meta.url);
+function compile(imports){const module={exports:{}};const code=ts.transpileModule(fs.readFileSync(new URL('../src/lib/sales/notifications.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;new Function('require','module','exports',code)(n=>imports[n]||require(n),module,module.exports);return module.exports;}
+test('failed welcome emails remain queued and reuse their encrypted single-use link and stable send idempotency key',async()=>{
+ const saved={RESEND_API_KEY:process.env.RESEND_API_KEY,EMAIL_FROM:process.env.EMAIL_FROM,SALES_EMAIL_ENCRYPTION_KEY:process.env.SALES_EMAIL_ENCRYPTION_KEY};Object.assign(process.env,{RESEND_API_KEY:'synthetic',EMAIL_FROM:'test@example.test',SALES_EMAIL_ENCRYPTION_KEY:'a'.repeat(64)});
+ const queue={id:'outbox-test',kind:'customer-welcome',recipient:'customer@example.test',encrypted_link:null,link_created_at:null,status:'pending'},mail=[];let generated=0,accepted=false;
+ const service={rpc:async()=>({data:[{...queue}],error:null}),auth:{admin:{generateLink:async()=>{generated++;return {data:{properties:{hashed_token:'synthetic_private_hash'}},error:null};}}},from:()=>({update:patch=>({eq:async()=>{Object.assign(queue,patch);return {error:null};}})})};
+ const api=compile({'server-only':{},'@/lib/supabase/admin':{createAdminClient:()=>service},'@/lib/supabase/server':{},'@/lib/email':{sendEmail:async(...args)=>{mail.push(args);return accepted;},inviteEmailHtml:(name,link)=>name+' '+link},'./payments':{salesOrigin:()=> 'https://oliverfee360.com'},'./server':{SalesError:Error,command:async()=>({})},'./validation':validation});
+ try{const first=await api.drainSalesOutbox();assert.equal(first.failed,1);assert.equal(queue.status,'failed');assert.ok(queue.encrypted_link);assert.equal(JSON.stringify(queue).includes('synthetic_private_hash'),false);assert.equal(JSON.stringify(queue).includes('token_hash'),false);
+  accepted=true;const second=await api.drainSalesOutbox();assert.equal(second.sent,1);assert.equal(queue.status,'sent');assert.equal(generated,1);assert.equal(mail[0][2],mail[1][2]);assert.equal(mail[0][3],mail[1][3]);
+  process.env.RESEND_API_KEY='';const pending=await api.drainSalesOutbox();assert.equal(pending.pending,true);assert.equal(pending.processed,0);
+ }finally{for(const [k,v]of Object.entries(saved))if(v===undefined)delete process.env[k];else process.env[k]=v;}
+});

@@ -1,0 +1,19 @@
+import {SalesInputError} from './input-error.ts';
+import {DISPOSITIONS,PLANS,type Plan,type EnrollmentDetails} from './types.ts';
+export function text(value:unknown,max=200){if(typeof value!=='string')return '';return value.trim().slice(0,max);}
+export function uuid(value:unknown){if(typeof value!=='string'||!/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(value))throw new SalesInputError('A valid record ID is required.');return value;}
+export function plan(value:unknown):Plan{if(typeof value!=='string'||!Object.hasOwn(PLANS,value))throw new SalesInputError('Select an approved membership plan.');return value as Plan;}
+export function email(value:unknown){if(typeof value!=='string'||value.trim().length>254)throw new SalesInputError('Enter a valid customer email.');const e=text(value,254).toLowerCase();if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e))throw new SalesInputError('Enter a valid customer email.');return e;}
+export function revision(value:unknown){if(!Number.isSafeInteger(value)||Number(value)<0)throw new SalesInputError('Reload this record before saving.');return Number(value);}
+export function callPayload(raw:Record<string,unknown>){const disposition=text(raw.disposition);if(!(DISPOSITIONS as readonly string[]).includes(disposition))throw new SalesInputError('Select a call disposition.');let follow_up_at=null;if(raw.follow_up_at){const date=new Date(String(raw.follow_up_at));if(!Number.isFinite(date.getTime()))throw new SalesInputError('Enter a valid follow-up date.');follow_up_at=date.toISOString();}if(disposition==='Call Back'&&!follow_up_at)throw new SalesInputError('Choose a follow-up date for a callback.');return {disposition,notes:text(raw.notes,4000),follow_up_at,revision:revision(raw.revision)};}
+export function applicationPayload(raw:Record<string,unknown>){
+ const src=raw.details;if(!src||typeof src!=='object'||Array.isArray(src))throw new SalesInputError('Application details are required.');const d=src as Record<string,unknown>;
+ for(const [key,max] of Object.entries({legal_name:200,dba:200,contact_name:120,phone:50,email:254,usdot:8,mc:12,address:500,equipment_type:100,drivers:5})){if(typeof d[key]==='string'&&(d[key] as string).trim().length>max)throw new SalesInputError(key.replaceAll('_',' ')+' is too long.');}
+ const details:EnrollmentDetails={legal_name:text(d.legal_name),dba:text(d.dba),contact_name:text(d.contact_name,120),phone:text(d.phone,50),email:text(d.email,254).toLowerCase(),usdot:text(d.usdot,8),mc:text(d.mc,12),address:text(d.address,500),equipment_type:text(d.equipment_type,100),drivers:text(d.drivers,5),services:Array.isArray(d.services)?[...new Set(d.services.map(x=>text(x,100)).filter(Boolean))].slice(0,20):[]};
+ if(details.usdot&&!/^\d{1,8}$/.test(details.usdot))throw new SalesInputError('USDOT must contain up to eight digits.');if(details.mc&&!/^\d{1,12}$/.test(details.mc))throw new SalesInputError('MC must contain digits only.');
+ const complete=raw.complete===true;
+ if(complete){details.email=email(details.email);if(details.legal_name.length<2||details.contact_name.length<2||details.phone.length<7||details.address.length<5||details.equipment_type.length<2||!/^\d{1,5}$/.test(details.drivers)||!details.services.length)throw new SalesInputError('Complete business/contact details, equipment, driver count and requested services.');}
+ return {details,plan_key:plan(raw.plan_key),complete,revision:revision(raw.revision??0)};
+}
+export function safeCsvCell(value:unknown){const s=String(value??'');const escaped=/^[\s]*[=+\-@\t\r]/.test(s)?"'"+s:s;return '"'+escaped.replaceAll('"','""')+'"';}
+export function salesReport(rows:Record<string,unknown>[]){const keys=['id','rep_id','plan_key','status','initial_revenue_cents','paid_at'];return [keys.join(','),...rows.map(r=>keys.map(k=>safeCsvCell(r[k])).join(','))].join('\r\n');}

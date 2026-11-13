@@ -13,7 +13,9 @@
     "admin:lab": "node scripts/admin-lab.mjs",
     "admin:inventory": "node scripts/admin-inventory.mjs",
     "test:admin": "node --test tests/admin-preview.integration.mjs",
-    "owner:invite": "node scripts/owner-invitation.mjs"
+    "owner:invite": "node scripts/owner-invitation.mjs",
+    "sales:preview": "node scripts/build-sales-preview.mjs",
+    "test:sales": "node --test tests/sales-*.test.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
@@ -24,11 +26,13 @@
     "server-only": "^0.0.1"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "0.5.16",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "esbuild": "0.28.2",
     "eslint": "^9",
     "eslint-config-next": "15.5.28",
     "jsdom": "^31.0.0",
