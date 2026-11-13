@@ -46,7 +46,7 @@
     {
       "id": "route:/admin/overview",
       "path": "/admin/overview",
-      "label": "Owner overview",
+      "label": "Owner Admin Center",
       "group": "Administration",
       "access": "Explicit owner only",
       "role": "owner",

@@ -1,0 +1,25 @@
+export class ManagementError extends Error{status:number;constructor(message:string,status=400){super(message);this.status=status;}}
+export type ManagementRow=Record<string,unknown>;
+export type ManagementData={ready:boolean;preview:boolean;versions:ManagementRow[];access:ManagementRow[];companyReviews:ManagementRow[];documentReviews:ManagementRow[];leadWorkflow:ManagementRow[];audit:ManagementRow[];invitations:ManagementRow[];outbox:ManagementRow[];auth:ManagementRow[];notice?:string};
+export const managementEmpty:ManagementData={ready:false,preview:false,versions:[],access:[],companyReviews:[],documentReviews:[],leadWorkflow:[],audit:[],invitations:[],outbox:[],auth:[]};
+const idPattern=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+export function managementId(value:unknown){if(typeof value!=='string'||!idPattern.test(value))throw new ManagementError('Valid record ID required.');return value;}
+function str(value:unknown,max=200){if(value===undefined||value===null)return '';if(typeof value!=='string'||value.length>max)throw new ManagementError(`Text must contain at most ${max} characters.`);return value.trim();}
+function choice(value:unknown,values:string[]){const result=str(value);if(!values.includes(result))throw new ManagementError('Select a supported status, role or plan.');return result;}
+function address(value:unknown,required=false){const s=str(value,254).toLowerCase();if((required||s)&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s))throw new ManagementError('Valid email required.');return s;}
+function date(value:unknown,time=false){const s=str(value,40);if(!s)return '';if((!time&&!/^\d{4}-\d{2}-\d{2}$/.test(s))||!Number.isFinite(Date.parse(s)))throw new ManagementError('Valid date required.');if(!time&&new Date(s).toISOString().slice(0,10)!==s)throw new ManagementError('Date is not valid.');return time?new Date(s).toISOString():s;}
+export function managementPayload(raw:ManagementRow){
+ const action=str(raw.action,40),id=raw.id?managementId(raw.id):null,p=(raw.payload&&typeof raw.payload==='object'&&!Array.isArray(raw.payload)?raw.payload:{}) as ManagementRow;
+ if(!['user-save','user-status','company-save','company-review','document-review','lead-save','lead-convert','invite-reserve','notifications-retry','document-reminder','invite-resume','invitation-resend'].includes(action))throw new ManagementError('Unknown owner action.');
+ const revision=Number(p.revision??0);if(!Number.isSafeInteger(revision)||revision<0)throw new ManagementError('Valid record revision required.');
+ const payload:ManagementRow={revision};
+ if(['user-save','user-status','company-review','document-review','lead-convert','document-reminder','invite-resume','invitation-resend'].includes(action)&&!id)throw new ManagementError('Select an existing record.');
+ if(action==='user-save'){payload.full_name=str(p.full_name,120);payload.role=choice(p.role,['admin','carrier','driver']);payload.carrier_id=p.carrier_id?managementId(p.carrier_id):'';payload.confirm_email=str(p.confirm_email,254);}
+ if(action==='user-status'){if(typeof p.active!=='boolean')throw new ManagementError('Select an access status.');payload.active=p.active;payload.confirm_email=str(p.confirm_email,254);}
+ if(action==='company-save'){for(const k of ['legal_name','dba','usdot','mc','phone','address'])payload[k]=str(p[k],k==='address'?500:200);if(String(payload.legal_name).length<2)throw new ManagementError('Legal name required.');if(payload.usdot&&!/^\d{1,12}$/.test(String(payload.usdot)))throw new ManagementError('USDOT must contain digits.');payload.email=address(p.email);payload.tier=choice(p.tier??'',['','Basic','Pro','Premium','Ultimate']);}
+ if(action==='company-review'){payload.status=choice(p.status,['pending','approved','rejected','suspended','resume']);payload.notes=str(p.notes,4000);}
+ if(action==='document-review'){payload.status=choice(p.status,['pending','approved','rejected']);payload.notes=str(p.notes,4000);payload.issued_on=date(p.issued_on);payload.expires_on=date(p.expires_on);if(payload.status==='rejected'&&String(payload.notes).length<3)throw new ManagementError('Give a rejection reason.');if(payload.issued_on&&payload.expires_on&&String(payload.issued_on)>String(payload.expires_on))throw new ManagementError('Expiration precedes issue date.');}
+ if(action==='lead-save'){for(const k of ['name','company','usdot','phone'])payload[k]=str(p[k]);if(String(payload.name).length<2)throw new ManagementError('Contact name required.');payload.email=address(p.email);payload.status=choice(p.status,['new','called','quoted','lost']);payload.notes=str(p.notes,4000);payload.follow_up_at=date(p.follow_up_at,true);payload.qualified=p.qualified===true;}
+ if(action==='invite-reserve'){payload.email=address(p.email,true);payload.full_name=str(p.full_name,120);if(String(payload.full_name).length<2)throw new ManagementError('Full name required.');payload.role=choice(p.role,['carrier','driver']);payload.carrier_id=managementId(p.carrier_id);}
+ return {action,id,payload};
+}

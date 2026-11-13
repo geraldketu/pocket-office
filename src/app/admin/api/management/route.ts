@@ -1,0 +1,7 @@
+import {managementOwner,ownerManagementPost,readManagement} from '@/lib/admin/management';
+import {ManagementError} from '@/lib/admin/management-validation';
+import {createClient} from '@/lib/supabase/server';
+export const dynamic='force-dynamic';
+export const maxDuration=60;
+export async function GET(request:Request){try{await managementOwner();const url=new URL(request.url);if(url.searchParams.has('companyLookup')){const q=(url.searchParams.get('companyLookup')||'').trim();if(q.length<2||q.length>100)throw new ManagementError('Enter 2–100 characters to find a company.');const client=await createClient();let lookup=client.from('carriers').select('id,legal_name,usdot,status').order('legal_name').limit(30);lookup=/^\d+$/.test(q)?lookup.eq('usdot',q):lookup.ilike('legal_name','%'+q.replace(/[%_\\]/g,'')+'%');const {data,error}=await lookup;if(error)throw new ManagementError('Company search unavailable.',503);return Response.json({companies:data||[]},{headers:{'Cache-Control':'no-store'}});}const page=Number(url.searchParams.get('page')||0);if(!Number.isSafeInteger(page)||page<0||page>50000)throw new ManagementError('Invalid page.');return Response.json(await readManagement(false,page),{headers:{'Cache-Control':'no-store'}});}catch(e){return Response.json({error:e instanceof ManagementError?e.message:'Owner management is unavailable.'},{status:e instanceof ManagementError?e.status:503,headers:{'Cache-Control':'no-store'}});}}
+export const POST=ownerManagementPost;

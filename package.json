@@ -15,7 +15,10 @@
     "test:admin": "node --test tests/admin-preview.integration.mjs",
     "owner:invite": "node scripts/owner-invitation.mjs",
     "sales:preview": "node scripts/build-sales-preview.mjs",
-    "test:sales": "node --test tests/sales-*.test.mjs"
+    "test:sales": "node --test tests/sales-*.test.mjs",
+    "owner:preview": "node scripts/owner-center-preview.mjs",
+    "owner:preview:html": "node scripts/build-owner-preview.mjs",
+    "test:owner-management": "node --test tests/owner-management-*.test.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
