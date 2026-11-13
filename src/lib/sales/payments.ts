@@ -5,7 +5,7 @@ import {PLANS,type Plan} from './types';
 import {assertPaidSession,type PaidSession} from './stripe-verification';
 export function salesOrigin(){const origin=process.env.NEXT_PUBLIC_SITE_URL||'';let url;try{url=new URL(origin);}catch{throw new SalesError('Set the existing production site address before enabling payment or email.',503);}if(url.origin!=='https://oliverfee360.com'||url.pathname!=='/'||url.search||url.hash)throw new SalesError('Sales payments must use the existing OliverFee360 production address.',503);return url.origin;}
 export function paymentConfig(){const key=process.env.STRIPE_SECRET_KEY||'',accountId=process.env.SALES_STRIPE_ACCOUNT_ID||'';if(process.env.SALES_PAYMENTS_ENABLED!=='true'||!/^sk_(test|live)_/.test(key)||!process.env.STRIPE_WEBHOOK_SECRET||!/^acct_[A-Za-z0-9]+$/.test(accountId))throw new SalesError('Sales Checkout is not enabled. No payment link was created.',503);return {key,accountId,live:key.startsWith('sk_live_'),origin:salesOrigin()};}
-async function stripe(path:string,method='GET',body?:URLSearchParams,idempotency?:string){
+export async function stripe(path:string,method='GET',body?:URLSearchParams,idempotency?:string){
  const {key}=paymentConfig();const r=await fetch('https://api.stripe.com/v1'+path,{method,headers:{Authorization:'Bearer '+key,'Stripe-Version':'2024-06-20',...(body?{'Content-Type':'application/x-www-form-urlencoded'}:{}),...(idempotency?{'Idempotency-Key':idempotency}:{})},body,signal:AbortSignal.timeout(15000)});
  if(!r.ok)throw new SalesError('Stripe could not complete this request. Retry; no payment has been reported as successful.',502);return r.json();
 }
