@@ -14,7 +14,9 @@ export async function salesIdentity(){
   return rep as Representative;
  }catch{return null;}
 }
-export async function requireSales(){const rep=await salesIdentity();if(!rep)redirect('/sales/login?error=access');return rep;}
+// Owners enter their existing management workspace; no representative account or role change is needed.
+export async function salesEntryDestination(){if(await ownerIdentity())return '/admin/sales';return await salesIdentity()?'/sales':null;}
+export async function requireSales(){if(await ownerIdentity())redirect('/admin/sales');const rep=await salesIdentity();if(!rep)redirect('/sales/login?error=access');return rep;}
 export async function actor(management=false){
  if(management){const owner=await ownerIdentity();if(!owner)throw new SalesError('Owner access required.',403);return {id:owner.id,owner:true,rep:null};}
  const rep=await salesIdentity();if(!rep)throw new SalesError('An active sales representative account is required.',403);return {id:rep.user_id,owner:false,rep};
