@@ -1,0 +1,10 @@
+{
+  "synthetic": true,
+  "sourceBytes": 18566769,
+  "sourceRows": 50000,
+  "batches": 250,
+  "valid": 50000,
+  "errors": 0,
+  "maxBatchRows": 200,
+  "maxBatchBytes": 128309
+}

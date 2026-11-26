@@ -1,0 +1,29 @@
+{
+  "realHostedBusinessWrites": false,
+  "results": [
+    {
+      "width": 390,
+      "synthetic": true,
+      "uploadedRows": 322,
+      "rejected": 1,
+      "recordsPersistedInTestTransport": 321,
+      "networkInterruptionRecovered": true,
+      "duplicateInsertions": 0,
+      "assignmentRequests": 17,
+      "manualServiceAddRemove": true,
+      "noOverflow": true
+    },
+    {
+      "width": 1440,
+      "synthetic": true,
+      "uploadedRows": 322,
+      "rejected": 1,
+      "recordsPersistedInTestTransport": 321,
+      "networkInterruptionRecovered": true,
+      "duplicateInsertions": 0,
+      "assignmentRequests": 17,
+      "manualServiceAddRemove": true,
+      "noOverflow": true
+    }
+  ]
+}

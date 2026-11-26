@@ -1,0 +1,1 @@
+import fs from 'node:fs';const file='src/app/api/release/route.ts',source=fs.readFileSync(file,'utf8');const next=source.replace('checks:{authentication:', 'configuration:releaseReadiness(process.env),checks:{authentication:');if(next===source)throw Error('Expected readiness source missing');fs.writeFileSync(file,next);

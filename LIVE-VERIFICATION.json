@@ -1,0 +1,108 @@
+{
+  "commit": "7688d5a5ef5994371a2137952c72cf8acc4bedbb",
+  "checks": [
+    {
+      "route": "/",
+      "status": 200
+    },
+    {
+      "route": "/signup",
+      "status": 200
+    },
+    {
+      "route": "/login",
+      "status": 200
+    },
+    {
+      "route": "/sales/login",
+      "status": 200
+    },
+    {
+      "route": "/plans",
+      "status": 200
+    },
+    {
+      "route": "/carrier-setup",
+      "status": 200
+    },
+    {
+      "route": "/bid-calculator",
+      "status": 200
+    },
+    {
+      "route": "/admin/sales",
+      "status": 307,
+      "anonymousDenied": true
+    },
+    {
+      "route": "/admin/prospects",
+      "status": 307,
+      "anonymousDenied": true
+    },
+    {
+      "route": "/sales",
+      "status": 307,
+      "anonymousDenied": true
+    },
+    {
+      "route": "/admin/api/sales",
+      "status": 403,
+      "anonymousDenied": true
+    },
+    {
+      "route": "/api/sales",
+      "status": 403,
+      "anonymousDenied": true
+    },
+    {
+      "route": "/auth/confirm",
+      "invalidTokenRejected": true,
+      "liveOrigin": true
+    }
+  ],
+  "scenarios": [
+    {
+      "route": "/",
+      "width": 390,
+      "pass": true
+    },
+    {
+      "route": "/signup",
+      "width": 390,
+      "pass": true
+    },
+    {
+      "route": "/login",
+      "width": 390,
+      "pass": true
+    },
+    {
+      "route": "/sales/login",
+      "width": 390,
+      "pass": true
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "route": "/signup",
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "route": "/login",
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "route": "/sales/login",
+      "width": 1440,
+      "pass": true
+    }
+  ],
+  "emailsSent": false,
+  "paymentsProcessed": false,
+  "authenticatedRenameOrSignupVerified": false
+}

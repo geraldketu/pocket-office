@@ -1,0 +1,2 @@
+"Source data row","Error","LEGAL_NAME","DOT_NUMBER","phone","email","city","state","MC_NUMBER","address"
+"323","Email is invalid.","Invalid","90099999","2025550199","bad","Atlanta","GA","MCbad","x"

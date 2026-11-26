@@ -1,0 +1,7 @@
+import fs from 'node:fs';import {execFileSync} from 'node:child_process';import path from 'node:path';import crypto from 'node:crypto';
+const base=path.resolve('../OliverFe360-Training/Sales-Test-Environment/compensation-release-20261115/.master-review/invitation-status-deploy');
+const list=execFileSync('git',['diff','--name-only'],{encoding:'utf8'}).trim().split(/\r?\n/).concat(execFileSync('git',['ls-files','--others','--exclude-standard'],{encoding:'utf8'}).trim().split(/\r?\n/)).filter(p=>/^(src\/|tests\/|public\/)/.test(p)||p==='eslint.config.mjs');
+const normalize=s=>s.replace(/^\uFEFF/,'').replaceAll('\r\n','\n');const entries=[];const liveChanges=[];
+for(const file of list){const content=normalize(fs.readFileSync(file,'utf8'));if(fs.existsSync(path.join(base,file))&&content!==normalize(fs.readFileSync(path.join(base,file),'utf8')))liveChanges.push(file);else if(!fs.existsSync(path.join(base,file)))liveChanges.push(file);if(/(?:sk_live_|sk_test_|sb_secret_|re_[A-Za-z0-9]{25,})/.test(content))throw Error('Possible secret pattern in '+file);entries.push({path:file,mode:'100644',type:'blob',content});}
+if(liveChanges.some(p=>/supabase|payments\.ts|middleware|config\.ts/.test(p)))throw Error('Unexpected protected change');
+if(process.argv.includes('--audit'))console.log(JSON.stringify({files:entries.length,changedFromRecordedLive:liveChanges,bytes:entries.reduce((n,e)=>n+Buffer.byteLength(e.content),0),hash:crypto.createHash('sha256').update(JSON.stringify(entries)).digest('hex')}));else console.log(JSON.stringify(entries));

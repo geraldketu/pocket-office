@@ -1,0 +1,5050 @@
+{
+  "generatedAt": "2026-11-17T03:24:49.553Z",
+  "sourceControlInstances": 425,
+  "warning": "Source instances include conditional/reusable controls, not a count of unique rendered buttons or verified business functions.",
+  "hostedAuthenticatedAudit": "BLOCKED: Windows browser URL could not be confidently determined; no authentication automation attempted.",
+  "inventory": [
+    {
+      "id": "src/app/admin/invite-forms.tsx:15:0",
+      "file": "src/app/admin/invite-forms.tsx",
+      "line": 15,
+      "tag": "input",
+      "attributes": {
+        "readOnly": true,
+        "value": "{state.link}",
+        "className": "\"field text-xs\"",
+        "onFocus": "{(e) => e.target.select()}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/invite-forms.tsx:16:1",
+      "file": "src/app/admin/invite-forms.tsx",
+      "line": 16,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"btn-secondary shrink-0\"",
+        "onClick": "{() => {\n              navigator.clipboard.writeText(state.link!);\n              setCopied(true);\n            }}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/invite-forms.tsx:36:2",
+      "file": "src/app/admin/invite-forms.tsx",
+      "line": 36,
+      "tag": "form",
+      "attributes": {
+        "action": "{action}",
+        "key": "{state?.ok ? state.carrierId : \"form\"}",
+        "className": "\"grid gap-3 sm:grid-cols-2\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/invite-forms.tsx:39:3",
+      "file": "src/app/admin/invite-forms.tsx",
+      "line": 39,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"legal_name\"",
+        "name": "\"legal_name\"",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/invite-forms.tsx:43:4",
+      "file": "src/app/admin/invite-forms.tsx",
+      "line": 43,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"dba\"",
+        "name": "\"dba\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/invite-forms.tsx:47:5",
+      "file": "src/app/admin/invite-forms.tsx",
+      "line": 47,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"c-email\"",
+        "name": "\"email\"",
+        "type": "\"email\"",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/invite-forms.tsx:51:6",
+      "file": "src/app/admin/invite-forms.tsx",
+      "line": 51,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"c-usdot\"",
+        "name": "\"usdot\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/invite-forms.tsx:55:7",
+      "file": "src/app/admin/invite-forms.tsx",
+      "line": 55,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"mc\"",
+        "name": "\"mc\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/invite-forms.tsx:59:8",
+      "file": "src/app/admin/invite-forms.tsx",
+      "line": 59,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"c-phone\"",
+        "name": "\"phone\"",
+        "type": "\"tel\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/invite-forms.tsx:63:9",
+      "file": "src/app/admin/invite-forms.tsx",
+      "line": 63,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"tier\"",
+        "name": "\"tier\"",
+        "placeholder": "\"e.g. Basic\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/invite-forms.tsx:66:10",
+      "file": "src/app/admin/invite-forms.tsx",
+      "line": 66,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn w-full sm:w-auto\"",
+        "disabled": "{pending}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/invite-forms.tsx:81:11",
+      "file": "src/app/admin/invite-forms.tsx",
+      "line": 81,
+      "tag": "form",
+      "attributes": {
+        "action": "{action}",
+        "className": "\"space-y-2\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/invite-forms.tsx:82:12",
+      "file": "src/app/admin/invite-forms.tsx",
+      "line": 82,
+      "tag": "input",
+      "attributes": {
+        "type": "\"hidden\"",
+        "name": "\"carrier_id\"",
+        "value": "{carrierId}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/invite-forms.tsx:83:13",
+      "file": "src/app/admin/invite-forms.tsx",
+      "line": 83,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "disabled": "{pending}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/permit-lookup/page.tsx:4:14",
+      "file": "src/app/admin/permit-lookup/page.tsx",
+      "line": 4,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn\"",
+        "href": "\"/admin/sales#application\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/preview/[id]/view/[[...path]]/page.tsx:65:15",
+      "file": "src/app/admin/preview/[id]/view/[[...path]]/page.tsx",
+      "line": 65,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"btn\"",
+        "href": "\"/app\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/preview/[id]/view/[[...path]]/page.tsx:66:16",
+      "file": "src/app/admin/preview/[id]/view/[[...path]]/page.tsx",
+      "line": 66,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"btn\"",
+        "href": "\"/admin\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/preview/[id]/view/[[...path]]/page.tsx:70:17",
+      "file": "src/app/admin/preview/[id]/view/[[...path]]/page.tsx",
+      "line": 70,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"btn\"",
+        "href": "\"/\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/preview/[id]/view/[[...path]]/page.tsx:70:18",
+      "file": "src/app/admin/preview/[id]/view/[[...path]]/page.tsx",
+      "line": 70,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "href": "\"/carrier-setup\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/preview/[id]/view/[[...path]]/page.tsx:70:19",
+      "file": "src/app/admin/preview/[id]/view/[[...path]]/page.tsx",
+      "line": 70,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "href": "\"/auth/confirm?token_hash=test-invite&type=invite&next=/set-password\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:52:20",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 52,
+      "tag": "form",
+      "attributes": {
+        "className": "\"card prospect-filters\"",
+        "method": "\"get\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:54:21",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 54,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"state\"",
+        "defaultValue": "{f.state}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:60:22",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 60,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"minYears\"",
+        "defaultValue": "{String(f.minYears)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:65:23",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 65,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"mcs150\"",
+        "defaultValue": "{f.mcs150}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:71:24",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 71,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"trucks\"",
+        "defaultValue": "{f.trucks}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:77:25",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 77,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"hire\"",
+        "defaultValue": "{f.hire}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:83:26",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 83,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"sort\"",
+        "defaultValue": "{f.sort}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:90:27",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 90,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"q\"",
+        "defaultValue": "{f.q}",
+        "placeholder": "\"e.g. Smith Trucking or 1234567\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:93:28",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 93,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:94:29",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 94,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "href": "{`/admin/prospects/export?${query(f, { page: 1 })}`}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:95:30",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 95,
+      "tag": "a",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "\"/admin/prospects\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:100:31",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 100,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "href": "{`?${query(f)}`}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:129:32",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 129,
+      "tag": "a",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "{saferUrl(p.dot)}",
+        "target": "\"_blank\"",
+        "rel": "\"noopener\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:137:33",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 137,
+      "tag": "a",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "{`tel:${p.phone}`}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:138:34",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 138,
+      "tag": "a",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "{`tel:${p.cell}`}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:139:35",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 139,
+      "tag": "a",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "{`mailto:${p.email}`}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:152:36",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 152,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "href": "{`?${query(f, { page: f.page - 1 })}`}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin/prospects/page.tsx:154:37",
+      "file": "src/app/admin/prospects/page.tsx",
+      "line": 154,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "href": "{`?${query(f, { page: f.page + 1 })}`}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin-lab/page.tsx:4:38",
+      "file": "src/app/admin-lab/page.tsx",
+      "line": 4,
+      "tag": "form",
+      "attributes": {
+        "className": "\"card\"",
+        "method": "\"post\"",
+        "action": "\"/api/admin-lab\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin-lab/page.tsx:4:39",
+      "file": "src/app/admin-lab/page.tsx",
+      "line": 4,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "type": "\"password\"",
+        "name": "\"password\"",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/admin-lab/page.tsx:4:40",
+      "file": "src/app/admin-lab/page.tsx",
+      "line": 4,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/forgot-password/page.tsx:36:41",
+      "file": "src/app/forgot-password/page.tsx",
+      "line": 36,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/\"",
+        "className": "\"text-link\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/forgot-password/page.tsx:41:42",
+      "file": "src/app/forgot-password/page.tsx",
+      "line": 41,
+      "tag": "form",
+      "attributes": {
+        "onSubmit": "{onSubmit}",
+        "className": "\"card space-y-4\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/forgot-password/page.tsx:44:43",
+      "file": "src/app/forgot-password/page.tsx",
+      "line": 44,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"email\"",
+        "name": "\"email\"",
+        "type": "\"email\"",
+        "required": true,
+        "autoComplete": "\"email\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/forgot-password/page.tsx:47:44",
+      "file": "src/app/forgot-password/page.tsx",
+      "line": 47,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn w-full\"",
+        "disabled": "{pending||!configured}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/login/page.tsx:56:45",
+      "file": "src/app/login/page.tsx",
+      "line": 56,
+      "tag": "form",
+      "attributes": {
+        "autoComplete": "\"off\"",
+        "onSubmit": "{onSubmit}",
+        "className": "\"card space-y-4\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/login/page.tsx:60:46",
+      "file": "src/app/login/page.tsx",
+      "line": 60,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"email\"",
+        "name": "\"email\"",
+        "type": "\"email\"",
+        "required": true,
+        "autoComplete": "\"off\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/login/page.tsx:64:47",
+      "file": "src/app/login/page.tsx",
+      "line": 64,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"password\"",
+        "name": "\"password\"",
+        "type": "\"password\"",
+        "required": true,
+        "autoComplete": "\"off\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/login/page.tsx:67:48",
+      "file": "src/app/login/page.tsx",
+      "line": 67,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn w-full\"",
+        "disabled": "{pending || !configured}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/login/page.tsx:69:49",
+      "file": "src/app/login/page.tsx",
+      "line": 69,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/forgot-password\"",
+        "className": "\"text-blue-700 hover:underline\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/login/page.tsx:79:50",
+      "file": "src/app/login/page.tsx",
+      "line": 79,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/login?next=/admin\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/login/page.tsx:79:51",
+      "file": "src/app/login/page.tsx",
+      "line": 79,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/login?portal=member\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/login/page.tsx:79:52",
+      "file": "src/app/login/page.tsx",
+      "line": 79,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/signup\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/login/page.tsx:79:53",
+      "file": "src/app/login/page.tsx",
+      "line": 79,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/sales/login\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/login/page.tsx:83:54",
+      "file": "src/app/login/page.tsx",
+      "line": 83,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "\"/forgot-password\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/page.tsx:13:55",
+      "file": "src/app/page.tsx",
+      "line": 13,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/carrier-setup\"",
+        "className": "\"btn\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/page.tsx:13:56",
+      "file": "src/app/page.tsx",
+      "line": 13,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/login\"",
+        "className": "\"btn-secondary\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/page.tsx:14:57",
+      "file": "src/app/page.tsx",
+      "line": 14,
+      "tag": "Link",
+      "attributes": {
+        "href": "{href}",
+        "className": "\"metric\"",
+        "key": "{label}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/page.tsx:16:58",
+      "file": "src/app/page.tsx",
+      "line": 16,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/plans\"",
+        "className": "\"text-link\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/page.tsx:16:59",
+      "file": "src/app/page.tsx",
+      "line": 16,
+      "tag": "Link",
+      "attributes": {
+        "href": "{tag===\"Member Office\"?\"/login\":\"/carrier-setup\"}",
+        "className": "\"btn-secondary\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/page.tsx:17:60",
+      "file": "src/app/page.tsx",
+      "line": 17,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/carrier-setup\"",
+        "className": "\"btn-secondary\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/plans/page.tsx:4:61",
+      "file": "src/app/plans/page.tsx",
+      "line": 4,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/carrier-setup\"",
+        "className": "\"btn-secondary\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/plans/page.tsx:4:62",
+      "file": "src/app/plans/page.tsx",
+      "line": 4,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/login\"",
+        "className": "\"btn-secondary\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/plans/page.tsx:4:63",
+      "file": "src/app/plans/page.tsx",
+      "line": 4,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/carrier-setup?package=startup\"",
+        "className": "\"btn\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/sales/page.tsx:6:64",
+      "file": "src/app/sales/page.tsx",
+      "line": 6,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn\"",
+        "href": "\"/sales/permit-lookup\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/sales/page.tsx:6:65",
+      "file": "src/app/sales/page.tsx",
+      "line": 6,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn\"",
+        "href": "\"/sales/training\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/sales/page.tsx:6:66",
+      "file": "src/app/sales/page.tsx",
+      "line": 6,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn\"",
+        "href": "\"/sales/permit-lookup\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/sales/page.tsx:6:67",
+      "file": "src/app/sales/page.tsx",
+      "line": 6,
+      "tag": "form",
+      "attributes": {
+        "action": "\"/auth/signout\"",
+        "method": "\"post\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/sales/page.tsx:6:68",
+      "file": "src/app/sales/page.tsx",
+      "line": 6,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/sales/payment-result/page.tsx:2:69",
+      "file": "src/app/sales/payment-result/page.tsx",
+      "line": 2,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"btn\"",
+        "href": "\"/login\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/sales/permit-lookup/page.tsx:4:70",
+      "file": "src/app/sales/permit-lookup/page.tsx",
+      "line": 4,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn\"",
+        "href": "\"/sales#application\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/set-password/page.tsx:37:71",
+      "file": "src/app/set-password/page.tsx",
+      "line": 37,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn w-full\"",
+        "href": "\"/sales/login\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/set-password/page.tsx:43:72",
+      "file": "src/app/set-password/page.tsx",
+      "line": 43,
+      "tag": "form",
+      "attributes": {
+        "onSubmit": "{onSubmit}",
+        "className": "\"card space-y-4\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/set-password/page.tsx:46:73",
+      "file": "src/app/set-password/page.tsx",
+      "line": 46,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"password\"",
+        "name": "\"password\"",
+        "type": "\"password\"",
+        "required": true,
+        "autoComplete": "\"new-password\"",
+        "minLength": "{10}",
+        "maxLength": "{128}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/set-password/page.tsx:50:74",
+      "file": "src/app/set-password/page.tsx",
+      "line": 50,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"confirm\"",
+        "name": "\"confirm\"",
+        "type": "\"password\"",
+        "required": true,
+        "autoComplete": "\"new-password\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/set-password/page.tsx:53:75",
+      "file": "src/app/set-password/page.tsx",
+      "line": 53,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn w-full\"",
+        "disabled": "{pending}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/signup/page.tsx:26:76",
+      "file": "src/app/signup/page.tsx",
+      "line": 26,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/login?next=/admin\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/signup/page.tsx:26:77",
+      "file": "src/app/signup/page.tsx",
+      "line": 26,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/login?portal=member\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/signup/page.tsx:26:78",
+      "file": "src/app/signup/page.tsx",
+      "line": 26,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/signup\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/signup/page.tsx:26:79",
+      "file": "src/app/signup/page.tsx",
+      "line": 26,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/sales/login\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/signup/page.tsx:26:80",
+      "file": "src/app/signup/page.tsx",
+      "line": 26,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "{testLink}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/signup/page.tsx:26:81",
+      "file": "src/app/signup/page.tsx",
+      "line": 26,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "href": "\"/login\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/signup/page.tsx:26:82",
+      "file": "src/app/signup/page.tsx",
+      "line": 26,
+      "tag": "form",
+      "attributes": {
+        "className": "\"card signup-form\"",
+        "onSubmit": "{submit}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/signup/page.tsx:26:83",
+      "file": "src/app/signup/page.tsx",
+      "line": 26,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"name\"",
+        "autoComplete": "\"name\"",
+        "minLength": "{2}",
+        "maxLength": "{120}",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/signup/page.tsx:26:84",
+      "file": "src/app/signup/page.tsx",
+      "line": 26,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"email\"",
+        "type": "\"email\"",
+        "autoComplete": "\"email\"",
+        "maxLength": "{254}",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/signup/page.tsx:26:85",
+      "file": "src/app/signup/page.tsx",
+      "line": 26,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"password\"",
+        "type": "\"password\"",
+        "autoComplete": "\"new-password\"",
+        "minLength": "{10}",
+        "maxLength": "{128}",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/signup/page.tsx:26:86",
+      "file": "src/app/signup/page.tsx",
+      "line": 26,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"confirm\"",
+        "type": "\"password\"",
+        "autoComplete": "\"new-password\"",
+        "minLength": "{10}",
+        "maxLength": "{128}",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/signup/page.tsx:26:87",
+      "file": "src/app/signup/page.tsx",
+      "line": 26,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn\"",
+        "disabled": "{pending||!configured}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/app/signup/page.tsx:26:88",
+      "file": "src/app/signup/page.tsx",
+      "line": 26,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "\"/carrier-setup\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/account-status.tsx:5:89",
+      "file": "src/components/account-status.tsx",
+      "line": 5,
+      "tag": "form",
+      "attributes": {
+        "method": "\"post\"",
+        "action": "\"/auth/signout\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/account-status.tsx:5:90",
+      "file": "src/components/account-status.tsx",
+      "line": 5,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/account-status.tsx:6:91",
+      "file": "src/components/account-status.tsx",
+      "line": 6,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"btn\"",
+        "href": "\"/carrier-setup\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/account-status.tsx:6:92",
+      "file": "src/components/account-status.tsx",
+      "line": 6,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "\"/plans\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/account-status.tsx:6:93",
+      "file": "src/components/account-status.tsx",
+      "line": 6,
+      "tag": "form",
+      "attributes": {
+        "method": "\"post\"",
+        "action": "\"/auth/signout\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/account-status.tsx:6:94",
+      "file": "src/components/account-status.tsx",
+      "line": 6,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/carrier-detail.tsx:13:95",
+      "file": "src/components/admin/carrier-detail.tsx",
+      "line": 13,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/admin\"",
+        "className": "\"text-sm text-blue-700 hover:underline\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/lead-desk.tsx:28:96",
+      "file": "src/components/admin/lead-desk.tsx",
+      "line": 28,
+      "tag": "a",
+      "attributes": {
+        "key": "{s}",
+        "href": "{s === \"all\" ? \"/admin/leads\" : `/admin/leads?status=${s}`}",
+        "className": "{`rounded-full px-3 py-1 text-sm capitalize ${\n              (status ?? \"all\") === s ? \"bg-blue-700 text-white\" : \"bg-white text-slate-700 ring-1 ring-slate-200\"\n            }`}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/lead-desk.tsx:42:97",
+      "file": "src/components/admin/lead-desk.tsx",
+      "line": 42,
+      "tag": "form",
+      "attributes": {
+        "action": "{async f=>{if(preview){await preview.call(\"addLead\",Object.fromEntries(f));router.refresh();}}}",
+        "className": "\"grid gap-3 sm:grid-cols-5\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/lead-desk.tsx:43:98",
+      "file": "src/components/admin/lead-desk.tsx",
+      "line": 43,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"name\"",
+        "placeholder": "\"Contact name *\"",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/lead-desk.tsx:44:99",
+      "file": "src/components/admin/lead-desk.tsx",
+      "line": 44,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"company\"",
+        "placeholder": "\"Company\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/lead-desk.tsx:45:100",
+      "file": "src/components/admin/lead-desk.tsx",
+      "line": 45,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"usdot\"",
+        "placeholder": "\"USDOT #\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/lead-desk.tsx:46:101",
+      "file": "src/components/admin/lead-desk.tsx",
+      "line": 46,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"phone\"",
+        "placeholder": "\"Phone\"",
+        "type": "\"tel\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/lead-desk.tsx:47:102",
+      "file": "src/components/admin/lead-desk.tsx",
+      "line": 47,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/lead-desk.tsx:57:103",
+      "file": "src/components/admin/lead-desk.tsx",
+      "line": 57,
+      "tag": "form",
+      "attributes": {
+        "key": "{l.id}",
+        "action": "{async f=>{if(preview){await preview.call(\"updateLead\",Object.fromEntries(f));router.refresh();}}}",
+        "className": "\"card grid gap-3 sm:grid-cols-6\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/lead-desk.tsx:58:104",
+      "file": "src/components/admin/lead-desk.tsx",
+      "line": 58,
+      "tag": "input",
+      "attributes": {
+        "type": "\"hidden\"",
+        "name": "\"id\"",
+        "value": "{l.id}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/lead-desk.tsx:63:105",
+      "file": "src/components/admin/lead-desk.tsx",
+      "line": 63,
+      "tag": "a",
+      "attributes": {
+        "className": "\"text-blue-700\"",
+        "href": "{`tel:${l.phone}`}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/lead-desk.tsx:71:106",
+      "file": "src/components/admin/lead-desk.tsx",
+      "line": 71,
+      "tag": "select",
+      "attributes": {
+        "disabled": "{!preview}",
+        "className": "\"field\"",
+        "name": "\"status\"",
+        "defaultValue": "{l.status}",
+        "aria-label": "\"Status\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/lead-desk.tsx:74:107",
+      "file": "src/components/admin/lead-desk.tsx",
+      "line": 74,
+      "tag": "input",
+      "attributes": {
+        "disabled": "{!preview}",
+        "className": "\"field\"",
+        "name": "\"quoted_price\"",
+        "defaultValue": "{l.quoted_price ?? \"\"}",
+        "placeholder": "\"Quote $\"",
+        "inputMode": "\"decimal\"",
+        "aria-label": "\"Quoted price\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/lead-desk.tsx:75:108",
+      "file": "src/components/admin/lead-desk.tsx",
+      "line": 75,
+      "tag": "textarea",
+      "attributes": {
+        "disabled": "{!preview}",
+        "className": "\"field\"",
+        "name": "\"notes\"",
+        "defaultValue": "{l.notes ?? \"\"}",
+        "placeholder": "\"Call notes\"",
+        "rows": "{2}",
+        "aria-label": "\"Call notes\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/lead-desk.tsx:76:109",
+      "file": "src/components/admin/lead-desk.tsx",
+      "line": 76,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-header.tsx:3:110",
+      "file": "src/components/admin/owner-header.tsx",
+      "line": 3,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"btn\"",
+        "href": "\"/admin/sales#invite-salesperson\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-header.tsx:3:111",
+      "file": "src/components/admin/owner-header.tsx",
+      "line": 3,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"btn\"",
+        "href": "\"/admin/sales#invite-salesperson\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-header.tsx:3:112",
+      "file": "src/components/admin/owner-header.tsx",
+      "line": 3,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/admin/prospects\"",
+        "className": "\"btn\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-header.tsx:3:113",
+      "file": "src/components/admin/owner-header.tsx",
+      "line": 3,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/admin\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-header.tsx:3:114",
+      "file": "src/components/admin/owner-header.tsx",
+      "line": 3,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/admin/overview\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-header.tsx:3:115",
+      "file": "src/components/admin/owner-header.tsx",
+      "line": 3,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/admin/sales\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-header.tsx:3:116",
+      "file": "src/components/admin/owner-header.tsx",
+      "line": 3,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"btn\"",
+        "href": "\"/admin/permit-lookup\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-header.tsx:3:117",
+      "file": "src/components/admin/owner-header.tsx",
+      "line": 3,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/admin/sales#representatives\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-header.tsx:3:118",
+      "file": "src/components/admin/owner-header.tsx",
+      "line": 3,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/admin/sales#assignments\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-header.tsx:3:119",
+      "file": "src/components/admin/owner-header.tsx",
+      "line": 3,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/admin/training\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-header.tsx:3:120",
+      "file": "src/components/admin/owner-header.tsx",
+      "line": 3,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/admin/leads\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-header.tsx:3:121",
+      "file": "src/components/admin/owner-header.tsx",
+      "line": 3,
+      "tag": "form",
+      "attributes": {
+        "method": "\"post\"",
+        "action": "{lab?\"/api/admin-lab\":\"/auth/signout\"}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-header.tsx:3:122",
+      "file": "src/components/admin/owner-header.tsx",
+      "line": 3,
+      "tag": "input",
+      "attributes": {
+        "type": "\"hidden\"",
+        "name": "\"logout\"",
+        "value": "\"1\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-header.tsx:3:123",
+      "file": "src/components/admin/owner-header.tsx",
+      "line": 3,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:39:124",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 39,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "aria-pressed": "{tab===key}",
+        "className": "{tab===key?'btn':'btn-secondary'}",
+        "key": "{key}",
+        "onClick": "{()=>{setTab(key);setFilter('');setEditor(null);}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:41:125",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 41,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "value": "{filter}",
+        "onChange": "{e=>setFilter(e.target.value)}",
+        "placeholder": "\"Search this page\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:41:126",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 41,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn\"",
+        "disabled": "{!data.ready||busy}",
+        "onClick": "{()=>edit('invite-reserve',{}, {role:'carrier'})}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:41:127",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 41,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn\"",
+        "disabled": "{!data.ready||busy}",
+        "onClick": "{()=>edit('company-save')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:41:128",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 41,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn\"",
+        "disabled": "{!data.ready||busy}",
+        "onClick": "{()=>edit('lead-save',{}, {status:'new'})}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:41:129",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 41,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn\"",
+        "disabled": "{!data.ready||busy}",
+        "onClick": "{()=>void submit('notifications-retry',null,{})}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:42:130",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 42,
+      "tag": "form",
+      "attributes": {
+        "className": "\"card om-editor\"",
+        "key": "{editor.action+'-'+editor.id}",
+        "onSubmit": "{save}",
+        "aria-label": "\"Owner record editor\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:42:131",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 42,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "value": "{companyQuery}",
+        "onChange": "{e=>setCompanyQuery(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:42:132",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 42,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"btn-secondary\"",
+        "disabled": "{busy||companyQuery.trim().length<2}",
+        "onClick": "{()=>void searchCompanies()}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:42:133",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 42,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "{f.name}",
+        "defaultValue": "{value(editor.values,f.name)||f.options[0][0]}",
+        "required": "{f.required}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:42:134",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 42,
+      "tag": "textarea",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "{f.name}",
+        "defaultValue": "{value(editor.values,f.name)}",
+        "maxLength": "{4000}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:42:135",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 42,
+      "tag": "input",
+      "attributes": {
+        "type": "\"checkbox\"",
+        "name": "{f.name}",
+        "defaultChecked": "{!!editor.values[f.name]}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:42:136",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 42,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "{f.name}",
+        "type": "{f.type||'text'}",
+        "defaultValue": "{f.type==='datetime-local'?localTime(value(editor.values,f.name)):value(editor.values,f.name)}",
+        "required": "{f.required}",
+        "maxLength": "{f.name==='address'?500:254}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:42:137",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 42,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn\"",
+        "disabled": "{busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:42:138",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 42,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "type": "\"button\"",
+        "onClick": "{()=>setEditor(null)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:44:139",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 44,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "disabled": "{!data.ready||busy}",
+        "onClick": "{()=>edit('user-save',row)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:44:140",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 44,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "disabled": "{!data.ready||busy}",
+        "onClick": "{()=>{const email=row.role==='admin'?window.prompt('Type the administrator email to confirm this explicit change:')||'':'';if(row.role==='admin'&&!email)return;void submit('user-status',id,{revision:revision('profiles',id),active:!active,confirm_email:email});}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:44:141",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 44,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "disabled": "{!data.ready||busy}",
+        "onClick": "{()=>edit('company-save',row)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:44:142",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 44,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "disabled": "{!data.ready||busy}",
+        "onClick": "{()=>edit('company-review',row,{status:review?.status||'pending',notes:review?.notes||''})}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:44:143",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 44,
+      "tag": "a",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "{'#audit'}",
+        "onClick": "{e=>{e.preventDefault();setTab('audit');setFilter(id);}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:44:144",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 44,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "disabled": "{!data.ready||busy}",
+        "onClick": "{()=>edit('document-review',row)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:44:145",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 44,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "disabled": "{!data.ready||busy}",
+        "onClick": "{()=>void submit('document-reminder',id,{revision:revision('documents',id)})}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:44:146",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 44,
+      "tag": "a",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "{'/documents/'+id+'/file?download=1'}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:44:147",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 44,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "disabled": "{!data.ready||busy||['paid','active'].includes(String(row.status))}",
+        "onClick": "{()=>edit('lead-save',row)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:44:148",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 44,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "disabled": "{!data.ready||busy||row.status!=='quoted'||!workflow?.qualified}",
+        "onClick": "{()=>void submit('lead-convert',id,{revision:revision('leads',id)})}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:44:149",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 44,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "disabled": "{busy||!data.ready}",
+        "onClick": "{()=>void submit('invitation-resend',String(r.id),{})}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:44:150",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 44,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "disabled": "{busy||!data.ready}",
+        "onClick": "{()=>void submit('invite-resume',String(r.id),{})}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:45:151",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 45,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "href": "{'/admin/overview?page='+((overview.page||0)-1)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-management.tsx:45:152",
+      "file": "src/components/admin/owner-management.tsx",
+      "line": 45,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "href": "{'/admin/overview?page='+((overview.page||0)+1)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:15:153",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 15,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "value": "{company}",
+        "onChange": "{e=>setCompany(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:15:154",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 15,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "href": "\"/admin/sales\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:15:155",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 15,
+      "tag": "button",
+      "attributes": {
+        "className": "{kind===key?'btn':'btn-secondary'}",
+        "key": "{key}",
+        "onClick": "{()=>setKind(key)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:16:156",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 16,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn\"",
+        "disabled": "{!company||!ready||busy}",
+        "onClick": "{()=>setEditor({})}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:18:157",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 18,
+      "tag": "form",
+      "attributes": {
+        "className": "\"card om-editor\"",
+        "onSubmit": "{save}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:18:158",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 18,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "{name}",
+        "defaultValue": "{String(editor[name]||'enrollment')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:18:159",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 18,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "{name}",
+        "defaultValue": "{String(editor[name]||'')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:18:160",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 18,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "{name}",
+        "type": "{['date','due_on'].includes(name)?'date':['gallons','total','miles'].includes(name)?'number':'text'}",
+        "step": "\"0.001\"",
+        "min": "\"0\"",
+        "maxLength": "{2000}",
+        "defaultValue": "{String(editor[name]??'')}",
+        "required": "{name==='state'||name==='date'&&kind!=='dat_records'||['gallons','total','miles'].includes(name)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:18:161",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 18,
+      "tag": "input",
+      "attributes": {
+        "name": "\"file\"",
+        "type": "\"file\"",
+        "accept": "\"image/jpeg,image/png,application/pdf\"",
+        "required": "{!preview}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:18:162",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 18,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn\"",
+        "disabled": "{busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:18:163",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 18,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "type": "\"button\"",
+        "onClick": "{()=>setEditor(null)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:19:164",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 19,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "disabled": "{!ready}",
+        "onClick": "{()=>setEditor(r)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:19:165",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 19,
+      "tag": "a",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "{'/admin/api/operations?fuelFile='+r.id}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:19:166",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 19,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "onClick": "{async()=>{if(preview){setMessage('Preview only: no Stripe verification requested.');return;}setBusy(true);try{const response=await fetch('/admin/api/operations?verifyPayment='+r.id),result=await response.json();if(!response.ok)throw Error(result.error);setMessage('Verified Stripe status: '+result.status+' ? Invoice: '+(result.invoice?.status||'not available'));}catch(e){setMessage(e instanceof Error?e.message:'Stripe lookup unavailable.');}finally{setBusy(false);}}}",
+        "disabled": "{busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:19:167",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 19,
+      "tag": "a",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "\"/admin/sales\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:20:168",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 20,
+      "tag": "form",
+      "attributes": {
+        "className": "\"card\"",
+        "onSubmit": "{async e=>{e.preventDefault();const f=new FormData(e.currentTarget);setBusy(true);try{if(preview){const summary=new Map<string,number>();for(const r of records)summary.set(String(r.state),(summary.get(String(r.state))||0)+Number(r.miles));setReport([...summary].map(([state,miles])=>({state,miles,gallons:0,fuel_cost:0})));return;}const r=await fetch('/admin/api/operations?carrier='+company+'&report=1&from='+f.get('from')+'&to='+f.get('to')),v=await r.json();if(!r.ok)throw Error(v.error);setReport(v.summary);}catch(e){setMessage(e instanceof Error?e.message:'Report unavailable');}finally{setBusy(false);}}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:20:169",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 20,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"from\"",
+        "type": "\"date\"",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:20:170",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 20,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "\"to\"",
+        "type": "\"date\"",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:20:171",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 20,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "disabled": "{!company||busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:21:172",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 21,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "onClick": "{()=>{setPage(page-1);void load(kind,page-1).catch(e=>setMessage(e.message));}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-operations.tsx:21:173",
+      "file": "src/components/admin/owner-operations.tsx",
+      "line": 21,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "onClick": "{()=>{setPage(page+1);void load(kind,page+1).catch(e=>setMessage(e.message));}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-overview.tsx:5:174",
+      "file": "src/components/admin/owner-overview.tsx",
+      "line": 5,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "key": "{m.name}",
+        "href": "{`#${m.name}`}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-overview.tsx:5:175",
+      "file": "src/components/admin/owner-overview.tsx",
+      "line": 5,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "href": "{`/admin/overview?page=${(data.page||0)-1}#${m.name}`}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-overview.tsx:5:176",
+      "file": "src/components/admin/owner-overview.tsx",
+      "line": 5,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "href": "{`/admin/overview?page=${(data.page||0)+1}#${m.name}`}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-overview.tsx:5:177",
+      "file": "src/components/admin/owner-overview.tsx",
+      "line": 5,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "{`/admin/carriers/${row.id}`}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-overview.tsx:5:178",
+      "file": "src/components/admin/owner-overview.tsx",
+      "line": 5,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "{`/admin/carriers/${row.carrier_id}`}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/owner-overview.tsx:5:179",
+      "file": "src/components/admin/owner-overview.tsx",
+      "line": 5,
+      "tag": "a",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "{`/documents/${row.id}/file`}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/preview-frame.tsx:12:180",
+      "file": "src/components/admin/preview-frame.tsx",
+      "line": 12,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "value": "{role}",
+        "onChange": "{e=>switchRole(e.target.value as PreviewRole)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/preview-frame.tsx:12:181",
+      "file": "src/components/admin/preview-frame.tsx",
+      "line": 12,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "onClick": "{()=>setWidth(\"100%\")}",
+        "aria-pressed": "{width===\"100%\"}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/preview-frame.tsx:12:182",
+      "file": "src/components/admin/preview-frame.tsx",
+      "line": 12,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "onClick": "{()=>setWidth(\"390px\")}",
+        "aria-pressed": "{width===\"390px\"}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/preview-frame.tsx:12:183",
+      "file": "src/components/admin/preview-frame.tsx",
+      "line": 12,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"btn\"",
+        "href": "\"/admin\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/preview-frame.tsx:12:184",
+      "file": "src/components/admin/preview-frame.tsx",
+      "line": 12,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "onClick": "{()=>simulate(\"simulatePayment\")}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/preview-frame.tsx:12:185",
+      "file": "src/components/admin/preview-frame.tsx",
+      "line": 12,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "onClick": "{()=>simulate(\"simulateDecline\")}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/preview-frame.tsx:12:186",
+      "file": "src/components/admin/preview-frame.tsx",
+      "line": 12,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "onClick": "{()=>simulate(\"simulateFiling\")}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/preview-frame.tsx:12:187",
+      "file": "src/components/admin/preview-frame.tsx",
+      "line": 12,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "onClick": "{()=>simulate(\"simulateNotification\")}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/preview-frame.tsx:12:188",
+      "file": "src/components/admin/preview-frame.tsx",
+      "line": 12,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "onClick": "{()=>simulate(\"reset\")}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/preview-frame.tsx:12:189",
+      "file": "src/components/admin/preview-frame.tsx",
+      "line": 12,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "onClick": "{refresh}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/preview-frame.tsx:12:190",
+      "file": "src/components/admin/preview-frame.tsx",
+      "line": 12,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "onClick": "{()=>{if(frame.current)frame.current.src=base+\"/auth/confirm?token_hash=test-invite&type=invite&next=/set-password\";}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/preview-frame.tsx:12:191",
+      "file": "src/components/admin/preview-frame.tsx",
+      "line": 12,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "onClick": "{()=>{if(frame.current)frame.current.src=base+\"/auth/confirm?token_hash=test-recovery&type=recovery&next=/set-password\";}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/site-explorer.tsx:9:192",
+      "file": "src/components/admin/site-explorer.tsx",
+      "line": 9,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "value": "{role}",
+        "onChange": "{e=>setRole(e.target.value as PreviewRole)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/site-explorer.tsx:9:193",
+      "file": "src/components/admin/site-explorer.tsx",
+      "line": 9,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn\"",
+        "disabled": "{busy}",
+        "onClick": "{()=>open(role)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/site-explorer.tsx:9:194",
+      "file": "src/components/admin/site-explorer.tsx",
+      "line": 9,
+      "tag": "a",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "\"/admin/api/coverage\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/site-explorer.tsx:9:195",
+      "file": "src/components/admin/site-explorer.tsx",
+      "line": 9,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "value": "{search}",
+        "onChange": "{e=>setSearch(e.target.value)}",
+        "placeholder": "\"Try checkout, driver, empty, /auth…\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/site-explorer.tsx:9:196",
+      "file": "src/components/admin/site-explorer.tsx",
+      "line": 9,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "value": "{group}",
+        "onChange": "{e=>setGroup(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/site-explorer.tsx:9:197",
+      "file": "src/components/admin/site-explorer.tsx",
+      "line": 9,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "disabled": "{busy}",
+        "onClick": "{()=>open(e.role as PreviewRole,e.previewPath,e.scenario)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/admin/site-explorer.tsx:9:198",
+      "file": "src/components/admin/site-explorer.tsx",
+      "line": 9,
+      "tag": "a",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "{e.path}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/app-header.tsx:4:199",
+      "file": "src/components/app-header.tsx",
+      "line": 4,
+      "tag": "Link",
+      "attributes": {
+        "key": "{n.href}",
+        "href": "{n.href}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/app-header.tsx:4:200",
+      "file": "src/components/app-header.tsx",
+      "line": 4,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/carrier-setup\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/app-header.tsx:4:201",
+      "file": "src/components/app-header.tsx",
+      "line": 4,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/bid-calculator\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/app-header.tsx:4:202",
+      "file": "src/components/app-header.tsx",
+      "line": 4,
+      "tag": "form",
+      "attributes": {
+        "action": "\"/auth/signout\"",
+        "method": "\"post\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/app-header.tsx:4:203",
+      "file": "src/components/app-header.tsx",
+      "line": 4,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/bid-calculator.tsx:4:204",
+      "file": "src/components/bid-calculator.tsx",
+      "line": 4,
+      "tag": "form",
+      "attributes": {
+        "onSubmit": "{submit}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/bid-calculator.tsx:4:205",
+      "file": "src/components/bid-calculator.tsx",
+      "line": 4,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "name": "{name}",
+        "type": "\"number\"",
+        "inputMode": "\"decimal\"",
+        "step": "\"0.01\"",
+        "min": "{name===\"miles\"?\"0.01\":\"0\"}",
+        "defaultValue": "{value}",
+        "placeholder": "{name===\"miles\"?\"Example: 300\":undefined}",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/bid-calculator.tsx:4:206",
+      "file": "src/components/bid-calculator.tsx",
+      "line": 4,
+      "tag": "input",
+      "attributes": {
+        "type": "\"checkbox\"",
+        "name": "\"confirmed\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/bid-calculator.tsx:4:207",
+      "file": "src/components/bid-calculator.tsx",
+      "line": 4,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn\"",
+        "style": "{{marginTop:20}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/carrier-interview.tsx:26:208",
+      "file": "src/components/carrier-interview.tsx",
+      "line": 26,
+      "tag": "form",
+      "attributes": {
+        "className": "\"card\"",
+        "onSubmit": "{send}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/carrier-interview.tsx:27:209",
+      "file": "src/components/carrier-interview.tsx",
+      "line": 27,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "value": "{data.company}",
+        "onChange": "{e=>update({company:e.target.value})}",
+        "maxLength": "{120}",
+        "required": true,
+        "autoComplete": "\"organization\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/carrier-interview.tsx:28:210",
+      "file": "src/components/carrier-interview.tsx",
+      "line": 28,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "value": "{data.packageSelection||\"services\"}",
+        "onChange": "{e=>update({packageSelection:e.target.value as Interview[\"packageSelection\"]})}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/carrier-interview.tsx:33:211",
+      "file": "src/components/carrier-interview.tsx",
+      "line": 33,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "type": "\"email\"",
+        "autoComplete": "\"email\"",
+        "value": "{email}",
+        "onChange": "{e=>setEmail(e.target.value)}",
+        "maxLength": "{254}",
+        "required": "{available}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/carrier-interview.tsx:33:212",
+      "file": "src/components/carrier-interview.tsx",
+      "line": 33,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "type": "\"tel\"",
+        "autoComplete": "\"tel\"",
+        "value": "{phone}",
+        "onChange": "{e=>setPhone(e.target.value)}",
+        "maxLength": "{40}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/carrier-interview.tsx:33:213",
+      "file": "src/components/carrier-interview.tsx",
+      "line": 33,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn\"",
+        "disabled": "{pending||(!quote.services.length&&!quote.bundleCents)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/carrier-interview.tsx:33:214",
+      "file": "src/components/carrier-interview.tsx",
+      "line": 33,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "type": "\"button\"",
+        "onClick": "{download}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/carrier-interview.tsx:34:215",
+      "file": "src/components/carrier-interview.tsx",
+      "line": 34,
+      "tag": "a",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "{s.feeSource}",
+        "target": "\"_blank\"",
+        "rel": "\"noopener noreferrer\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/contact-form.tsx:18:216",
+      "file": "src/components/contact-form.tsx",
+      "line": 18,
+      "tag": "form",
+      "attributes": {
+        "action": "{action}",
+        "className": "\"grid gap-4 sm:grid-cols-2\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/contact-form.tsx:22:217",
+      "file": "src/components/contact-form.tsx",
+      "line": 22,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"name\"",
+        "name": "\"name\"",
+        "required": true,
+        "autoComplete": "\"name\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/contact-form.tsx:26:218",
+      "file": "src/components/contact-form.tsx",
+      "line": 26,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"company\"",
+        "name": "\"company\"",
+        "autoComplete": "\"organization\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/contact-form.tsx:30:219",
+      "file": "src/components/contact-form.tsx",
+      "line": 30,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"phone\"",
+        "name": "\"phone\"",
+        "type": "\"tel\"",
+        "autoComplete": "\"tel\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/contact-form.tsx:34:220",
+      "file": "src/components/contact-form.tsx",
+      "line": 34,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"email\"",
+        "name": "\"email\"",
+        "type": "\"email\"",
+        "autoComplete": "\"email\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/contact-form.tsx:38:221",
+      "file": "src/components/contact-form.tsx",
+      "line": 38,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"usdot\"",
+        "name": "\"usdot\"",
+        "inputMode": "\"numeric\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/contact-form.tsx:42:222",
+      "file": "src/components/contact-form.tsx",
+      "line": 42,
+      "tag": "textarea",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"message\"",
+        "name": "\"message\"",
+        "rows": "{3}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/contact-form.tsx:44:223",
+      "file": "src/components/contact-form.tsx",
+      "line": 44,
+      "tag": "input",
+      "attributes": {
+        "type": "\"text\"",
+        "name": "\"website\"",
+        "tabIndex": "{-1}",
+        "autoComplete": "\"off\"",
+        "className": "\"hidden\"",
+        "aria-hidden": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/contact-form.tsx:47:224",
+      "file": "src/components/contact-form.tsx",
+      "line": 47,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn w-full sm:w-auto\"",
+        "disabled": "{pending || !available}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/document-list.tsx:25:225",
+      "file": "src/components/document-list.tsx",
+      "line": 25,
+      "tag": "a",
+      "attributes": {
+        "href": "{`/documents/${d.id}/file`}",
+        "target": "\"_blank\"",
+        "rel": "\"noopener\"",
+        "className": "\"text-blue-700 hover:underline\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/document-list.tsx:26:226",
+      "file": "src/components/document-list.tsx",
+      "line": 26,
+      "tag": "a",
+      "attributes": {
+        "href": "{`/documents/${d.id}/file?download=1`}",
+        "className": "\"text-blue-700 hover:underline\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/document-upload-form.tsx:97:227",
+      "file": "src/components/document-upload-form.tsx",
+      "line": 97,
+      "tag": "form",
+      "attributes": {
+        "ref": "{formRef}",
+        "onSubmit": "{onSubmit}",
+        "className": "\"grid gap-4 sm:grid-cols-2\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/document-upload-form.tsx:100:228",
+      "file": "src/components/document-upload-form.tsx",
+      "line": 100,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"type\"",
+        "value": "{typeId}",
+        "onChange": "{(e) => {\n            setTypeId(e.target.value);\n            setDone(null);\n          }}",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/document-upload-form.tsx:118:229",
+      "file": "src/components/document-upload-form.tsx",
+      "line": 118,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field file:mr-3 file:rounded-md file:border-0 file:bg-blue-50 file:px-3 file:py-1.5 file:text-blue-800\"",
+        "id": "\"file\"",
+        "name": "\"file\"",
+        "type": "\"file\"",
+        "accept": "\"image/*,application/pdf\"",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/document-upload-form.tsx:130:230",
+      "file": "src/components/document-upload-form.tsx",
+      "line": 130,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"issued\"",
+        "type": "\"date\"",
+        "value": "{issued}",
+        "onChange": "{(e) => onIssuedChange(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/document-upload-form.tsx:134:231",
+      "file": "src/components/document-upload-form.tsx",
+      "line": 134,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"expires\"",
+        "type": "\"date\"",
+        "value": "{expires}",
+        "onChange": "{(e) => setExpires(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/document-upload-form.tsx:138:232",
+      "file": "src/components/document-upload-form.tsx",
+      "line": 138,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"notes\"",
+        "name": "\"notes\"",
+        "placeholder": "\"Optional\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/document-upload-form.tsx:143:233",
+      "file": "src/components/document-upload-form.tsx",
+      "line": 143,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn w-full sm:w-auto\"",
+        "disabled": "{pending}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/official-permit-sources.tsx:22:234",
+      "file": "src/components/official-permit-sources.tsx",
+      "line": 22,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "key": "{url}",
+        "href": "{url}",
+        "target": "\"_blank\"",
+        "rel": "\"noopener noreferrer\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/official-permit-sources.tsx:24:235",
+      "file": "src/components/official-permit-sources.tsx",
+      "line": 24,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "value": "{filter}",
+        "maxLength": "{100}",
+        "onChange": "{e=>setFilter(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/official-permit-sources.tsx:25:236",
+      "file": "src/components/official-permit-sources.tsx",
+      "line": 25,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"btn-secondary\"",
+        "onClick": "{()=>setAll(v=>!v)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/official-permit-sources.tsx:27:237",
+      "file": "src/components/official-permit-sources.tsx",
+      "line": 27,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "href": "{s.oversize}",
+        "target": "\"_blank\"",
+        "rel": "\"noopener noreferrer\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/official-permit-sources.tsx:28:238",
+      "file": "src/components/official-permit-sources.tsx",
+      "line": 28,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "href": "{s.fuelTax}",
+        "target": "\"_blank\"",
+        "rel": "\"noopener noreferrer\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/owner-account-access.tsx:19:239",
+      "file": "src/components/owner-account-access.tsx",
+      "line": 19,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn\"",
+        "onClick": "{open}",
+        "disabled": "{pending}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/assistance.tsx:7:240",
+      "file": "src/components/sales/assistance.tsx",
+      "line": 7,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"sales-secondary\"",
+        "aria-pressed": "{bilingual}",
+        "onClick": "{()=>setBilingual(!bilingual)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/bulk-assignment.tsx:9:241",
+      "file": "src/components/sales/bulk-assignment.tsx",
+      "line": 9,
+      "tag": "form",
+      "attributes": {
+        "className": "\"sales-form-grid\"",
+        "onSubmit": "{async e=>{e.preventDefault();const form=new FormData(e.currentTarget);setError('');setMessage('');setLeads([]);setSelected([]);setBusy(true);try{if(preview){setMessage('Preview only: live range search is disabled.');return;}const params=new URLSearchParams({q:String(form.get('q')||''),state:String(form.get('state')||''),start:String(form.get('start')),end:String(form.get('end')),unassigned:String(form.get('unassigned')==='on')});const response=await fetch('/admin/api/sales/leads?'+params,{cache:'no-store'}),result=await response.json();if(!response.ok)throw Error(result.error||'Could not load leads.');setLeads(result.leads);setSelected(result.leads.map((l:Lead)=>l.id));setMessage(result.leads.length+' leads displayed; '+result.total+' match these filters.');}catch(e){setError(e instanceof Error?e.message:'Search failed.');}finally{setBusy(false);}}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/bulk-assignment.tsx:9:242",
+      "file": "src/components/sales/bulk-assignment.tsx",
+      "line": 9,
+      "tag": "input",
+      "attributes": {
+        "name": "\"q\"",
+        "maxLength": "{120}",
+        "disabled": "{busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/bulk-assignment.tsx:9:243",
+      "file": "src/components/sales/bulk-assignment.tsx",
+      "line": 9,
+      "tag": "input",
+      "attributes": {
+        "name": "\"state\"",
+        "maxLength": "{2}",
+        "pattern": "\"[A-Za-z]{2}\"",
+        "disabled": "{busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/bulk-assignment.tsx:9:244",
+      "file": "src/components/sales/bulk-assignment.tsx",
+      "line": 9,
+      "tag": "input",
+      "attributes": {
+        "name": "\"start\"",
+        "type": "\"number\"",
+        "min": "{1}",
+        "defaultValue": "{1}",
+        "required": true,
+        "disabled": "{busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/bulk-assignment.tsx:9:245",
+      "file": "src/components/sales/bulk-assignment.tsx",
+      "line": 9,
+      "tag": "input",
+      "attributes": {
+        "name": "\"end\"",
+        "type": "\"number\"",
+        "min": "{1}",
+        "defaultValue": "{1000}",
+        "required": true,
+        "disabled": "{busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/bulk-assignment.tsx:9:246",
+      "file": "src/components/sales/bulk-assignment.tsx",
+      "line": 9,
+      "tag": "input",
+      "attributes": {
+        "name": "\"unassigned\"",
+        "type": "\"checkbox\"",
+        "disabled": "{busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/bulk-assignment.tsx:9:247",
+      "file": "src/components/sales/bulk-assignment.tsx",
+      "line": 9,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/bulk-assignment.tsx:9:248",
+      "file": "src/components/sales/bulk-assignment.tsx",
+      "line": 9,
+      "tag": "button",
+      "attributes": {
+        "disabled": "{busy}",
+        "onClick": "{()=>setSelected(leads.map(l=>l.id))}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/bulk-assignment.tsx:9:249",
+      "file": "src/components/sales/bulk-assignment.tsx",
+      "line": 9,
+      "tag": "button",
+      "attributes": {
+        "disabled": "{busy}",
+        "onClick": "{()=>setSelected([])}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/bulk-assignment.tsx:9:250",
+      "file": "src/components/sales/bulk-assignment.tsx",
+      "line": 9,
+      "tag": "select",
+      "attributes": {
+        "value": "{target}",
+        "disabled": "{busy}",
+        "onChange": "{e=>setTarget(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/bulk-assignment.tsx:9:251",
+      "file": "src/components/sales/bulk-assignment.tsx",
+      "line": 9,
+      "tag": "input",
+      "attributes": {
+        "type": "\"checkbox\"",
+        "aria-label": "{'Select '+l.company_name}",
+        "checked": "{selected.includes(l.id)}",
+        "disabled": "{busy}",
+        "onChange": "{e=>setSelected(e.target.checked?[...selected,l.id]:selected.filter(id=>id!==l.id))}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/bulk-assignment.tsx:9:252",
+      "file": "src/components/sales/bulk-assignment.tsx",
+      "line": 9,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-primary\"",
+        "disabled": "{busy||!selected.length}",
+        "onClick": "{()=>{if(window.confirm('Save '+selected.length+' lead assignments to '+(representatives.find(r=>r.user_id===target)?.name||'Unassigned')+'?'))void save();}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/bulk-assignment.tsx:9:253",
+      "file": "src/components/sales/bulk-assignment.tsx",
+      "line": 9,
+      "tag": "button",
+      "attributes": {
+        "disabled": "{!busy}",
+        "onClick": "{()=>{stop.current=true;}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/call-workflows.tsx:11:254",
+      "file": "src/components/sales/call-workflows.tsx",
+      "line": 11,
+      "tag": "select",
+      "attributes": {
+        "aria-label": "\"Workflow lead\"",
+        "value": "{selected?.id||''}",
+        "onChange": "{e=>select(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/call-workflows.tsx:11:255",
+      "file": "src/components/sales/call-workflows.tsx",
+      "line": 11,
+      "tag": "form",
+      "attributes": {
+        "aria-label": "{mode==='outcomes'?'Record call outcome':'Schedule follow-up'}",
+        "onSubmit": "{async e=>{e.preventDefault();setError('');try{const follow_up_at=date?new Date(date).toISOString():null;if(mode==='outcomes'){const payload=callPayload({direction,disposition:outcome,notes,follow_up_at,revision:selected.revision});await run('call',{id:selected.id,...payload},'Actual call outcome saved.');}else await run('prospect-notes',{id:selected.id,notes,follow_up_at,revision:selected.revision},'Follow-up appointment saved without adding a call.');}catch(err){setError(err instanceof Error?err.message:'Check the appointment.');}}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/call-workflows.tsx:12:256",
+      "file": "src/components/sales/call-workflows.tsx",
+      "line": 12,
+      "tag": "select",
+      "attributes": {
+        "aria-label": "\"Workflow call direction\"",
+        "value": "{direction}",
+        "onChange": "{e=>setDirection(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/call-workflows.tsx:12:257",
+      "file": "src/components/sales/call-workflows.tsx",
+      "line": 12,
+      "tag": "select",
+      "attributes": {
+        "aria-label": "\"Workflow call outcome\"",
+        "value": "{outcome}",
+        "onChange": "{e=>setOutcome(e.target.value)}",
+        "disabled": "{restricted}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/call-workflows.tsx:13:258",
+      "file": "src/components/sales/call-workflows.tsx",
+      "line": 13,
+      "tag": "input",
+      "attributes": {
+        "aria-label": "\"Workflow follow-up date\"",
+        "type": "\"datetime-local\"",
+        "value": "{date}",
+        "required": "{mode==='followups'}",
+        "disabled": "{restricted}",
+        "onChange": "{e=>setDate(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/call-workflows.tsx:13:259",
+      "file": "src/components/sales/call-workflows.tsx",
+      "line": 13,
+      "tag": "textarea",
+      "attributes": {
+        "aria-label": "\"Workflow customer notes\"",
+        "rows": "{4}",
+        "maxLength": "{4000}",
+        "value": "{notes}",
+        "disabled": "{restricted}",
+        "onChange": "{e=>setNotes(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/call-workflows.tsx:13:260",
+      "file": "src/components/sales/call-workflows.tsx",
+      "line": 13,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-primary\"",
+        "disabled": "{busy||restricted||mode==='outcomes'&&direction==='outbound'&&!callAllowed}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/call-workflows.tsx:14:261",
+      "file": "src/components/sales/call-workflows.tsx",
+      "line": 14,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "onClick": "{()=>select(p.id)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/enrollment.tsx:8:262",
+      "file": "src/components/sales/enrollment.tsx",
+      "line": 8,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy||!['submitted','payment_pending'].includes(application.status)}",
+        "onClick": "{()=>run('quote-create',{id:application.id},'Itemized quote prepared. Unknown fees still require owner review.')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/enrollment.tsx:8:263",
+      "file": "src/components/sales/enrollment.tsx",
+      "line": 8,
+      "tag": "a",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "target": "\"_blank\"",
+        "rel": "\"noopener noreferrer\"",
+        "href": "{(management?'/admin/api/sales/quote-document':'/api/sales/quote-document')+'?quote='+encodeURIComponent(quote.id)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/enrollment.tsx:8:264",
+      "file": "src/components/sales/enrollment.tsx",
+      "line": 8,
+      "tag": "form",
+      "attributes": {
+        "onSubmit": "{e=>{e.preventDefault();const f=new FormData(e.currentTarget),resolutions:Record<string,unknown>={};for(const l of quote.lines.filter(l=>l.unit_cents===null)){const value=String(f.get('amount-'+l.key));const cents=Math.round(Number(value)*100);if(value===''||!Number.isSafeInteger(cents)||cents<0)return;resolutions[l.key]={cents,source:String(f.get('source-'+l.key)||''),verified_on:String(f.get('date-'+l.key)||'')};}run('quote-approve',{id:application.id,notes:f.get('notes'),resolutions},'Owner-approved quote saved. Payment still requires operational, approved Stripe configuration.');}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/enrollment.tsx:8:265",
+      "file": "src/components/sales/enrollment.tsx",
+      "line": 8,
+      "tag": "input",
+      "attributes": {
+        "name": "{'amount-'+l.key}",
+        "type": "\"number\"",
+        "min": "\"0\"",
+        "max": "\"100000\"",
+        "step": "\"0.01\"",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/enrollment.tsx:8:266",
+      "file": "src/components/sales/enrollment.tsx",
+      "line": 8,
+      "tag": "input",
+      "attributes": {
+        "name": "{'source-'+l.key}",
+        "maxLength": "{500}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/enrollment.tsx:8:267",
+      "file": "src/components/sales/enrollment.tsx",
+      "line": 8,
+      "tag": "input",
+      "attributes": {
+        "name": "{'date-'+l.key}",
+        "type": "\"date\"",
+        "max": "{new Date().toISOString().slice(0,10)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/enrollment.tsx:8:268",
+      "file": "src/components/sales/enrollment.tsx",
+      "line": 8,
+      "tag": "textarea",
+      "attributes": {
+        "name": "\"notes\"",
+        "minLength": "{3}",
+        "maxLength": "{2000}",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/enrollment.tsx:8:269",
+      "file": "src/components/sales/enrollment.tsx",
+      "line": 8,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-primary\"",
+        "disabled": "{busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/enrollment.tsx:10:270",
+      "file": "src/components/sales/enrollment.tsx",
+      "line": 10,
+      "tag": "select",
+      "attributes": {
+        "value": "{selected}",
+        "onChange": "{e=>setSelected(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/enrollment.tsx:10:271",
+      "file": "src/components/sales/enrollment.tsx",
+      "line": 10,
+      "tag": "form",
+      "attributes": {
+        "aria-label": "\"Owner customer intake\"",
+        "key": "{selected||'new'}",
+        "onSubmit": "{e=>{e.preventDefault();setError('');const f=new FormData(e.currentTarget),details={...blank,...Object.fromEntries(Object.keys(blank).filter(k=>k!=='services').map(k=>[k,f.get(k)||''])),services:f.getAll('services')},complete=((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement|null)?.value==='complete';try{const payload=applicationPayload({details,plan_key:f.get('plan_key'),complete,revision:app?.revision||0});void Promise.resolve(run('owner-enrollment',{id:app?.prospect_id||null,...payload},complete?'Owner application submitted. Select it in the application list to generate the itemized quote.':'Owner application draft saved.')).then(result=>{if(result&&typeof result==='object'&&'id' in result)setSelected(String(result.id));});}catch(err){setError(err instanceof Error?err.message:'Application invalid.');}}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/enrollment.tsx:10:272",
+      "file": "src/components/sales/enrollment.tsx",
+      "line": 10,
+      "tag": "input",
+      "attributes": {
+        "name": "{k}",
+        "defaultValue": "{String(app?.details[k as keyof EnrollmentDetails]||'')}",
+        "type": "{k==='email'?'email':k==='drivers'?'number':k==='phone'?'tel':'text'}",
+        "maxLength": "{k==='address'?500:254}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/enrollment.tsx:10:273",
+      "file": "src/components/sales/enrollment.tsx",
+      "line": 10,
+      "tag": "select",
+      "attributes": {
+        "name": "\"plan_key\"",
+        "defaultValue": "{app?.plan_key||'Basic'}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/enrollment.tsx:10:274",
+      "file": "src/components/sales/enrollment.tsx",
+      "line": 10,
+      "tag": "input",
+      "attributes": {
+        "type": "\"checkbox\"",
+        "name": "\"services\"",
+        "value": "{s}",
+        "defaultChecked": "{app?.details.services?.includes(s)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/enrollment.tsx:10:275",
+      "file": "src/components/sales/enrollment.tsx",
+      "line": 10,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "type": "\"submit\"",
+        "value": "\"draft\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/enrollment.tsx:10:276",
+      "file": "src/components/sales/enrollment.tsx",
+      "line": 10,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-primary\"",
+        "type": "\"submit\"",
+        "value": "\"complete\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/federal-lookups.tsx:1:277",
+      "file": "src/components/sales/federal-lookups.tsx",
+      "line": 1,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn\"",
+        "href": "\"https://motus.dot.gov/public/search\"",
+        "target": "\"_blank\"",
+        "rel": "\"noopener noreferrer\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/federal-lookups.tsx:1:278",
+      "file": "src/components/sales/federal-lookups.tsx",
+      "line": 1,
+      "tag": "a",
+      "attributes": {
+        "className": "\"btn\"",
+        "href": "\"https://safer.fmcsa.dot.gov/CompanySnapshot.aspx\"",
+        "target": "\"_blank\"",
+        "rel": "\"noopener noreferrer\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/large-import.tsx:14:279",
+      "file": "src/components/sales/large-import.tsx",
+      "line": 14,
+      "tag": "input",
+      "attributes": {
+        "type": "\"file\"",
+        "accept": "\".csv,text/csv\"",
+        "disabled": "{busy}",
+        "onChange": "{async e=>{const file=e.target.files?.[0];if(!file)return;setError('');setMessage('');setPlan(null);setSource(null);try{if(file.size>IMPORT_LIMITS.maxBytes)throw Error('Choose a CSV of 25 MB or smaller.');const parsed=readImport(await file.text());setSource(parsed);setMapping(defaultMapping(parsed.headers));cursor.current=0;setDone(0);setSaved(0);setDuplicates(0);}catch(e){setError(e instanceof Error?e.message:'CSV could not be read.');}}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/large-import.tsx:14:280",
+      "file": "src/components/sales/large-import.tsx",
+      "line": 14,
+      "tag": "select",
+      "attributes": {
+        "aria-label": "{'CSV column '+field}",
+        "disabled": "{busy||done>0}",
+        "value": "{mapping[field]??-1}",
+        "onChange": "{e=>{setMapping({...mapping,[field]:Number(e.target.value)});setPlan(null);}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/large-import.tsx:14:281",
+      "file": "src/components/sales/large-import.tsx",
+      "line": 14,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy||done>0}",
+        "onClick": "{()=>{setError('');try{const prepared=planImport(source.headers,source.rows,mapping);setPlan(prepared);cursor.current=0;setMessage('Validation complete. Review the preview and error report before importing.');}catch(e){setError(e instanceof Error?e.message:'Validation failed.');}}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/large-import.tsx:14:282",
+      "file": "src/components/sales/large-import.tsx",
+      "line": 14,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-primary\"",
+        "disabled": "{busy||!plan.valid||done===plan.valid}",
+        "onClick": "{()=>void start()}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/large-import.tsx:14:283",
+      "file": "src/components/sales/large-import.tsx",
+      "line": 14,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "disabled": "{!busy}",
+        "onClick": "{()=>{pause.current=true;setMessage('Pause requested; waiting for the current batch to finish.');}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/large-import.tsx:14:284",
+      "file": "src/components/sales/large-import.tsx",
+      "line": 14,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "disabled": "{!plan.issues.length}",
+        "onClick": "{download}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/login-form.tsx:8:285",
+      "file": "src/components/sales/login-form.tsx",
+      "line": 8,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/login?next=/admin\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/login-form.tsx:8:286",
+      "file": "src/components/sales/login-form.tsx",
+      "line": 8,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/login?portal=member\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/login-form.tsx:8:287",
+      "file": "src/components/sales/login-form.tsx",
+      "line": 8,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/signup\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/login-form.tsx:8:288",
+      "file": "src/components/sales/login-form.tsx",
+      "line": 8,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/sales/login\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/login-form.tsx:8:289",
+      "file": "src/components/sales/login-form.tsx",
+      "line": 8,
+      "tag": "form",
+      "attributes": {
+        "autoComplete": "\"off\"",
+        "className": "\"card space-y-4\"",
+        "onSubmit": "{async e=>{e.preventDefault();setError('');if(!authConfigured()){setError('Sales login is not configured in this environment.');return;}setPending(true);const form=new FormData(e.currentTarget);try{const {error}=await createClient().auth.signInWithPassword({email:String(form.get('email')).trim().toLowerCase(),password:String(form.get('password'))});if(error)throw Error('Email or password was not accepted.');router.replace('/sales');router.refresh();}catch(e){setError(e instanceof Error?e.message:'Sign-in is unavailable.');}finally{setPending(false);}}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/login-form.tsx:8:290",
+      "file": "src/components/sales/login-form.tsx",
+      "line": 8,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"sales-email\"",
+        "name": "\"email\"",
+        "type": "\"email\"",
+        "autoComplete": "\"off\"",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/login-form.tsx:8:291",
+      "file": "src/components/sales/login-form.tsx",
+      "line": 8,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "id": "\"sales-password\"",
+        "name": "\"password\"",
+        "type": "\"password\"",
+        "autoComplete": "\"off\"",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/login-form.tsx:8:292",
+      "file": "src/components/sales/login-form.tsx",
+      "line": 8,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn w-full\"",
+        "disabled": "{pending||!authConfigured()}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/login-form.tsx:8:293",
+      "file": "src/components/sales/login-form.tsx",
+      "line": 8,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "\"/forgot-password\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/login-form.tsx:8:294",
+      "file": "src/components/sales/login-form.tsx",
+      "line": 8,
+      "tag": "Link",
+      "attributes": {
+        "className": "\"text-link\"",
+        "href": "\"/login\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/manual-services.tsx:6:295",
+      "file": "src/components/sales/manual-services.tsx",
+      "line": 6,
+      "tag": "input",
+      "attributes": {
+        "aria-label": "\"Other service or permit\"",
+        "value": "{value}",
+        "maxLength": "{100}",
+        "onChange": "{e=>setValue(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/manual-services.tsx:6:296",
+      "file": "src/components/sales/manual-services.tsx",
+      "line": 6,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"sales-secondary\"",
+        "onClick": "{()=>{const name=value.trim();if(name.length<2||name.length>100){setError('Enter 2–100 characters.');return;}if(selected.length>=20){setError('Use up to 20 services per application.');return;}update([...new Set([...selected,name])]);setValue('');setError('');}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/manual-services.tsx:6:297",
+      "file": "src/components/sales/manual-services.tsx",
+      "line": 6,
+      "tag": "input",
+      "attributes": {
+        "type": "\"hidden\"",
+        "name": "\"services\"",
+        "value": "{item}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/manual-services.tsx:6:298",
+      "file": "src/components/sales/manual-services.tsx",
+      "line": 6,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"sales-secondary\"",
+        "aria-label": "{'Remove manual service '+item}",
+        "onClick": "{()=>update(selected.filter(s=>s!==item))}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/remote-team.tsx:4:299",
+      "file": "src/components/sales/remote-team.tsx",
+      "line": 4,
+      "tag": "form",
+      "attributes": {
+        "className": "\"sales-panel\"",
+        "key": "{slot}",
+        "onSubmit": "{e=>{e.preventDefault();const form=new FormData(e.currentTarget);save('team-slot',{slot,rep_id:form.get('rep_id')},'Team position saved. Existing account credentials were not changed.');}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/remote-team.tsx:4:300",
+      "file": "src/components/sales/remote-team.tsx",
+      "line": 4,
+      "tag": "select",
+      "attributes": {
+        "name": "\"rep_id\"",
+        "defaultValue": "{bound||''}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/remote-team.tsx:4:301",
+      "file": "src/components/sales/remote-team.tsx",
+      "line": 4,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy||!data.teamSlots?.some(s=>s.slot===slot)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/remote-team.tsx:4:302",
+      "file": "src/components/sales/remote-team.tsx",
+      "line": 4,
+      "tag": "form",
+      "attributes": {
+        "action": "\"/admin/api/sales\"",
+        "method": "\"get\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/remote-team.tsx:4:303",
+      "file": "src/components/sales/remote-team.tsx",
+      "line": 4,
+      "tag": "input",
+      "attributes": {
+        "type": "\"hidden\"",
+        "name": "\"export\"",
+        "value": "\"team\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/remote-team.tsx:4:304",
+      "file": "src/components/sales/remote-team.tsx",
+      "line": 4,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "disabled": "{preview}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/remote-team.tsx:5:305",
+      "file": "src/components/sales/remote-team.tsx",
+      "line": 5,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy||selected.disposition==='Do Not Contact'}",
+        "onClick": "{()=>run('dnc-optout',{id:selected.id,reason:'Customer requested no further sales calls'},es?'Solicitud registrada. Llamadas bloqueadas.':'Opt-out recorded immediately. Calling is blocked for matching numbers across the team.')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/remote-team.tsx:5:306",
+      "file": "src/components/sales/remote-team.tsx",
+      "line": 5,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-primary\"",
+        "disabled": "{busy||!data.screeningConfigured||preview||selected.disposition==='Do Not Contact'}",
+        "onClick": "{()=>run('screen-prospect',{id:selected.id},'Screening evidence recorded. Review the status before any call.')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:81:307",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 81,
+      "tag": "Link",
+      "attributes": {
+        "href": "{management?'/sales-preview':'/sales-preview?view=management'}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:82:308",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 82,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/\"",
+        "className": "\"sales-brand\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:82:309",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 82,
+      "tag": "button",
+      "attributes": {
+        "key": "{t}",
+        "aria-current": "{tab===t?'page':undefined}",
+        "onClick": "{()=>setTab(t)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:82:310",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 82,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/admin\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:82:311",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 82,
+      "tag": "form",
+      "attributes": {
+        "method": "\"post\"",
+        "action": "\"/auth/signout\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:82:312",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 82,
+      "tag": "button",
+      "attributes": {},
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:84:313",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 84,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "aria-pressed": "{language==='en'}",
+        "type": "\"button\"",
+        "onClick": "{()=>chooseLanguage('en')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:84:314",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 84,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "aria-pressed": "{language==='es'}",
+        "type": "\"button\"",
+        "onClick": "{()=>chooseLanguage('es')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:84:315",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 84,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-primary\"",
+        "onClick": "{()=>setTab('prospects')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:86:316",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 86,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-link\"",
+        "onClick": "{()=>setTab('prospects')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:86:317",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 86,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-queue-row\"",
+        "key": "{p.id}",
+        "onClick": "{()=>select(p)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:86:318",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 86,
+      "tag": "button",
+      "attributes": {
+        "onClick": "{()=>setTab('resources')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:86:319",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 86,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-link\"",
+        "onClick": "{()=>{setFilter('Due');setTab('prospects');void refresh(0,query,'Due').catch(e=>setError(e.message));}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:86:320",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 86,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "onClick": "{()=>select(p)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:87:321",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 87,
+      "tag": "input",
+      "attributes": {
+        "value": "{query}",
+        "onChange": "{e=>setQuery(e.target.value)}",
+        "placeholder": "{tr(\"Company name\")}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:87:322",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 87,
+      "tag": "select",
+      "attributes": {
+        "value": "{filter}",
+        "onChange": "{e=>{setFilter(e.target.value);void refresh(0,query,e.target.value).catch(e=>setError(e.message));}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:87:323",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 87,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy}",
+        "onClick": "{()=>{setBusy(true);refresh(0).catch(e=>setError(e.message)).finally(()=>setBusy(false));}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:87:324",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 87,
+      "tag": "button",
+      "attributes": {
+        "className": "{'sales-prospect-card '+(selectedId===p.id?'selected':'')}",
+        "key": "{p.id}",
+        "onClick": "{()=>select(p,tab)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:87:325",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 87,
+      "tag": "button",
+      "attributes": {
+        "disabled": "{busy||!data.page||preview}",
+        "onClick": "{()=>refresh(data.page-1).catch(e=>setError(e.message))}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:87:326",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 87,
+      "tag": "button",
+      "attributes": {
+        "disabled": "{busy||!data.hasMore||preview}",
+        "onClick": "{()=>refresh(data.page+1).catch(e=>setError(e.message))}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:89:327",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 89,
+      "tag": "button",
+      "attributes": {
+        "aria-current": "{tab==='prospects'?'page':undefined}",
+        "onClick": "{()=>setTab('prospects')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:89:328",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 89,
+      "tag": "button",
+      "attributes": {
+        "aria-current": "{tab==='application'?'page':undefined}",
+        "onClick": "{()=>setTab('application')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:329",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "form",
+      "attributes": {
+        "onSubmit": "{e=>{e.preventDefault();void run('call',{id:selected.id,direction,notes,disposition,follow_up_at:followUp?new Date(followUp).toISOString():null,revision:selected.revision},'Call logged and follow-up saved.');}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:330",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "select",
+      "attributes": {
+        "value": "{disposition}",
+        "disabled": "{dnc}",
+        "onChange": "{e=>setDisposition(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:331",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "input",
+      "attributes": {
+        "type": "\"datetime-local\"",
+        "value": "{followUp}",
+        "disabled": "{dnc}",
+        "onChange": "{e=>setFollowUp(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:332",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "textarea",
+      "attributes": {
+        "rows": "{5}",
+        "value": "{notes}",
+        "maxLength": "{4000}",
+        "disabled": "{dnc}",
+        "onChange": "{e=>setNotes(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:333",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "a",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "href": "{api+'/call?prospect='+selected.id}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:334",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"sales-secondary\"",
+        "disabled": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:335",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy||dnc}",
+        "onClick": "{()=>run('dnc-optout',{id:selected.id,reason:'Customer opt-out'},'Opt-out recorded. Calling blocked.')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:336",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "select",
+      "attributes": {
+        "aria-label": "\"Call direction\"",
+        "value": "{direction}",
+        "onChange": "{e=>setDirection(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:337",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-primary\"",
+        "disabled": "{busy||dnc||(direction==='outbound'&&!canCall)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:338",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy}",
+        "onClick": "{()=>run('prospect-notes',{id:selected.id,notes,follow_up_at:followUp?new Date(followUp).toISOString():null,revision:selected.revision},'Notes and follow-up saved without recording a call.')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:339",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "form",
+      "attributes": {
+        "onSubmit": "{e=>{e.preventDefault();void run('save-application',{id:selected.id,details:form,plan_key:plan,complete:true,revision:application?.revision||0},'Application submitted. Generate the itemized quote for owner review.');}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:340",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "input",
+      "attributes": {
+        "name": "{key}",
+        "type": "{type||'text'}",
+        "min": "{type==='number'?0:undefined}",
+        "maxLength": "{key==='address'?500:254}",
+        "value": "{form[key]}",
+        "onChange": "{e=>{setForm({...form,[key]:e.target.value});setDirty(true);}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:341",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "input",
+      "attributes": {
+        "type": "\"checkbox\"",
+        "checked": "{form.services.includes(s)}",
+        "onChange": "{e=>{setForm({...form,services:e.target.checked?[...form.services,s]:form.services.filter(x=>x!==s)});setDirty(true);}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:342",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "select",
+      "attributes": {
+        "value": "{plan}",
+        "onChange": "{e=>{setPlan(e.target.value as Plan);setDirty(true);}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:343",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "type": "\"button\"",
+        "onClick": "{()=>run('save-application',{id:selected.id,details:form,plan_key:plan,complete:false,revision:application?.revision||0},'Draft saved. Resume it from this prospect.')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:344",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-primary\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:345",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"sales-primary\"",
+        "disabled": "{busy||dnc||dirty||currentQuote?.status!=='approved'||!['submitted','payment_pending'].includes(application?.status||'')}",
+        "onClick": "{()=>run('checkout',{id:selected.id},'Secure Stripe Checkout link created.')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:346",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy||dnc||checkout?.status!=='pending'}",
+        "onClick": "{()=>run('email-checkout',{id:selected.id},'Payment email accepted by the provider.')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:347",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "a",
+      "attributes": {
+        "href": "{checkout.checkout_url}",
+        "target": "\"_blank\"",
+        "rel": "\"noopener noreferrer\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:90:348",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 90,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "onClick": "{()=>navigator.clipboard.writeText(checkout.checkout_url!).then(()=>setMessage('Checkout link copied.')).catch(()=>setError('Copy is unavailable in this browser.'))}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:93:349",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 93,
+      "tag": "select",
+      "attributes": {
+        "aria-label": "\"DNC lead\"",
+        "value": "{selectedId}",
+        "onChange": "{e=>setSelectedId(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:350",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "form",
+      "attributes": {
+        "className": "\"sales-form-grid\"",
+        "onSubmit": "{e=>{e.preventDefault();const f=new FormData(e.currentTarget);void run('register-rep',Object.fromEntries(f),'Representative created. Account setup is queued; activate the representative when ready.');}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:351",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "input",
+      "attributes": {
+        "name": "\"first_name\"",
+        "minLength": "{1}",
+        "maxLength": "{60}",
+        "required": true,
+        "autoComplete": "\"given-name\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:352",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "input",
+      "attributes": {
+        "name": "\"last_name\"",
+        "minLength": "{1}",
+        "maxLength": "{60}",
+        "required": true,
+        "autoComplete": "\"family-name\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:353",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "input",
+      "attributes": {
+        "name": "\"phone\"",
+        "type": "\"tel\"",
+        "maxLength": "{40}",
+        "autoComplete": "\"tel\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:354",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "select",
+      "attributes": {
+        "name": "\"role\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:355",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "textarea",
+      "attributes": {
+        "name": "\"notes\"",
+        "maxLength": "{2000}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:356",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "input",
+      "attributes": {
+        "name": "\"rep_code\"",
+        "pattern": "\"[A-Za-z0-9_-]{2,32}\"",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:357",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "input",
+      "attributes": {
+        "name": "\"email\"",
+        "type": "\"email\"",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:358",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-primary\"",
+        "disabled": "{busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:359",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"sales-secondary\"",
+        "aria-pressed": "{showRemoved}",
+        "onClick": "{()=>setShowRemoved(!showRemoved)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:360",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "form",
+      "attributes": {
+        "key": "{r.user_id}",
+        "className": "\"sales-panel\"",
+        "onSubmit": "{e=>{e.preventDefault();const f=new FormData(e.currentTarget),mode=String(f.get('commission_mode')),value=Number(f.get('commission_value'));void run('rep-update',{id:r.user_id,status:f.get('status'),commission_mode:mode,commission_value:Math.round(value*100)},'Representative status and commission settings saved.');}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:361",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "input",
+      "attributes": {
+        "name": "\"representative_name\"",
+        "defaultValue": "{r.name}",
+        "minLength": "{2}",
+        "maxLength": "{120}",
+        "autoComplete": "\"off\"",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:362",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy}",
+        "onClick": "{e=>{const form=e.currentTarget.form;if(form)void run('rep-rename',{id:r.user_id,name:new FormData(form).get('representative_name')},'Salesperson name saved.');}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:363",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "select",
+      "attributes": {
+        "name": "\"status\"",
+        "defaultValue": "{r.status}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:364",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "select",
+      "attributes": {
+        "name": "\"commission_mode\"",
+        "defaultValue": "{r.commission_mode}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:365",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "input",
+      "attributes": {
+        "name": "\"commission_value\"",
+        "type": "\"number\"",
+        "step": "\"0.01\"",
+        "min": "\"0\"",
+        "defaultValue": "{r.commission_value/100}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:366",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-primary\"",
+        "disabled": "{busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:367",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy||r.status!=='invited'}",
+        "onClick": "{()=>{if(window.confirm('Resend a fresh setup invitation to '+r.email+'? This does not activate the account.'))void run('resend-invite',{id:r.user_id},'Invitation resend requested.');}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:368",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy||r.status==='inactive'}",
+        "onClick": "{()=>setRemoving(r.user_id)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:369",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"sales-primary\"",
+        "disabled": "{busy}",
+        "onClick": "{async()=>{const result=await run('remove-rep',{id:r.user_id},'Salesperson removed.');if(result)setRemoving(null);}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:99:370",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 99,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy}",
+        "onClick": "{()=>setRemoving(null)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:100:371",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 100,
+      "tag": "form",
+      "attributes": {
+        "key": "{p.id}",
+        "className": "\"sales-assign-row\"",
+        "onSubmit": "{e=>{e.preventDefault();const f=new FormData(e.currentTarget);void run('assign',{id:p.id,rep_id:f.get('rep_id')},'Prospect assignment saved.');}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:100:372",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 100,
+      "tag": "select",
+      "attributes": {
+        "name": "\"rep_id\"",
+        "defaultValue": "{p.assigned_to||''}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:100:373",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 100,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:101:374",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 101,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy||c.status!=='earned'}",
+        "onClick": "{()=>run('commission-approve',{id:c.id},'Commission payout approval recorded.')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:102:375",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 102,
+      "tag": "form",
+      "attributes": {
+        "className": "\"sales-report-form\"",
+        "action": "{api}",
+        "method": "\"get\"",
+        "onSubmit": "{e=>{if(preview){e.preventDefault();setMessage(\"Preview only: no production sales report is exported.\");}}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:102:376",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 102,
+      "tag": "input",
+      "attributes": {
+        "type": "\"hidden\"",
+        "name": "\"export\"",
+        "value": "\"csv\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:102:377",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 102,
+      "tag": "input",
+      "attributes": {
+        "name": "\"from\"",
+        "type": "\"date\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:102:378",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 102,
+      "tag": "input",
+      "attributes": {
+        "name": "\"to\"",
+        "type": "\"date\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:102:379",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 102,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:102:380",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 102,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy}",
+        "onClick": "{()=>run('retry-notifications',{},'Notification queue processed. Review pending items below.')}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:105:381",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 105,
+      "tag": "form",
+      "attributes": {
+        "onSubmit": "{e=>{e.preventDefault();const f=new FormData(e.currentTarget);save({slug:resource.slug,revision:resource.revision,title:f.get('title'),body:f.get('body'),title_es:f.get('title_es'),body_es:f.get('body_es')});}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:105:382",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 105,
+      "tag": "input",
+      "attributes": {
+        "name": "\"title\"",
+        "defaultValue": "{resource.title}",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:105:383",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 105,
+      "tag": "textarea",
+      "attributes": {
+        "name": "\"body\"",
+        "rows": "{9}",
+        "maxLength": "{20000}",
+        "defaultValue": "{resource.body}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:105:384",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 105,
+      "tag": "input",
+      "attributes": {
+        "name": "\"title_es\"",
+        "defaultValue": "{resource.title_es||''}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:105:385",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 105,
+      "tag": "textarea",
+      "attributes": {
+        "name": "\"body_es\"",
+        "rows": "{6}",
+        "defaultValue": "{resource.body_es||''}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/sales/workspace.tsx:105:386",
+      "file": "src/components/sales/workspace.tsx",
+      "line": 105,
+      "tag": "button",
+      "attributes": {
+        "className": "\"sales-secondary\"",
+        "disabled": "{busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:7:387",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 7,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"btn-secondary\"",
+        "onClick": "{()=>onChange([...STATE_CODES])}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:7:388",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 7,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"btn-secondary\"",
+        "onClick": "{()=>onChange([])}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:7:389",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 7,
+      "tag": "input",
+      "attributes": {
+        "type": "\"checkbox\"",
+        "aria-label": "{name}",
+        "checked": "{selected.includes(code)}",
+        "onChange": "{e=>onChange(selectedStates(selected,code,e.target.checked))}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:11:390",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 11,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "value": "{value}",
+        "onChange": "{e=>onAnswer(question.key,e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:11:391",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 11,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "value": "{value}",
+        "maxLength": "{1000}",
+        "onChange": "{e=>onAnswer(question.key,e.target.value)}",
+        "placeholder": "\"Enter details, or choose Not sure\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:11:392",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 11,
+      "tag": "button",
+      "attributes": {
+        "className": "\"text-link unsure-button\"",
+        "type": "\"button\"",
+        "onClick": "{()=>onAnswer(question.key,\"Not sure\")}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:13:393",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 13,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "value": "{base}",
+        "onChange": "{e=>onChange(\"base\",e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:13:394",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 13,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "value": "{scope}",
+        "onChange": "{e=>onChange(\"scope\",e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:32:395",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 32,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"text-link\"",
+        "onClick": "{()=>onChange(vehicles.filter((_,i)=>i!==index))}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:32:396",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 32,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "value": "{v[f.key]}",
+        "onChange": "{e=>update(index,f.key,e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:32:397",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 32,
+      "tag": "input",
+      "attributes": {
+        "className": "\"field\"",
+        "inputMode": "\"numeric\"",
+        "value": "{v[f.key]}",
+        "maxLength": "{20}",
+        "onChange": "{e=>update(index,f.key,e.target.value)}",
+        "placeholder": "\"Not yet answered\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:32:398",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 32,
+      "tag": "button",
+      "attributes": {
+        "type": "\"button\"",
+        "className": "\"text-link unsure-button\"",
+        "onClick": "{()=>update(index,f.key,\"Not sure\")}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:32:399",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 32,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "type": "\"button\"",
+        "onClick": "{()=>onChange([...vehicles,emptyVehicle()])}",
+        "disabled": "{vehicles.length>=50}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:34:400",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 34,
+      "tag": "button",
+      "attributes": {
+        "className": "\"requirement-help\"",
+        "type": "\"button\"",
+        "aria-haspopup": "\"dialog\"",
+        "aria-label": "{`Questions to Ask the Carrier: ${result.rule.label} (${location})`}",
+        "onClick": "{()=>onOpen(result.rule.id)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:37:401",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 37,
+      "tag": "select",
+      "attributes": {
+        "className": "\"field\"",
+        "value": "{choice}",
+        "onChange": "{e=>onChoice(e.target.value)}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:39:402",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 39,
+      "tag": "a",
+      "attributes": {
+        "className": "\"text-link\"",
+        "key": "{s.url}",
+        "href": "{s.url}",
+        "target": "\"_blank\"",
+        "rel": "\"noopener noreferrer\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:44:403",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 44,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "type": "\"button\"",
+        "onClick": "{onClose}",
+        "autoFocus": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/screening-workspace.tsx:44:404",
+      "file": "src/components/screening-workspace.tsx",
+      "line": 44,
+      "tag": "button",
+      "attributes": {
+        "className": "\"btn-secondary\"",
+        "type": "\"button\"",
+        "onClick": "{()=>setEdit(v=>!v)}",
+        "aria-pressed": "{edit}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/site-shell.tsx:6:405",
+      "file": "src/components/site-shell.tsx",
+      "line": 6,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/\"",
+        "className": "\"brand\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/site-shell.tsx:12:406",
+      "file": "src/components/site-shell.tsx",
+      "line": 12,
+      "tag": "Link",
+      "attributes": {
+        "key": "{href}",
+        "href": "{href}",
+        "aria-current": "{path===href?\"page\":undefined}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/site-shell.tsx:12:407",
+      "file": "src/components/site-shell.tsx",
+      "line": 12,
+      "tag": "a",
+      "attributes": {
+        "href": "\"https://safer.fmcsa.dot.gov/CompanySnapshot.aspx\"",
+        "target": "\"_blank\"",
+        "rel": "\"noopener noreferrer\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/site-shell.tsx:12:408",
+      "file": "src/components/site-shell.tsx",
+      "line": 12,
+      "tag": "a",
+      "attributes": {
+        "href": "\"https://motus.dot.gov\"",
+        "target": "\"_blank\"",
+        "rel": "\"noopener noreferrer\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/site-shell.tsx:12:409",
+      "file": "src/components/site-shell.tsx",
+      "line": 12,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/carrier-setup\"",
+        "className": "\"btn\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/site-shell.tsx:12:410",
+      "file": "src/components/site-shell.tsx",
+      "line": 12,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/login?next=/admin\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/site-shell.tsx:12:411",
+      "file": "src/components/site-shell.tsx",
+      "line": 12,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/login?portal=member\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/site-shell.tsx:12:412",
+      "file": "src/components/site-shell.tsx",
+      "line": 12,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/signup\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/site-shell.tsx:12:413",
+      "file": "src/components/site-shell.tsx",
+      "line": 12,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/sales/login\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/site-shell.tsx:12:414",
+      "file": "src/components/site-shell.tsx",
+      "line": 12,
+      "tag": "Link",
+      "attributes": {
+        "href": "\"/login\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/training-center.tsx:11:415",
+      "file": "src/components/training-center.tsx",
+      "line": 11,
+      "tag": "button",
+      "attributes": {
+        "disabled": "{busy||!data.lessons.length}",
+        "onClick": "{()=>send({action:'play'})}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/training-center.tsx:11:416",
+      "file": "src/components/training-center.tsx",
+      "line": 11,
+      "tag": "button",
+      "attributes": {
+        "disabled": "{busy||!ended}",
+        "onClick": "{()=>send({action:'complete'})}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/training-center.tsx:12:417",
+      "file": "src/components/training-center.tsx",
+      "line": 12,
+      "tag": "form",
+      "attributes": {
+        "onSubmit": "{e=>{e.preventDefault();upload(e.currentTarget);}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/training-center.tsx:12:418",
+      "file": "src/components/training-center.tsx",
+      "line": 12,
+      "tag": "input",
+      "attributes": {
+        "type": "\"file\"",
+        "name": "\"video\"",
+        "accept": "\"video/mp4\"",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/training-center.tsx:12:419",
+      "file": "src/components/training-center.tsx",
+      "line": 12,
+      "tag": "button",
+      "attributes": {
+        "disabled": "{busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/training-center.tsx:12:420",
+      "file": "src/components/training-center.tsx",
+      "line": 12,
+      "tag": "button",
+      "attributes": {
+        "disabled": "{busy}",
+        "onClick": "{()=>send({action:'finalize-upload'})}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/training-center.tsx:12:421",
+      "file": "src/components/training-center.tsx",
+      "line": 12,
+      "tag": "form",
+      "attributes": {
+        "onSubmit": "{e=>{e.preventDefault();const f=new FormData(e.currentTarget);send({action:String(f.get('action')),user:String(f.get('user'))});}}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/training-center.tsx:12:422",
+      "file": "src/components/training-center.tsx",
+      "line": 12,
+      "tag": "input",
+      "attributes": {
+        "name": "\"user\"",
+        "required": true
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/training-center.tsx:12:423",
+      "file": "src/components/training-center.tsx",
+      "line": 12,
+      "tag": "select",
+      "attributes": {
+        "name": "\"action\""
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    },
+    {
+      "id": "src/components/training-center.tsx:12:424",
+      "file": "src/components/training-center.tsx",
+      "line": 12,
+      "tag": "button",
+      "attributes": {
+        "disabled": "{busy}"
+      },
+      "verification": "NOT_INDIVIDUALLY_HOSTED_VERIFIED"
+    }
+  ]
+}
